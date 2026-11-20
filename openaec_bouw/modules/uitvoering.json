@@ -1,0 +1,167 @@
+{
+ "id": "uitvoering",
+ "titel": "Uitvoering",
+ "omschrijving": "Voor aannemers en installateurs: artikelgroepen voor arbeid, materiaal, materieel en onderaanneming, een termijnstaat en een projectsjabloon van calculatie tot nazorg",
+ "standaard": true,
+ "versie": 1,
+ "records": [
+  {
+   "doctype": "Item Group",
+   "naam": "Arbeid",
+   "velden": {
+    "item_group_name": "Arbeid",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Item Group",
+   "naam": "Materiaal",
+   "velden": {
+    "item_group_name": "Materiaal",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Item Group",
+   "naam": "Materieel",
+   "velden": {
+    "item_group_name": "Materieel",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Item Group",
+   "naam": "Onderaanneming",
+   "velden": {
+    "item_group_name": "Onderaanneming",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Item Group",
+   "naam": "Advies en diensten",
+   "velden": {
+    "item_group_name": "Advies en diensten",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Item Group",
+   "naam": "Stelposten",
+   "velden": {
+    "item_group_name": "Stelposten",
+    "parent_item_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "Termijn bij opdracht",
+   "velden": {
+    "payment_term_name": "Termijn bij opdracht",
+    "invoice_portion": 30,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 14
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "Termijn bij start uitvoering",
+   "velden": {
+    "payment_term_name": "Termijn bij start uitvoering",
+    "invoice_portion": 40,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 14
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "Termijn bij oplevering",
+   "velden": {
+    "payment_term_name": "Termijn bij oplevering",
+    "invoice_portion": 25,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 14
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "Termijn na onderhoudstermijn",
+   "velden": {
+    "payment_term_name": "Termijn na onderhoudstermijn",
+    "invoice_portion": 5,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 14
+   }
+  },
+  {
+   "doctype": "Payment Terms Template",
+   "naam": "Termijnstaat 30-40-25-5",
+   "velden": {
+    "template_name": "Termijnstaat 30-40-25-5",
+    "terms": [
+     {
+      "payment_term": "Termijn bij opdracht",
+      "description": "Termijn bij opdracht",
+      "invoice_portion": 30,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 14
+     },
+     {
+      "payment_term": "Termijn bij start uitvoering",
+      "description": "Termijn bij start uitvoering",
+      "invoice_portion": 40,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 14
+     },
+     {
+      "payment_term": "Termijn bij oplevering",
+      "description": "Termijn bij oplevering",
+      "invoice_portion": 25,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 14
+     },
+     {
+      "payment_term": "Termijn na onderhoudstermijn",
+      "description": "Termijn na onderhoudstermijn",
+      "invoice_portion": 5,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 14
+     }
+    ]
+   }
+  },
+  {
+   "soort": "projectsjabloon",
+   "naam": "Bouwproject (calculatie t/m nazorg)",
+   "projecttype": "Nieuwbouw",
+   "fasen": [
+    {
+     "naam": "Calculatie",
+     "dagen": 10
+    },
+    {
+     "naam": "Werkvoorbereiding",
+     "dagen": 20
+    },
+    {
+     "naam": "Uitvoering",
+     "dagen": 90
+    },
+    {
+     "naam": "Oplevering",
+     "dagen": 5
+    },
+    {
+     "naam": "Nazorg",
+     "dagen": 30
+    }
+   ]
+  }
+ ]
+}
