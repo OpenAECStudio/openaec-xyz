@@ -3,25 +3,47 @@
  "titel": "Basis",
  "omschrijving": "Btw (21%, 9%, 0% en verlegd), betaalvoorwaarden, eenheden en groepen voor klanten en leveranciers",
  "standaard": true,
- "versie": 1,
+ "versie": 2,
  "records": [
+  {
+   "soort": "btw",
+   "naam": "BTW 21%",
+   "tarief": 21,
+   "omschrijving": "Btw 21%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen hoog",
+    "inkoop": "Btw te vorderen hoog"
+   }
+  },
   {
    "soort": "btw",
    "naam": "BTW 9%",
    "tarief": 9,
-   "omschrijving": "Btw 9%"
+   "omschrijving": "Btw 9%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen laag",
+    "inkoop": "Btw te vorderen laag"
+   }
   },
   {
    "soort": "btw",
    "naam": "BTW 0%",
    "tarief": 0,
-   "omschrijving": "Btw 0%"
+   "omschrijving": "Btw 0%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen overig",
+    "inkoop": "Btw te vorderen overig"
+   }
   },
   {
    "soort": "btw",
    "naam": "BTW verlegd",
    "tarief": 0,
-   "omschrijving": "Btw verlegd"
+   "omschrijving": "Btw verlegd",
+   "rekeningen": {
+    "verkoop": "Af te dragen Btw-verlegd",
+    "inkoop": "Te vorderen Btw-verlegd"
+   }
   },
   {
    "doctype": "Payment Term",

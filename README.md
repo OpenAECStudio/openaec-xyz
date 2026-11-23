@@ -4,7 +4,16 @@ De OpenAEC-inrichting van ERPNext voor bedrijven in de bouw: van aannemers en in
 ingenieurs- en architectenbureaus. De inrichting bestaat uit **modules** met stamgegevens (btw, projecttypes, fasen,
 uursoorten, groepen, sjablonen). Elke module kan per omgeving aan of uit.
 
-Ontwerp en keuzes: `docs/standaard-bouwinrichting.md`.
+Ontwerp en keuzes: `docs/standaard-bouwinrichting.md`. Routekaart per sector: `docs/openaec-bouw-routekaart.md`.
+Versies: `CHANGELOG.md`.
+
+## Wat een gebruiker ziet
+
+- De tegel **Bouwbedrijf** op het startscherm: een werkruimte met tegels en een zijbalk in het Nederlands
+  (`openaec_bouw/openaec_bouw/workspace` en `.../sidebar`). In ontwikkelmodus schrijft Frappe wijzigingen aan beide
+  terug naar deze bestanden.
+- Het rapport **Btw-aangifte** (`.../report/btw_aangifte`).
+- Met de module **Rustig menu** aan: een navigatie zonder productie, voorraad, activa en dergelijke.
 
 ## Modules
 
@@ -26,6 +35,10 @@ Een module is een bestand in `openaec_bouw/modules/<id>.json`:
 - `"ouder": "@wortel"`: de wortel van een boom (artikel-, klant- of leveranciersgroep), welke naam hij ook heeft.
 - `"soort": "btw"`: per bedrijf een btw-rekening en een sjabloon voor verkoop en inkoop.
 - `"soort": "projectsjabloon"`: een Project Template met de taken (fasen) als sjabloontaken.
+- `"soort": "verberg"`: een moduleprofiel dat de genoemde modules uit de navigatie haalt; gebruikers zonder eigen
+  keuze krijgen het, nieuwe gebruikers ook.
+
+`"vereist": ["hrms"]` op de module: de module zet pas iets als die apps op de omgeving staan.
 
 ## Regels van de lader (`openaec_bouw.profiel`)
 

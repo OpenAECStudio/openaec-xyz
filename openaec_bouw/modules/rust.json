@@ -1,0 +1,35 @@
+{
+ "id": "rust",
+ "titel": "Rustig menu",
+ "omschrijving": "Haalt uit de navigatie wat een bouwbedrijf zelden gebruikt (productie, voorraad, activa, kwaliteit, support, website en bouwstenen voor ontwikkelaars). De gegevens en rechten blijven; per gebruiker terug te zetten.",
+ "standaard": true,
+ "versie": 1,
+ "records": [
+  {
+   "soort": "verberg",
+   "naam": "Bouwbedrijf",
+   "modules": [
+    "Manufacturing",
+    "Stock",
+    "Assets",
+    "Quality Management",
+    "Support",
+    "Subcontracting",
+    "Maintenance",
+    "Portal",
+    "EDI",
+    "Bulk Transaction",
+    "Regional",
+    "Website",
+    "Build",
+    "Automation",
+    "Workflow",
+    "Geo",
+    "Recruitment",
+    "Performance",
+    "Shift and Attendance",
+    "Tenure"
+   ]
+  }
+ ]
+}

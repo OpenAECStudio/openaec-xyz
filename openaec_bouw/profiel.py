@@ -7,6 +7,7 @@ Regels:
 - **Alleen aanvullen:** een record dat er al staat, blijft zoals het is.
 - **Wat de klant weghaalt, blijft weg:** een record met een regel maar zonder record zet de lader niet opnieuw.
 - **Uitzetten** haalt weg wat de module zette, voor zover de klant het niet wijzigde en er niets aan hangt.
+- **Vereiste apps:** een module met `vereist` (bijvoorbeeld `["hrms"]`) wacht tot die apps op de site staan.
 
 Voor `bench --site <site> execute openaec_bouw.profiel.<functie>` en (later) Beheer → Inrichting: `stand`, `pas_toe`
 en `zet_module`.
@@ -20,6 +21,11 @@ from frappe import _
 
 MAP = Path(__file__).parent / "modules"
 AAN = "openaec_bouw_modules"
+# De modules die deze omgeving al eens zag. Een standaardmodule die hier nog niet in staat, is nieuw in deze versie en
+# gaat aan; een module die de klant uitzette, staat er wel in en blijft uit.
+BEKEND = "openaec_bouw_bekend"
+# Omgevingen van vóór `BEKEND` kenden deze vier.
+EERSTE_MODULES = ("basis", "projecten", "ontwerp", "uitvoering")
 REGEL = "Bouwprofiel Regel"
 # Bomen: DocType -> (veld van de bovenliggende groep).
 BOMEN = {"Item Group": "parent_item_group", "Customer Group": "parent_customer_group", "Supplier Group": "parent_supplier_group"}
@@ -47,8 +53,25 @@ def ingeschakeld() -> list[str] | None:
 	return None if waarde is None else [m for m in json.loads(waarde) if m in modules()]
 
 
+def beschikbaar(module: dict) -> bool:
+	"""Of de apps die de module nodig heeft op deze site staan."""
+	return set(module.get("vereist") or []) <= set(frappe.get_installed_apps())
+
+
 def _bewaar_aan(ids) -> None:
 	frappe.db.set_default(AAN, json.dumps(sorted(set(ids))))
+
+
+def _zet_nieuwe_standaard_aan() -> None:
+	"""Bij installeren en na elke migratie: de standaardmodules die deze omgeving nog niet kende, gaan aan."""
+	alle, gekozen = modules(), ingeschakeld()
+	waarde = frappe.db.get_default(BEKEND)
+	bekend = set(json.loads(waarde)) if waarde else (set() if gekozen is None else set(EERSTE_MODULES))
+	nieuw = {m["id"] for m in alle.values() if m.get("standaard")} - bekend
+	if nieuw or gekozen is None:
+		_bewaar_aan(set(gekozen or []) | nieuw)
+	if set(alle) != bekend:
+		frappe.db.set_default(BEKEND, json.dumps(sorted(bekend | set(alle))))
 
 
 def _vereis_beheerder() -> None:
@@ -68,6 +91,8 @@ def stand() -> list[dict]:
 			"standaard": bool(m.get("standaard")),
 			"versie": m.get("versie", 1),
 			"aan": m["id"] in gekozen,
+			"vereist": m.get("vereist") or [],
+			"beschikbaar": beschikbaar(m),
 			"records": len(m["records"]),
 			"gezet": frappe.db.count(REGEL, {"module": m["id"]}),
 		}
@@ -131,30 +156,92 @@ def _belastinggroep(bedrijf: str) -> str | None:
 	return groep[0] if groep else None
 
 
+def _schemarekening(bedrijf: str, naam: str | None) -> str | None:
+	"""De btw-rekening met deze naam uit het rekeningschema van het bedrijf, als die er is."""
+	if not naam:
+		return None
+	gevonden = frappe.get_all("Account", filters={"company": bedrijf, "account_name": naam, "account_type": "Tax", "is_group": 0}, pluck="name", limit=1)
+	return gevonden[0] if gevonden else None
+
+
 def _btw(module: str, record: dict) -> int:
-	"""Per bedrijf: een btw-rekening en een sjabloon voor verkoop en inkoop met dat tarief. Een bedrijf zonder groep
-	voor belastingen (eigen rekeningschema) wordt overgeslagen."""
+	"""Per bedrijf: een sjabloon voor verkoop en inkoop met dat tarief.
+
+	Heeft het bedrijf het Nederlandse rekeningschema, dan boeken de sjablonen op de rekeningen daarvan (`rekeningen`:
+	af te dragen bij verkoop, te vorderen bij inkoop). Anders komt er één eigen btw-rekening voor beide. Een bedrijf
+	zonder groep voor belastingen (eigen rekeningschema) wordt overgeslagen."""
 	titel, tarief, tekst = record["naam"], float(record["tarief"]), record.get("omschrijving") or record["naam"]
+	schema = record.get("rekeningen") or {}
 	gezet = 0
 	for bedrijf in frappe.get_all("Company", fields=["name", "abbr"]):
-		groep = _belastinggroep(bedrijf.name)
-		if not groep:
-			continue
-		rekening = f"{titel} - {bedrijf.abbr}"
-		gezet += _zet(
-			module,
-			"Account",
-			rekening,
-			{"account_name": titel, "company": bedrijf.name, "parent_account": groep, "account_type": "Tax", "tax_rate": tarief},
-		)
-		if not frappe.db.exists("Account", rekening):
-			continue  # de klant haalde de rekening weg: dan ook geen sjablonen
+		naam = f"{titel} - {bedrijf.abbr}"
+		hoofden = {"Sales": _schemarekening(bedrijf.name, schema.get("verkoop")), "Purchase": _schemarekening(bedrijf.name, schema.get("inkoop"))}
+		if not all(hoofden.values()):
+			groep = _belastinggroep(bedrijf.name)
+			if not groep:
+				continue
+			gezet += _zet(
+				module,
+				"Account",
+				naam,
+				{"account_name": titel, "company": bedrijf.name, "parent_account": groep, "account_type": "Tax", "tax_rate": tarief},
+			)
+			if not frappe.db.exists("Account", naam):
+				continue  # de klant haalde de rekening weg: dan ook geen sjablonen
+			hoofden = {"Sales": naam, "Purchase": naam}
 		for sjabloon in BTW_SJABLONEN:
-			regel = {"charge_type": "On Net Total", "account_head": rekening, "description": tekst, "rate": tarief}
+			regel = {"charge_type": "On Net Total", "account_head": hoofden[sjabloon.split()[0]], "description": tekst, "rate": tarief}
 			if sjabloon.startswith("Purchase"):
 				regel.update({"category": "Total", "add_deduct_tax": "Add"})
-			gezet += _zet(module, sjabloon, rekening, {"title": titel, "company": bedrijf.name, "taxes": [regel]})
+			gezet += _zet(module, sjabloon, naam, {"title": titel, "company": bedrijf.name, "taxes": [regel]})
 	return gezet
+
+
+# --- rustig menu ------------------------------------------------------------------------------------------------
+
+
+def _verberg(module: str, record: dict) -> int:
+	"""Een moduleprofiel dat de genoemde modules uit de navigatie haalt, voor elke gebruiker die nog geen eigen keuze
+	heeft. Alleen de navigatie: de gegevens en de rechten blijven zoals ze zijn. Een beheerder zet per gebruiker een
+	module terug (Gebruiker → Modules) of zet de bouwmodule uit."""
+	naam = record["naam"]
+	if _al_gezet(module, "Module Profile", naam) or frappe.db.exists("Module Profile", naam):
+		return 0
+	bestaand = set(frappe.get_all("Module Def", pluck="name"))
+	frappe.get_doc(
+		{"doctype": "Module Profile", "module_profile_name": naam, "block_modules": [{"module": m} for m in record["modules"] if m in bestaand]}
+	).insert(ignore_permissions=True)
+	_onthoud(module, "Module Profile", naam)
+	for gebruiker in frappe.get_all("User", filters={"enabled": 1, "user_type": "System User", "name": ("not in", frappe.STANDARD_USERS)}, pluck="name"):
+		doc = frappe.get_doc("User", gebruiker)
+		if doc.module_profile or doc.block_modules:
+			continue  # eigen keuze van de klant
+		doc.module_profile = naam
+		doc.flags.ignore_permissions = True
+		doc.save()
+	return 1
+
+
+def _toon_weer(module: str) -> None:
+	"""Vóór het weghalen van een moduleprofiel: de gebruikers die het hebben, zien alles weer."""
+	for regel in frappe.get_all(REGEL, filters={"module": module, "soort": "Module Profile"}, pluck="record"):
+		for gebruiker in frappe.get_all("User", filters={"module_profile": regel}, pluck="name"):
+			doc = frappe.get_doc("User", gebruiker)
+			doc.module_profile = None
+			doc.set("block_modules", [])
+			doc.flags.ignore_permissions = True
+			doc.save()
+
+
+def nieuwe_gebruiker(doc, method=None) -> None:
+	"""Een nieuwe gebruiker van het bureaublad krijgt het rustige menu, als die module aan staat."""
+	if doc.module_profile or doc.block_modules or doc.name in frappe.STANDARD_USERS:
+		return
+	for id_ in ingeschakeld() or []:
+		for record in modules()[id_]["records"]:
+			if record.get("soort") == "verberg" and frappe.db.exists("Module Profile", record["naam"]):
+				doc.module_profile = record["naam"]
+				return
 
 
 def _projectsjabloon(module: str, record: dict) -> int:
@@ -179,7 +266,7 @@ def _projectsjabloon(module: str, record: dict) -> int:
 	return 1 + len(taken)
 
 
-SOORTEN = {"btw": _btw, "projectsjabloon": _projectsjabloon}
+SOORTEN = {"btw": _btw, "projectsjabloon": _projectsjabloon, "verberg": _verberg}
 
 
 def pas_toe(alleen=None) -> dict:
@@ -191,7 +278,7 @@ def pas_toe(alleen=None) -> dict:
 	ids = [alleen] if isinstance(alleen, str) else list(alleen or gekozen)
 	uit = {}
 	for id_ in ids:
-		if id_ not in alle or id_ not in gekozen:
+		if id_ not in alle or id_ not in gekozen or not beschikbaar(alle[id_]):
 			continue
 		uit[id_] = sum(SOORTEN.get(r.get("soort"), _gewoon)(id_, r) for r in alle[id_]["records"])
 	_vastleggen()
@@ -202,6 +289,7 @@ def _haal_weg(module: str) -> dict:
 	"""Haal weg wat de module zette: alleen wat de klant niet wijzigde en waar niets aan hangt. De regels gaan altijd
 	weg; opnieuw aanzetten vult dan weer aan."""
 	weg, gebleven = 0, []
+	_toon_weer(module)
 	# In omgekeerde volgorde: een sjabloon vóór zijn taken, een btw-sjabloon vóór zijn rekening.
 	for regel in frappe.get_all(REGEL, filters={"module": module}, fields=["name", "soort", "record", "gezet_op"], order_by="creation desc, name desc"):
 		gewijzigd = frappe.db.get_value(regel.soort, regel.record, "modified")
@@ -243,16 +331,14 @@ def zet_module(module: str, aan: int | str | bool = 1) -> dict:
 
 def na_installatie() -> None:
 	"""De app installeren is het profiel willen: de standaardmodules aan, en toepassen als ERPNext al ingericht is."""
-	if ingeschakeld() is None:
-		_bewaar_aan(m["id"] for m in modules().values() if m.get("standaard"))
+	_zet_nieuwe_standaard_aan()
 	pas_toe()
 
 
 def na_migratie() -> None:
 	"""Na elke uitrol: wat een nieuwe versie van een module brengt. Een fout hier mag de migratie niet tegenhouden."""
 	try:
-		if ingeschakeld() is None:
-			_bewaar_aan(m["id"] for m in modules().values() if m.get("standaard"))
+		_zet_nieuwe_standaard_aan()
 		pas_toe()
 	except Exception:
 		frappe.db.rollback()
