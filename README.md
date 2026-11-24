@@ -32,6 +32,8 @@ opnieuw binnengehaald worden (`git subtree pull`).
 
 Deze repo geeft veel releases uit, elk met een eigen tag:
 
+- **Y-Next lokaal** (`installer/y-next`, tags `y-next-installer-v*`): Y-Next met ERPNext op de eigen pc, in Docker,
+  met één opdracht of één dubbelklik. Zie `installer/y-next/README.md`;
 - de Frappe-apps zelf (`y_next`, `z_next`, en straks de ene app XYZ);
 - **implementaties**: een inrichting van een ERPNext-omgeving voor een sector (aannemer, installatie, hout en handel,
   bureau). Een implementatie is een lijst modules die aan staan, zie `docs/routekaart.md`.

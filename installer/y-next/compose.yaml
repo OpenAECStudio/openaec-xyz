@@ -1,0 +1,118 @@
+# Y-Next lokaal: Frappe, ERPNext en Y-Next op de eigen pc.
+# Start niet met de hand voor de eerste keer; gebruik installeer.sh (Linux, macOS) of installeer.cmd (Windows).
+# Die maakt .env met de wachtwoorden en de poort.
+name: y-next
+
+x-bench: &bench
+  image: y-next-lokaal:${INSTALLER_VERSIE:-dev}
+  build:
+    context: .
+    additional_contexts:
+      # In de bundel staat de app in ./y_next; in de repo wijst installeer.sh naar apps/y_next.
+      y_next: ${Y_NEXT_BRON:-./y_next}
+    args:
+      INSTALLER_VERSIE: ${INSTALLER_VERSIE:-dev}
+  restart: unless-stopped
+  volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    - logs:/home/frappe/frappe-bench/logs
+
+services:
+  db:
+    image: docker.io/mariadb:11.8
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Draai eerst het installatiescript; dat maakt .env}
+      MARIADB_AUTO_UPGRADE: 1
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 60
+    volumes:
+      - db:/var/lib/mysql
+
+  redis-cache:
+    image: docker.io/valkey/valkey:8.1.10-alpine
+    restart: unless-stopped
+
+  redis-queue:
+    image: docker.io/valkey/valkey:8.1.10-alpine
+    restart: unless-stopped
+    volumes:
+      - redis-queue:/data
+
+  # Eenmalig per start: maakt bij de eerste keer de site, doorloopt de ERPNext-wizard en maakt de beheerder.
+  # Daarna doet hij alleen iets als de versie van de installer is veranderd (migratie).
+  inrichten:
+    <<: *bench
+    restart: "no"
+    command: /opt/y-next/inrichten.sh
+    environment:
+      SITE_NAAM: ${SITE_NAAM:-y-next.localhost}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      BEDRIJF: ${BEDRIJF:-Mijn Bedrijf}
+      BEHEERDER_EMAIL: ${BEHEERDER_EMAIL:-}
+      BEHEERDER_NAAM: ${BEHEERDER_NAAM:-}
+      POORT: ${POORT:-8080}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_started
+      redis-queue:
+        condition: service_started
+
+  backend:
+    <<: *bench
+    depends_on:
+      inrichten:
+        condition: service_completed_successfully
+
+  websocket:
+    <<: *bench
+    command: node /home/frappe/frappe-bench/apps/frappe/socketio.js
+    depends_on:
+      inrichten:
+        condition: service_completed_successfully
+
+  # Eén werker voor alle wachtrijen: genoeg voor een pc, en het scheelt geheugen.
+  werker:
+    <<: *bench
+    command: bench worker --queue long,default,short
+    depends_on:
+      inrichten:
+        condition: service_completed_successfully
+
+  planner:
+    <<: *bench
+    command: bench schedule
+    depends_on:
+      inrichten:
+        condition: service_completed_successfully
+
+  frontend:
+    <<: *bench
+    command: nginx-entrypoint.sh
+    environment:
+      BACKEND: backend:8000
+      SOCKETIO: websocket:9000
+      # Eén site, dus elk adres (localhost, de naam van de pc) komt bij die site uit.
+      FRAPPE_SITE_NAME_HEADER: ${SITE_NAAM:-y-next.localhost}
+      CLIENT_MAX_BODY_SIZE: 50m
+    ports:
+      # Standaard alleen vanaf deze pc bereikbaar. Zie README voor delen op het eigen netwerk.
+      - "${LUISTER_OP:-127.0.0.1}:${POORT:-8080}:8080"
+    depends_on:
+      - backend
+      - websocket
+
+volumes:
+  db:
+  redis-queue:
+  sites:
+  logs:
