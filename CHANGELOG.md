@@ -4,6 +4,11 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/openaec-bouw-routekaart.md`.
 
+## 0.2.2 (24 november 2026)
+
+- **Herstel:** het rustige menu liep op de modelomgeving nog steeds vast, nu op het DocShare van de gebruiker. De
+  lader schrijft het moduleprofiel nu rechtstreeks bij de gebruiker en slaat de gebruiker zelf niet meer op.
+
 ## 0.2.1 (23 november 2026)
 
 - **Herstel:** het rustige menu liep op de modelomgeving vast als een gebruiker tijdens de uitrol door een andere
