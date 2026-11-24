@@ -1,0 +1,328 @@
+{
+ "charts": [],
+ "content": "[{\"id\": \"bouwkop01\", \"type\": \"header\", \"data\": {\"text\": \"\\u003cspan class=\\\"h4\\\"\\u003e\\u003cb\\u003eVandaag\\u003c/b\\u003e\\u003c/span\\u003e\", \"col\": 12}}, {\"id\": \"bouwtegel00\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Projecten\", \"col\": 4}}, {\"id\": \"bouwtegel01\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Offertes\", \"col\": 4}}, {\"id\": \"bouwtegel02\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Opdrachten\", \"col\": 4}}, {\"id\": \"bouwtegel03\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Verkoopfacturen\", \"col\": 4}}, {\"id\": \"bouwtegel04\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Inkoopfacturen\", \"col\": 4}}, {\"id\": \"bouwtegel05\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Uren\", \"col\": 4}}, {\"id\": \"bouwtegel06\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Taken\", \"col\": 4}}, {\"id\": \"bouwtegel07\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Klanten\", \"col\": 4}}, {\"id\": \"bouwtegel08\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Leveranciers\", \"col\": 4}}, {\"id\": \"bouwwit01\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"bouwnum00\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open projecten\", \"col\": 4}}, {\"id\": \"bouwnum01\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Uitgaande facturen\", \"col\": 4}}, {\"id\": \"bouwnum02\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Inkomende facturen\", \"col\": 4}}, {\"id\": \"bouwwit02\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"bouwkop02\", \"type\": \"header\", \"data\": {\"text\": \"\\u003cspan class=\\\"h4\\\"\\u003e\\u003cb\\u003eAdministratie en stamgegevens\\u003c/b\\u003e\\u003c/span\\u003e\", \"col\": 12}}, {\"id\": \"bouwkaart00\", \"type\": \"card\", \"data\": {\"card_name\": \"Administratie\", \"col\": 4}}, {\"id\": \"bouwkaart01\", \"type\": \"card\", \"data\": {\"card_name\": \"Rapporten\", \"col\": 4}}, {\"id\": \"bouwkaart02\", \"type\": \"card\", \"data\": {\"card_name\": \"Stamgegevens\", \"col\": 4}}]",
+ "creation": "2026-11-21 16:11:52.203779",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "icon": "hard-hat",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Bouwbedrijf",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Administratie",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Btw-aangifte",
+   "link_count": 0,
+   "link_to": "Btw-aangifte",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Grootboek",
+   "link_count": 0,
+   "link_to": "General Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Debiteuren",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Crediteuren",
+   "link_count": 0,
+   "link_to": "Accounts Payable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Betalingen",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Journaalposten",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rapporten",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Winst en verlies",
+   "link_count": 0,
+   "link_to": "Profit and Loss Statement",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Balans",
+   "link_count": 0,
+   "link_to": "Balance Sheet",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Projectoverzicht",
+   "link_count": 0,
+   "link_to": "Project Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Uren per dag",
+   "link_count": 0,
+   "link_to": "Daily Timesheet Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Te factureren uren",
+   "link_count": 0,
+   "link_to": "Timesheet Billing Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stamgegevens",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Artikelen",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Prijslijsten",
+   "link_count": 0,
+   "link_to": "Price List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Projectsjablonen",
+   "link_count": 0,
+   "link_to": "Project Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Projecttypes",
+   "link_count": 0,
+   "link_to": "Project Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Uursoorten",
+   "link_count": 0,
+   "link_to": "Activity Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Betalingsvoorwaarden",
+   "link_count": 0,
+   "link_to": "Payment Terms Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-11-21 16:11:52.203779",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "name": "Bouwbedrijf",
+ "number_cards": [
+  {
+   "label": "Open projecten",
+   "number_card_name": "Open Projects"
+  },
+  {
+   "label": "Uitgaande facturen",
+   "number_card_name": "Total Outgoing Bills"
+  },
+  {
+   "label": "Inkomende facturen",
+   "number_card_name": "Total Incoming Bills"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "blue",
+   "doc_view": "List",
+   "format": "{} Open",
+   "icon": "folder-kanban",
+   "label": "Projecten",
+   "link_to": "Project",
+   "stats_filter": "{\"status\": \"Open\"}",
+   "type": "DocType"
+  },
+  {
+   "color": "orange",
+   "doc_view": "List",
+   "format": "{} Open",
+   "icon": "file-text",
+   "label": "Offertes",
+   "link_to": "Quotation",
+   "stats_filter": "{\"status\": \"Open\"}",
+   "type": "DocType"
+  },
+  {
+   "color": "green",
+   "doc_view": "List",
+   "format": "{} Lopend",
+   "icon": "handshake",
+   "label": "Opdrachten",
+   "link_to": "Sales Order",
+   "stats_filter": "{\"status\": [\"in\", [\"To Deliver and Bill\", \"To Bill\", \"To Deliver\"]]}",
+   "type": "DocType"
+  },
+  {
+   "color": "red",
+   "doc_view": "List",
+   "format": "{} Openstaand",
+   "icon": "receipt",
+   "label": "Verkoopfacturen",
+   "link_to": "Sales Invoice",
+   "stats_filter": "{\"outstanding_amount\": [\">\", 0], \"docstatus\": 1}",
+   "type": "DocType"
+  },
+  {
+   "color": "red",
+   "doc_view": "List",
+   "format": "{} Te betalen",
+   "icon": "receipt-text",
+   "label": "Inkoopfacturen",
+   "link_to": "Purchase Invoice",
+   "stats_filter": "{\"outstanding_amount\": [\">\", 0], \"docstatus\": 1}",
+   "type": "DocType"
+  },
+  {
+   "color": "grey",
+   "doc_view": "List",
+   "format": "{} Concept",
+   "icon": "calendar-clock",
+   "label": "Uren",
+   "link_to": "Timesheet",
+   "stats_filter": "{\"docstatus\": 0}",
+   "type": "DocType"
+  },
+  {
+   "color": "yellow",
+   "doc_view": "List",
+   "format": "{} Open",
+   "icon": "list-todo",
+   "label": "Taken",
+   "link_to": "Task",
+   "stats_filter": "{\"status\": [\"in\", [\"Open\", \"Working\", \"Overdue\"]]}",
+   "type": "DocType"
+  },
+  {
+   "color": "grey",
+   "doc_view": "List",
+   "icon": "users",
+   "label": "Klanten",
+   "link_to": "Customer",
+   "type": "DocType"
+  },
+  {
+   "color": "grey",
+   "doc_view": "List",
+   "icon": "truck",
+   "label": "Leveranciers",
+   "link_to": "Supplier",
+   "type": "DocType"
+  }
+ ],
+ "standard": 1,
+ "title": "Bouwbedrijf",
+ "type": "Workspace"
+}

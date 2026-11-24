@@ -1,0 +1,177 @@
+{
+ "id": "projecten",
+ "titel": "Projecten",
+ "omschrijving": "Projecttypes, uursoorten en functies",
+ "standaard": true,
+ "versie": 1,
+ "records": [
+  {
+   "doctype": "Project Type",
+   "naam": "Nieuwbouw",
+   "velden": {
+    "project_type": "Nieuwbouw"
+   }
+  },
+  {
+   "doctype": "Project Type",
+   "naam": "Verbouw en renovatie",
+   "velden": {
+    "project_type": "Verbouw en renovatie"
+   }
+  },
+  {
+   "doctype": "Project Type",
+   "naam": "Onderhoud",
+   "velden": {
+    "project_type": "Onderhoud"
+   }
+  },
+  {
+   "doctype": "Project Type",
+   "naam": "Infra",
+   "velden": {
+    "project_type": "Infra"
+   }
+  },
+  {
+   "doctype": "Project Type",
+   "naam": "Advies en engineering",
+   "velden": {
+    "project_type": "Advies en engineering"
+   }
+  },
+  {
+   "doctype": "Project Type",
+   "naam": "Intern",
+   "velden": {
+    "project_type": "Intern"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Calculatie",
+   "velden": {
+    "activity_type": "Calculatie"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Werkvoorbereiding",
+   "velden": {
+    "activity_type": "Werkvoorbereiding"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Tekenwerk en modelleren",
+   "velden": {
+    "activity_type": "Tekenwerk en modelleren"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Berekeningen",
+   "velden": {
+    "activity_type": "Berekeningen"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Projectleiding",
+   "velden": {
+    "activity_type": "Projectleiding"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Uitvoering",
+   "velden": {
+    "activity_type": "Uitvoering"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Toezicht",
+   "velden": {
+    "activity_type": "Toezicht"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Overleg",
+   "velden": {
+    "activity_type": "Overleg"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Reistijd",
+   "velden": {
+    "activity_type": "Reistijd"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Meerwerk",
+   "velden": {
+    "activity_type": "Meerwerk"
+   }
+  },
+  {
+   "doctype": "Activity Type",
+   "naam": "Intern",
+   "velden": {
+    "activity_type": "Intern"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Projectleider",
+   "velden": {
+    "designation_name": "Projectleider"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Werkvoorbereider",
+   "velden": {
+    "designation_name": "Werkvoorbereider"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Calculator",
+   "velden": {
+    "designation_name": "Calculator"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Uitvoerder",
+   "velden": {
+    "designation_name": "Uitvoerder"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Modelleur",
+   "velden": {
+    "designation_name": "Modelleur"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Constructeur",
+   "velden": {
+    "designation_name": "Constructeur"
+   }
+  },
+  {
+   "doctype": "Designation",
+   "naam": "Administratie",
+   "velden": {
+    "designation_name": "Administratie"
+   }
+  }
+ ]
+}

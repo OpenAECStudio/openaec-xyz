@@ -1,0 +1,287 @@
+{
+ "id": "loon",
+ "titel": "Personeel en loon (begin)",
+ "omschrijving": "Nederlandse looncomponenten, verlofsoorten, dienstverbanden en declaratiesoorten voor Frappe HR. Legt de structuur klaar; de loonberekening zelf (loonheffing, cao, pensioen) en de loonaangifte zitten er nog niet in.",
+ "standaard": true,
+ "versie": 1,
+ "vereist": [
+  "hrms"
+ ],
+ "records": [
+  {
+   "doctype": "Salary Component",
+   "naam": "Brutoloon",
+   "velden": {
+    "salary_component": "Brutoloon",
+    "salary_component_abbr": "BRUTO",
+    "type": "Earning",
+    "description": "Vast bruto maandloon of periodeloon",
+    "is_tax_applicable": 1,
+    "depends_on_payment_days": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Uurloon",
+   "velden": {
+    "salary_component": "Uurloon",
+    "salary_component_abbr": "UUR",
+    "type": "Earning",
+    "description": "Loon op basis van gewerkte uren",
+    "is_tax_applicable": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Overwerk",
+   "velden": {
+    "salary_component": "Overwerk",
+    "salary_component_abbr": "OVW",
+    "type": "Earning",
+    "description": "Overwerktoeslag volgens de cao",
+    "is_tax_applicable": 1,
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Vakantiegeld",
+   "velden": {
+    "salary_component": "Vakantiegeld",
+    "salary_component_abbr": "VAKG",
+    "type": "Earning",
+    "description": "Vakantiebijslag (wettelijk minimaal 8% van het brutoloon)",
+    "is_tax_applicable": 1,
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Reisurenvergoeding",
+   "velden": {
+    "salary_component": "Reisurenvergoeding",
+    "salary_component_abbr": "REISU",
+    "type": "Earning",
+    "description": "Vergoeding van reisuren volgens de cao",
+    "is_tax_applicable": 1,
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Reiskostenvergoeding",
+   "velden": {
+    "salary_component": "Reiskostenvergoeding",
+    "salary_component_abbr": "REISK",
+    "type": "Earning",
+    "description": "Onbelaste vergoeding van reiskosten (tot het vrijgestelde bedrag per kilometer)",
+    "is_tax_applicable": 0,
+    "exempted_from_income_tax": 1,
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Onkostenvergoeding",
+   "velden": {
+    "salary_component": "Onkostenvergoeding",
+    "salary_component_abbr": "ONK",
+    "type": "Earning",
+    "description": "Onbelaste vergoeding van werkelijke kosten",
+    "is_tax_applicable": 0,
+    "exempted_from_income_tax": 1,
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Loonheffing",
+   "velden": {
+    "salary_component": "Loonheffing",
+    "salary_component_abbr": "LH",
+    "type": "Deduction",
+    "description": "Loonbelasting en premie volksverzekeringen",
+    "is_income_tax_component": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Pensioenpremie werknemer",
+   "velden": {
+    "salary_component": "Pensioenpremie werknemer",
+    "salary_component_abbr": "PENSWN",
+    "type": "Deduction",
+    "description": "Werknemersdeel van de pensioenpremie",
+    "exempted_from_income_tax": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Premie WGA werknemer",
+   "velden": {
+    "salary_component": "Premie WGA werknemer",
+    "salary_component_abbr": "WGAWN",
+    "type": "Deduction",
+    "description": "Verhaald werknemersdeel van de WGA-premie",
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Inhouding overig",
+   "velden": {
+    "salary_component": "Inhouding overig",
+    "salary_component_abbr": "INH",
+    "type": "Deduction",
+    "description": "Overige netto inhouding",
+    "remove_if_zero_valued": 1
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Pensioenpremie werkgever",
+   "velden": {
+    "salary_component": "Pensioenpremie werkgever",
+    "salary_component_abbr": "PENSWG",
+    "type": "Employer Contribution",
+    "description": "Werkgeversdeel van de pensioenpremie"
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Premies werknemersverzekeringen",
+   "velden": {
+    "salary_component": "Premies werknemersverzekeringen",
+    "salary_component_abbr": "WNVZ",
+    "type": "Employer Contribution",
+    "description": "AWf, Aof, Wko en Whk (werkgeverslasten)"
+   }
+  },
+  {
+   "doctype": "Salary Component",
+   "naam": "Werkgeversheffing Zvw",
+   "velden": {
+    "salary_component": "Werkgeversheffing Zvw",
+    "salary_component_abbr": "ZVW",
+    "type": "Employer Contribution",
+    "description": "Inkomensafhankelijke bijdrage Zorgverzekeringswet"
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Vakantie (wettelijk)",
+   "velden": {
+    "leave_type_name": "Vakantie (wettelijk)",
+    "max_leaves_allowed": 20,
+    "is_carry_forward": 1
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Vakantie (bovenwettelijk)",
+   "velden": {
+    "leave_type_name": "Vakantie (bovenwettelijk)",
+    "max_leaves_allowed": 5,
+    "is_carry_forward": 1
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Roostervrij (ATV)",
+   "velden": {
+    "leave_type_name": "Roostervrij (ATV)",
+    "max_leaves_allowed": 0
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Ziekte",
+   "velden": {
+    "leave_type_name": "Ziekte",
+    "max_leaves_allowed": 0,
+    "allow_negative": 1,
+    "include_holiday": 0
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Bijzonder verlof",
+   "velden": {
+    "leave_type_name": "Bijzonder verlof",
+    "max_leaves_allowed": 0
+   }
+  },
+  {
+   "doctype": "Leave Type",
+   "naam": "Onbetaald verlof",
+   "velden": {
+    "leave_type_name": "Onbetaald verlof",
+    "max_leaves_allowed": 0,
+    "is_lwp": 1
+   }
+  },
+  {
+   "doctype": "Employment Type",
+   "naam": "Vast",
+   "velden": {
+    "employee_type_name": "Vast"
+   }
+  },
+  {
+   "doctype": "Employment Type",
+   "naam": "Tijdelijk",
+   "velden": {
+    "employee_type_name": "Tijdelijk"
+   }
+  },
+  {
+   "doctype": "Employment Type",
+   "naam": "Oproep",
+   "velden": {
+    "employee_type_name": "Oproep"
+   }
+  },
+  {
+   "doctype": "Employment Type",
+   "naam": "Stage",
+   "velden": {
+    "employee_type_name": "Stage"
+   }
+  },
+  {
+   "doctype": "Employment Type",
+   "naam": "Inhuur (zzp of uitzend)",
+   "velden": {
+    "employee_type_name": "Inhuur (zzp of uitzend)"
+   }
+  },
+  {
+   "doctype": "Expense Claim Type",
+   "naam": "Reiskosten",
+   "velden": {
+    "expense_type": "Reiskosten"
+   }
+  },
+  {
+   "doctype": "Expense Claim Type",
+   "naam": "Gereedschap en materiaal",
+   "velden": {
+    "expense_type": "Gereedschap en materiaal"
+   }
+  },
+  {
+   "doctype": "Expense Claim Type",
+   "naam": "Verblijf en maaltijden",
+   "velden": {
+    "expense_type": "Verblijf en maaltijden"
+   }
+  },
+  {
+   "doctype": "Expense Claim Type",
+   "naam": "Opleiding en certificaten",
+   "velden": {
+    "expense_type": "Opleiding en certificaten"
+   }
+  }
+ ]
+}

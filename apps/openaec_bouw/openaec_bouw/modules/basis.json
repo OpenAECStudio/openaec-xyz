@@ -1,0 +1,268 @@
+{
+ "id": "basis",
+ "titel": "Basis",
+ "omschrijving": "Btw (21%, 9%, 0% en verlegd), betaalvoorwaarden, eenheden en groepen voor klanten en leveranciers",
+ "standaard": true,
+ "versie": 2,
+ "records": [
+  {
+   "soort": "btw",
+   "naam": "BTW 21%",
+   "tarief": 21,
+   "omschrijving": "Btw 21%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen hoog",
+    "inkoop": "Btw te vorderen hoog"
+   }
+  },
+  {
+   "soort": "btw",
+   "naam": "BTW 9%",
+   "tarief": 9,
+   "omschrijving": "Btw 9%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen laag",
+    "inkoop": "Btw te vorderen laag"
+   }
+  },
+  {
+   "soort": "btw",
+   "naam": "BTW 0%",
+   "tarief": 0,
+   "omschrijving": "Btw 0%",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen overig",
+    "inkoop": "Btw te vorderen overig"
+   }
+  },
+  {
+   "soort": "btw",
+   "naam": "BTW verlegd",
+   "tarief": 0,
+   "omschrijving": "Btw verlegd",
+   "rekeningen": {
+    "verkoop": "Af te dragen Btw-verlegd",
+    "inkoop": "Te vorderen Btw-verlegd"
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "14 dagen",
+   "velden": {
+    "payment_term_name": "14 dagen",
+    "invoice_portion": 100,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 14
+   }
+  },
+  {
+   "doctype": "Payment Term",
+   "naam": "30 dagen",
+   "velden": {
+    "payment_term_name": "30 dagen",
+    "invoice_portion": 100,
+    "due_date_based_on": "Day(s) after invoice date",
+    "credit_days": 30
+   }
+  },
+  {
+   "doctype": "Payment Terms Template",
+   "naam": "14 dagen",
+   "velden": {
+    "template_name": "14 dagen",
+    "terms": [
+     {
+      "payment_term": "14 dagen",
+      "invoice_portion": 100,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 14
+     }
+    ]
+   }
+  },
+  {
+   "doctype": "Payment Terms Template",
+   "naam": "30 dagen",
+   "velden": {
+    "template_name": "30 dagen",
+    "terms": [
+     {
+      "payment_term": "30 dagen",
+      "invoice_portion": 100,
+      "due_date_based_on": "Day(s) after invoice date",
+      "credit_days": 30
+     }
+    ]
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "uur",
+   "velden": {
+    "uom_name": "uur"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "dag",
+   "velden": {
+    "uom_name": "dag"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "week",
+   "velden": {
+    "uom_name": "week"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "m",
+   "velden": {
+    "uom_name": "m"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "m²",
+   "velden": {
+    "uom_name": "m²"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "m³",
+   "velden": {
+    "uom_name": "m³"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "stuk",
+   "velden": {
+    "uom_name": "stuk"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "kg",
+   "velden": {
+    "uom_name": "kg"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "ton",
+   "velden": {
+    "uom_name": "ton"
+   }
+  },
+  {
+   "doctype": "UOM",
+   "naam": "post",
+   "velden": {
+    "uom_name": "post"
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Particulier",
+   "velden": {
+    "customer_group_name": "Particulier",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Zakelijk",
+   "velden": {
+    "customer_group_name": "Zakelijk",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Overheid",
+   "velden": {
+    "customer_group_name": "Overheid",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Woningcorporatie",
+   "velden": {
+    "customer_group_name": "Woningcorporatie",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Aannemer",
+   "velden": {
+    "customer_group_name": "Aannemer",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Customer Group",
+   "naam": "Architect en adviseur",
+   "velden": {
+    "customer_group_name": "Architect en adviseur",
+    "parent_customer_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Supplier Group",
+   "naam": "Onderaannemer",
+   "velden": {
+    "supplier_group_name": "Onderaannemer",
+    "parent_supplier_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Supplier Group",
+   "naam": "Materiaalleverancier",
+   "velden": {
+    "supplier_group_name": "Materiaalleverancier",
+    "parent_supplier_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Supplier Group",
+   "naam": "Verhuur materieel",
+   "velden": {
+    "supplier_group_name": "Verhuur materieel",
+    "parent_supplier_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Supplier Group",
+   "naam": "Adviseur",
+   "velden": {
+    "supplier_group_name": "Adviseur",
+    "parent_supplier_group": "@wortel",
+    "is_group": 0
+   }
+  },
+  {
+   "doctype": "Supplier Group",
+   "naam": "Zzp",
+   "velden": {
+    "supplier_group_name": "Zzp",
+    "parent_supplier_group": "@wortel",
+    "is_group": 0
+   }
+  }
+ ]
+}

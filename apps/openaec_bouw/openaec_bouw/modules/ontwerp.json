@@ -1,0 +1,36 @@
+{
+ "id": "ontwerp",
+ "titel": "Ontwerp en engineering",
+ "omschrijving": "Voor ingenieurs- en architectenbureaus: een projectsjabloon met de ontwerpfasen SO, VO, DO, TO en UO",
+ "standaard": true,
+ "versie": 1,
+ "records": [
+  {
+   "soort": "projectsjabloon",
+   "naam": "Ontwerpproject (SO t/m UO)",
+   "projecttype": "Advies en engineering",
+   "fasen": [
+    {
+     "naam": "SO - Schetsontwerp",
+     "dagen": 15
+    },
+    {
+     "naam": "VO - Voorlopig ontwerp",
+     "dagen": 20
+    },
+    {
+     "naam": "DO - Definitief ontwerp",
+     "dagen": 30
+    },
+    {
+     "naam": "TO - Technisch ontwerp",
+     "dagen": 30
+    },
+    {
+     "naam": "UO - Uitvoeringsontwerp",
+     "dagen": 30
+    }
+   ]
+  }
+ ]
+}
