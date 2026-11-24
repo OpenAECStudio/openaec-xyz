@@ -1,0 +1,79 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Quotation",
+  "enabled": 1,
+  "modified": "2026-04-16 05:25:47.227918",
+  "module": "Z Next",
+  "name": "Acquisitie Status Kleur",
+  "script": "frappe.listview_settings[\"Quotation\"].get_indicator = function(doc) {\n    var s = doc.custom_acquisitie_status;\n    if (s === \"Lead\") return [\"Lead\", \"blue\"];\n    if (s === \"Offerte\") return [\"Offerte\", \"orange\"];\n    if (s === \"Grote kans bijna binnen\") return [\"Grote kans\", \"yellow\"];\n    if (s === \"Opdracht\") return [\"Opdracht\", \"green\"];\n    if (s === \"Verloren\") return [\"Verloren\", \"red\"];\n    return [doc.status, \"gray\"];\n};",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Zapp Bouw7 Koppeling",
+  "enabled": 1,
+  "modified": "2026-10-22 15:41:49.680835",
+  "module": "Z Next",
+  "name": "Zapp Bouw7 beheer",
+  "script": "frappe.ui.form.on(\"Zapp Bouw7 Koppeling\", {\n  refresh(frm) {\n    if (frm.is_new()) return;\n    const invoke = async (action) => {\n      if (frm.is_dirty()) await frm.save();\n      const response = await frappe.call({\n        method: \"zapp_bouw7_sync\", type: \"POST\",\n        args: {action, mutation_token: frappe.csrf_token},\n        freeze: true, freeze_message: \"Bouw7-koppeling bijwerken…\",\n      });\n      await frm.reload_doc();\n      const result = response.message || {};\n      if (action === \"test\" && !result.connected) {\n        frappe.msgprint({title: \"Bouw7-verbinding\", message: result.error || \"Verbinding mislukt.\", indicator: \"red\"});\n        return;\n      }\n      frappe.show_alert({message: result.connected ? `Verbonden met ${result.organization}` : result.status === \"running\" ? \"Er loopt al een synchronisatie.\" : \"Synchronisatie gestart. De voortgang wordt automatisch vernieuwd.\", indicator: \"green\"});\n    };\n    frm.add_custom_button(\"Nu bijwerken\", () => invoke(\"start\")).addClass(\"btn-primary\");\n    frm.add_custom_button(\"Verbinding testen\", () => invoke(\"test\"), \"Bouw7\");\n    frm.add_custom_button(\"Eerst vergelijken\", () => invoke(\"preview\"), \"Bouw7\");\n    frm.add_custom_button(\"Volledig controleren en bijwerken\", () => invoke(\"full\"), \"Bouw7\");\n    frm.add_custom_button(\"Verwerkingslog\", () => frappe.set_route(\"List\", \"Zapp Bouw7 Log\"), \"Bouw7\");\n    frm.add_custom_button(\"Openstaande controles\", () => frappe.set_route(\"List\", \"Zapp Bouw7 Controle\", {resolved: 0}), \"Bouw7\");\n    const state = JSON.parse(frm.doc.state_json || \"{}\");\n    const labels = {contacts:\"Contacten\", employees:\"Medewerkers\", projects:\"Projecten\", purchase_invoices:\"Inkoopfacturen\", sales_invoices:\"Verkoopfacturen\"};\n    const stats = state.stats || {};\n    const esc = frappe.utils.escape_html;\n    const rows = Object.entries(stats).map(([kind, s]) => `<tr><td>${esc(labels[kind] || kind)}</td><td>${s.created || 0}</td><td>${s.updated || 0}</td><td>${s.unchanged || 0}</td><td>${(s.failed || 0) + (s.conflict || 0)}</td></tr>`).join(\"\");\n    const kind = [\"Bezig\", \"Fout\"].includes(frm.doc.sync_status) ? [\"contacts\", \"employees\", \"projects\", \"purchase_invoices\", \"sales_invoices\"][state.index] : null;\n    const position = kind ? `<p>${esc(labels[kind])}: ${Number(state.offset || 0).toLocaleString(\"nl-NL\")} behandeld${state.expected_counts?.[kind] != null ? ` · ${Number(state.expected_counts[kind]).toLocaleString(\"nl-NL\")} in bronselectie` : \"\"}</p>` : \"\";\n    const heartbeat = frm.doc.last_heartbeat ? `<p class=\"text-muted\">Laatste activiteit: ${esc(frappe.datetime.str_to_user(frm.doc.last_heartbeat))}</p>` : \"\";\n    const error = frm.doc.last_error ? `<div class=\"alert ${frm.doc.sync_status === \"Fout\" ? \"alert-danger\" : \"alert-warning\"}\">${esc(frm.doc.last_error)}${frm.doc.sync_status === \"Fout\" ? \"<br>‘Nu bijwerken’ hervat vanaf het opgeslagen punt. De uurtaak probeert dit ook opnieuw.\" : \"\"}</div>` : \"\";\n    frm.fields_dict.progress_html.$wrapper.html(`<p><strong>${esc(frm.doc.sync_status || \"Nog niet gestart\")}</strong> ${state.dry_run ? \"· Vergelijking zonder wijzigingen\" : \"\"}${state.repair_ids ? \" · Gerichte herstelronde\" : \"\"}</p>${position}${heartbeat}${error}<table class=\"table table-bordered\"><thead><tr><th>Onderdeel</th><th>Nieuw</th><th>Bijgewerkt</th><th>Ongewijzigd</th><th>Controleren</th></tr></thead><tbody>${rows}</tbody></table>`);\n    if (frm.doc.sync_status === \"Bezig\" && !frm.bouw7_timer) {\n      frm.bouw7_timer = setTimeout(() => {\n        frm.bouw7_timer = null;\n        if (cur_frm === frm && !frm.is_dirty()) frm.reload_doc();\n      }, 5000);\n    }\n  },\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Zapp Calculatie",
+  "enabled": 1,
+  "modified": "2026-10-22 12:30:07.152795",
+  "module": "Z Next",
+  "name": "Zapp Calculatie - Open Calc Studio",
+  "script": "frappe.ui.form.on('Zapp Calculatie', {\n    refresh(frm) {\n        if (!frm.is_new()) {\n            frm.add_custom_button(__('Openen in Open Calc Studio'), () => window.open('/zapp-calculaties?calc=' + encodeURIComponent(frm.doc.name), '_blank'));\n        }\n    },\n    open_editor(frm) {\n        if (frm.is_new()) { frappe.msgprint(__('Sla de calculatie eerst op.')); return; }\n        window.open('/zapp-calculaties?calc=' + encodeURIComponent(frm.doc.name), '_blank');\n    }\n});\nfrappe.listview_settings['Zapp Calculatie'] = Object.assign(frappe.listview_settings['Zapp Calculatie'] || {}, {\n    onload(list) {\n        list.page.add_inner_button(__('Open Calc Studio'), () => window.open('/zapp-calculaties', '_blank'));\n    }\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Zapp Terugkerende Taak",
+  "enabled": 1,
+  "modified": "2026-10-22 12:22:28.252374",
+  "module": "Z Next",
+  "name": "Zapp Terugkerende Taak - Formulier",
+  "script": "\nconst DTT_INTERVAL = {\n    'Dagelijks': [1, 'd'], 'Wekelijks': [7, 'd'], 'Tweewekelijks': [14, 'd'],\n    'Maandelijks': [1, 'm'], 'Per kwartaal': [3, 'm'], 'Jaarlijks': [12, 'm']\n};\n\nfunction dtt_add(date, freq) {\n    const [n, unit] = DTT_INTERVAL[freq];\n    return unit === 'd' ? frappe.datetime.add_days(date, n) : frappe.datetime.add_months(date, n);\n}\n\nfrappe.ui.form.on('Zapp Terugkerende Taak', {\n    refresh(frm) {\n        if (frm.is_new() || !DTT_INTERVAL[frm.doc.frequentie]) return;\n        frm.add_custom_button(__('Markeer als uitgevoerd'), () => {\n            const today = frappe.datetime.get_today();\n            // Ritme vasthouden: reken vanaf de geplande datum, niet vanaf vandaag\n            let next = dtt_add(frm.doc.volgende_keer || today, frm.doc.frequentie);\n            while (frappe.datetime.get_diff(next, today) <= 0) {\n                next = dtt_add(next, frm.doc.frequentie);\n            }\n            frm.set_value('laatst_uitgevoerd', today);\n            frm.set_value('volgende_keer', next);\n            frm.save().then(() => frappe.show_alert({\n                message: __('Uitgevoerd. Volgende keer: {0}', [frappe.datetime.str_to_user(next)]),\n                indicator: 'green'\n            }));\n        }).addClass('btn-primary');\n    },\n    laatst_uitgevoerd(frm) {\n        if (frm.doc.laatst_uitgevoerd && DTT_INTERVAL[frm.doc.frequentie] && !frm.doc.volgende_keer) {\n            frm.set_value('volgende_keer', dtt_add(frm.doc.laatst_uitgevoerd, frm.doc.frequentie));\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Zapp Terugkerende Taak",
+  "enabled": 1,
+  "modified": "2026-10-22 12:22:28.568371",
+  "module": "Z Next",
+  "name": "Zapp Terugkerende Taak - Lijst",
+  "script": "\nfrappe.listview_settings['Zapp Terugkerende Taak'] = {\n    add_fields: ['volgende_keer', 'actief', 'frequentie'],\n    get_indicator(doc) {\n        if (!doc.actief) return [__('Inactief'), 'gray', 'actief,=,0'];\n        if (doc.frequentie === 'Doorlopend') return [__('Doorlopend'), 'blue', 'frequentie,=,Doorlopend'];\n        if (!doc.volgende_keer) return [__('Geen datum'), 'gray', 'volgende_keer,is,not set'];\n        const diff = frappe.datetime.get_diff(doc.volgende_keer, frappe.datetime.get_today());\n        if (diff < 0) return [__('Achterstallig'), 'red', 'volgende_keer,<,' + frappe.datetime.get_today()];\n        if (diff <= 7) return [__('Binnen 7 dagen'), 'orange'];\n        return [__('Gepland'), 'green'];\n    }\n};\n",
+  "view": "List"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Invoice",
+  "enabled": 1,
+  "modified": "2026-01-24 21:15:03.631971",
+  "module": "Z Next",
+  "name": "Purchase Invoice - PDF Preview",
+  "script": "\nfrappe.ui.form.on('Purchase Invoice', {\n    refresh: function(frm) {\n        // Verwijder oude floating preview als die bestaat\n        $('.pdf-preview-panel').remove();\n        \n        // Voeg PDF preview sectie toe aan het formulier\n        if (!frm.fields_dict.pdf_preview_html) {\n            // Maak een custom HTML sectie voor de PDF\n            let wrapper = frm.fields_dict.items.$wrapper.parent();\n            \n            // Voeg PDF frame toe boven de items tabel\n            if (!$('#pdf-preview-frame').length) {\n                let pdf_section = $(`\n                    <div id=\"pdf-preview-frame\" class=\"form-group\" style=\"margin-bottom: 20px;\">\n                        <label class=\"control-label\">Factuur PDF</label>\n                        <div id=\"pdf-container\" style=\"border: 1px solid #d1d8dd; border-radius: 4px; background: #f5f7fa; min-height: 600px;\">\n                            <p style=\"padding: 20px; color: #8d99a6;\">Geen PDF bijlage gevonden</p>\n                        </div>\n                    </div>\n                `);\n                wrapper.before(pdf_section);\n            }\n        }\n        \n        // Zoek PDF bijlage\n        frappe.call({\n            method: 'frappe.client.get_list',\n            args: {\n                doctype: 'File',\n                filters: {\n                    attached_to_doctype: 'Purchase Invoice',\n                    attached_to_name: frm.doc.name,\n                    file_url: ['like', '%.pdf']\n                },\n                fields: ['file_url', 'file_name'],\n                limit_page_length: 1\n            },\n            callback: function(r) {\n                if (r.message && r.message.length > 0) {\n                    let file_url = r.message[0].file_url;\n                    $('#pdf-container').html(`\n                        <iframe src=\"${file_url}\" \n                            style=\"width: 100%; height: 700px; border: none;\"\n                            title=\"PDF Preview\">\n                        </iframe>\n                    `);\n                } else {\n                    $('#pdf-container').html('<p style=\"padding: 20px; color: #8d99a6;\">Geen PDF bijlage gevonden</p>');\n                }\n            }\n        });\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2026-01-24 21:26:48.587923",
+  "module": "Z Next",
+  "name": "Sales Invoice - Force Sidebar",
+  "script": "\n// Force sidebar always visible\n(function() {\n    if (window._sidebar_forced) return;\n    window._sidebar_forced = true;\n    \n    function forceSidebar() {\n        // Remove any collapsed state\n        $('body').removeClass('sidebar-collapsed');\n        $('.layout-side-section').show().css({\n            'display': 'block',\n            'visibility': 'visible',\n            'width': '220px'\n        });\n        $('.desk-sidebar').show();\n        \n        // Hide collapse button\n        $('.collapse-sidebar-btn, .sidebar-toggle-btn').hide();\n        \n        // Store preference\n        if (typeof frappe !== 'undefined' && frappe.ui && frappe.ui.sidebar) {\n            frappe.ui.sidebar.collapsed = false;\n        }\n    }\n    \n    // Apply immediately and on changes\n    forceSidebar();\n    $(document).ready(forceSidebar);\n    \n    // Observe DOM changes\n    const observer = new MutationObserver(forceSidebar);\n    observer.observe(document.body, {attributes: true, childList: true, subtree: true});\n    \n    // Also on route changes\n    if (typeof frappe !== 'undefined' && frappe.router) {\n        frappe.router.on('change', function() {\n            setTimeout(forceSidebar, 100);\n        });\n    }\n})();\n",
+  "view": "List"
+ }
+]

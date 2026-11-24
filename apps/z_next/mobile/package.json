@@ -1,0 +1,17 @@
+{
+  "name": "z-next-mobile",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Z-Next als app voor Android en iOS (Tauri 2 mobile)",
+  "scripts": {
+    "tauri": "tauri",
+    "icon": "tauri icon src-tauri/icons/source.png",
+    "android:init": "tauri android init --ci",
+    "android:apk": "tauri android build --debug --apk --target aarch64 --target x86_64",
+    "ios:init": "tauri ios init --ci",
+    "ios:sim": "tauri ios build --debug --target aarch64-sim"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "~2.12.4"
+  }
+}

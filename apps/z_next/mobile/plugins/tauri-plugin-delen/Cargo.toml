@@ -1,0 +1,14 @@
+[package]
+name = "tauri-plugin-delen"
+version = "0.1.0"
+description = "Delen voor Z-Next Mobile: downloads en navigator.share via het deelmenu van Android"
+authors = ["OpenAEC Foundation"]
+edition = "2021"
+rust-version = "1.77"
+links = "tauri-plugin-delen"
+
+[dependencies]
+tauri = { version = "2" }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }

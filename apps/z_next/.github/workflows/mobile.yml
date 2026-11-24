@@ -1,0 +1,116 @@
+name: Mobiele app
+
+on:
+  push:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile.yml"
+  pull_request:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: mobile
+
+jobs:
+  android:
+    name: Android (debug-APK)
+    runs-on: ubuntu-latest
+    env:
+      # Geen debuginfo in de Rust-bibliotheek: de debug-APK blijft klein genoeg om te downloaden.
+      CARGO_PROFILE_DEV_DEBUG: "0"
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Android SDK en NDK
+        run: |
+          # De runner heeft de Android SDK en een NDK al; Tauri leest ANDROID_HOME en NDK_HOME.
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> "$GITHUB_ENV"
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,x86_64-linux-android
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: mobile/src-tauri -> target
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - run: npm ci
+
+      - name: Android-project genereren
+        run: |
+          npx tauri android init --ci
+          # De iconen van de app in het nieuwe project zetten (mipmap-*).
+          npx tauri icon src-tauri/icons/source.png
+
+      - name: Debug-APK bouwen (arm64 voor telefoons, x86_64 voor de emulator)
+        run: npx tauri android build --debug --apk --target aarch64 --target x86_64
+
+      - name: APK als artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: z-next-android-debug-apk
+          path: mobile/src-tauri/gen/android/app/build/outputs/apk/**/*.apk
+          if-no-files-found: error
+          retention-days: 30
+
+  ios:
+    name: iOS (simulator-build)
+    runs-on: macos-latest
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-ios-sim
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: mobile/src-tauri -> target
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - run: npm ci
+
+      - name: iOS-project genereren
+        run: |
+          npx tauri ios init --ci
+          npx tauri icon src-tauri/icons/source.png
+
+      - name: Simulator-build (zonder ondertekening)
+        run: npx tauri ios build --debug --target aarch64-sim
+
+      - name: App als artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: z-next-ios-simulator-app
+          path: mobile/src-tauri/gen/apple/build
+          if-no-files-found: error
+          retention-days: 14

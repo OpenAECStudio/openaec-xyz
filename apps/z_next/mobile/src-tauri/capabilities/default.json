@@ -1,0 +1,6 @@
+{
+  "identifier": "default",
+  "description": "Alleen de basis: de startpagina gebruikt geen Tauri-functies en de Z-App krijgt geen toegang tot de app.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

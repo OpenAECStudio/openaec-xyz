@@ -1,0 +1,826 @@
+[
+ {
+  "app": "erpnext",
+  "charts": [],
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Welkom bij Z-Next\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Quotations\", \"col\": 4}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Projects\", \"col\": 4}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Purchase Orders\", \"col\": 4}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "home",
+  "indicator_color": "green",
+  "is_hidden": 0,
+  "label": "Z-Next",
+  "links": [
+   {
+    "hidden": 0,
+    "icon": "shopping-cart",
+    "is_query_report": 0,
+    "label": "Verkoop",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Klanten",
+    "link_count": 0,
+    "link_to": "Customer",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Leads",
+    "link_count": 0,
+    "link_to": "Lead",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Offertes",
+    "link_count": 0,
+    "link_to": "Quotation",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Verkooporders",
+    "link_count": 0,
+    "link_to": "Sales Order",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Verkoopfacturen",
+    "link_count": 0,
+    "link_to": "Sales Invoice",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "shopping-bag",
+    "is_query_report": 0,
+    "label": "Inkoop",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Leveranciers",
+    "link_count": 0,
+    "link_to": "Supplier",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Inkooporders",
+    "link_count": 0,
+    "link_to": "Purchase Order",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Inkoopfacturen",
+    "link_count": 0,
+    "link_to": "Purchase Invoice",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Materiaal Aanvraag",
+    "link_count": 0,
+    "link_to": "Material Request",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "folder",
+    "is_query_report": 0,
+    "label": "Projecten",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Projecten",
+    "link_count": 0,
+    "link_to": "Project",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Taken",
+    "link_count": 0,
+    "link_to": "Task",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Timesheets",
+    "link_count": 0,
+    "link_to": "Timesheet",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "package",
+    "is_query_report": 0,
+    "label": "Voorraad",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Artikelen",
+    "link_count": 0,
+    "link_to": "Item",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Magazijn",
+    "link_count": 0,
+    "link_to": "Warehouse",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Voorraadmutaties",
+    "link_count": 0,
+    "link_to": "Stock Entry",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "tool",
+    "is_query_report": 0,
+    "label": "Productie",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Stuklijsten (BOM)",
+    "link_count": 0,
+    "link_to": "BOM",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Werkorders",
+    "link_count": 0,
+    "link_to": "Work Order",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "dollar-sign",
+    "is_query_report": 0,
+    "label": "Financieel",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Journaalposten",
+    "link_count": 0,
+    "link_to": "Journal Entry",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Betalingen",
+    "link_count": 0,
+    "link_to": "Payment Entry",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Grootboek",
+    "link_count": 0,
+    "link_to": "General Ledger",
+    "link_type": "Report",
+    "onboard": 0,
+    "report_ref_doctype": "GL Entry",
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Resultatenrekening",
+    "link_count": 0,
+    "link_to": "Profit and Loss Statement",
+    "link_type": "Report",
+    "onboard": 0,
+    "report_ref_doctype": "GL Entry",
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "users",
+    "is_query_report": 0,
+    "label": "HR",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Medewerkers",
+    "link_count": 0,
+    "link_to": "Employee",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Verlofaanvragen",
+    "link_count": 0,
+    "link_to": "Leave Application",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-02-25 07:50:10.391359",
+  "module": "ERPNext Integrations",
+  "name": "Z-Next",
+  "number_cards": [],
+  "public": 0,
+  "quick_lists": [],
+  "roles": [],
+  "sequence_id": 0.0,
+  "shortcuts": [
+   {
+    "doc_view": "",
+    "icon": "users",
+    "label": "Klanten",
+    "link_to": "Customer",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "file",
+    "label": "Offertes",
+    "link_to": "Quotation",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "shopping-cart",
+    "label": "Verkooporders",
+    "link_to": "Sales Order",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "file-text",
+    "label": "Facturen",
+    "link_to": "Sales Invoice",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "folder",
+    "label": "Projecten",
+    "link_to": "Project",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "clock",
+    "label": "Timesheets",
+    "link_to": "Timesheet",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "shopping-bag",
+    "label": "Inkooporders",
+    "link_to": "Purchase Order",
+    "type": "DocType"
+   },
+   {
+    "doc_view": "",
+    "icon": "truck",
+    "label": "Leveranciers",
+    "link_to": "Supplier",
+    "type": "DocType"
+   }
+  ],
+  "title": "Z-Next",
+  "type": "Workspace"
+ },
+ {
+  "app": "frappe",
+  "charts": [
+   {
+    "chart_name": "Taken per persoon",
+    "label": "Taken per persoon"
+   },
+   {
+    "chart_name": "Taken per frequentie",
+    "label": "Taken per frequentie"
+   }
+  ],
+  "content": "[{\"id\": \"dd01\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Terugkerende taken en verantwoordelijkheden</b></span>\", \"col\": 12}}, {\"id\": \"dd02\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Achterstallige taken\", \"col\": 3}}, {\"id\": \"dd03\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Taken binnen 7 dagen\", \"col\": 3}}, {\"id\": \"dd04\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Mijn taken\", \"col\": 3}}, {\"id\": \"dd05\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Actieve taken\", \"col\": 3}}, {\"id\": \"dd06\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"dd07\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Per persoon</b></span>\", \"col\": 12}}, {\"id\": \"dd10\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Alle taken\", \"col\": 4}}, {\"id\": \"dd20\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"dd21\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Taken per persoon\", \"col\": 6}}, {\"id\": \"dd22\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Taken per frequentie\", \"col\": 6}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "hide_custom": 0,
+  "icon": "list",
+  "indicator_color": "green",
+  "is_hidden": 0,
+  "label": "Zapp Dashboard",
+  "link_type": "DocType",
+  "links": [],
+  "modified": "2026-10-22 12:22:32.349095",
+  "module": "Z Next",
+  "name": "Zapp Dashboard",
+  "number_cards": [
+   {
+    "label": "Actieve taken",
+    "number_card_name": "Actieve taken"
+   },
+   {
+    "label": "Achterstallige taken",
+    "number_card_name": "Achterstallige taken"
+   },
+   {
+    "label": "Taken binnen 7 dagen",
+    "number_card_name": "Taken binnen 7 dagen"
+   },
+   {
+    "label": "Mijn taken",
+    "number_card_name": "Mijn taken"
+   }
+  ],
+  "public": 1,
+  "quick_lists": [],
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Zapp Superuser"
+   },
+   {
+    "role": "Accounts Manager"
+   },
+   {
+    "role": "Accounts User"
+   }
+  ],
+  "sequence_id": 0.0,
+  "shortcuts": [
+   {
+    "color": "Grey",
+    "doc_view": "List",
+    "format": "{} actief",
+    "label": "Alle taken",
+    "link_to": "Zapp Terugkerende Taak",
+    "stats_filter": "{\"actief\": 1}",
+    "type": "DocType"
+   }
+  ],
+  "title": "Zapp Dashboard",
+  "type": "Workspace"
+ },
+ {
+  "app": "hrms",
+  "charts": [],
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Welkom!\", \"col\": 12}}, {\"type\": \"paragraph\", \"data\": {\"text\": \"Registreer hier je uren en bekijk je taken.\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "tool",
+  "indicator_color": "green",
+  "is_hidden": 0,
+  "label": "Mijn Werkplek",
+  "links": [
+   {
+    "hidden": 0,
+    "icon": "briefcase",
+    "is_query_report": 0,
+    "label": "Mijn Werk",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Uren Invoeren",
+    "link_count": 0,
+    "link_to": "Timesheet",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Mijn Taken",
+    "link_count": 0,
+    "link_to": "Task",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Projecten (bekijken)",
+    "link_count": 0,
+    "link_to": "Project",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "calendar",
+    "is_query_report": 0,
+    "label": "Verlof & Afwezigheid",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Verlof Aanvragen",
+    "link_count": 0,
+    "link_to": "Leave Application",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "user",
+    "is_query_report": 0,
+    "label": "Mijn Profiel",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Mijn Gegevens",
+    "link_count": 0,
+    "link_to": "Employee",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-02-25 07:50:10.389365",
+  "module": "HR",
+  "name": "Mijn Werkplek",
+  "number_cards": [],
+  "public": 0,
+  "quick_lists": [],
+  "roles": [],
+  "sequence_id": 0.0,
+  "shortcuts": [
+   {
+    "color": "#4CAF50",
+    "doc_view": "",
+    "icon": "clock",
+    "label": "Mijn Uren",
+    "link_to": "Timesheet",
+    "type": "DocType"
+   },
+   {
+    "color": "#2196F3",
+    "doc_view": "",
+    "icon": "check-square",
+    "label": "Mijn Taken",
+    "link_to": "Task",
+    "type": "DocType"
+   },
+   {
+    "color": "#FF9800",
+    "doc_view": "",
+    "icon": "calendar",
+    "label": "Verlof Aanvragen",
+    "link_to": "Leave Application",
+    "type": "DocType"
+   }
+  ],
+  "title": "Mijn Werkplek",
+  "type": "Workspace"
+ },
+ {
+  "app": "erpnext",
+  "charts": [],
+  "content": "[{\"type\": \"header\", \"data\": {\"text\": \"Werkplaats Overzicht\", \"col\": 12}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "settings",
+  "indicator_color": "green",
+  "is_hidden": 0,
+  "label": "Werkplaats",
+  "links": [
+   {
+    "hidden": 0,
+    "icon": "clock",
+    "is_query_report": 0,
+    "label": "Uren Beheer",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Alle Timesheets",
+    "link_count": 0,
+    "link_to": "Timesheet",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Mijn Uren",
+    "link_count": 0,
+    "link_to": "Timesheet",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "tool",
+    "is_query_report": 0,
+    "label": "Productie",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Werkorders",
+    "link_count": 0,
+    "link_to": "Work Order",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Stuklijsten (BOM)",
+    "link_count": 0,
+    "link_to": "BOM",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Job Cards",
+    "link_count": 0,
+    "link_to": "Job Card",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "folder",
+    "is_query_report": 0,
+    "label": "Projecten",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Projecten",
+    "link_count": 0,
+    "link_to": "Project",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Taken",
+    "link_count": 0,
+    "link_to": "Task",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "package",
+    "is_query_report": 0,
+    "label": "Voorraad",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Artikelen",
+    "link_count": 0,
+    "link_to": "Item",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Voorraadmutaties",
+    "link_count": 0,
+    "link_to": "Stock Entry",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Magazijn",
+    "link_count": 0,
+    "link_to": "Warehouse",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "icon": "users",
+    "is_query_report": 0,
+    "label": "Team",
+    "link_count": 0,
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Card Break"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Medewerkers",
+    "link_count": 0,
+    "link_to": "Employee",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   },
+   {
+    "hidden": 0,
+    "is_query_report": 0,
+    "label": "Verlofaanvragen",
+    "link_count": 0,
+    "link_to": "Leave Application",
+    "link_type": "DocType",
+    "onboard": 0,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-02-25 07:50:10.387412",
+  "module": "Manufacturing",
+  "name": "Werkplaats",
+  "number_cards": [],
+  "public": 0,
+  "quick_lists": [],
+  "roles": [],
+  "sequence_id": 0.0,
+  "shortcuts": [
+   {
+    "color": "#4CAF50",
+    "doc_view": "",
+    "icon": "check-circle",
+    "label": "Uren Goedkeuren",
+    "link_to": "Timesheet",
+    "type": "DocType"
+   },
+   {
+    "color": "#2196F3",
+    "doc_view": "",
+    "icon": "clipboard",
+    "label": "Werkorders",
+    "link_to": "Work Order",
+    "type": "DocType"
+   },
+   {
+    "color": "#9C27B0",
+    "doc_view": "",
+    "icon": "folder",
+    "label": "Projecten",
+    "link_to": "Project",
+    "type": "DocType"
+   },
+   {
+    "color": "#FF9800",
+    "doc_view": "",
+    "icon": "package",
+    "label": "Voorraad",
+    "link_to": "Stock Entry",
+    "type": "DocType"
+   }
+  ],
+  "title": "Werkplaats",
+  "type": "Workspace"
+ }
+]

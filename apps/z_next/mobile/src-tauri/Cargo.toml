@@ -1,0 +1,27 @@
+[package]
+name = "z-next-mobile"
+version = "0.1.0"
+description = "Z-Next als app voor Android en iOS"
+authors = ["OpenAEC Foundation"]
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "z_next_mobile_lib"
+# staticlib en cdylib zijn de mobiele artefacten (iOS static library, Android .so); rlib voor main.rs op de computer.
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+# Downloads openen en navigator.share via het deelmenu van Android.
+tauri-plugin-delen = { path = "../plugins/tauri-plugin-delen" }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

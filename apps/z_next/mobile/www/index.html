@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3b4641" />
+    <title>Z-Next</title>
+    <style>
+      html, body { height: 100%; margin: 0; }
+      body {
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+        background: #3b4641; color: #fff; text-align: center; padding: 24px; box-sizing: border-box;
+        font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      svg { width: 72px; height: 72px; }
+      p { margin: 0; opacity: 0.85; }
+      button {
+        font: inherit; color: #fff; background: #526952; border: 0; border-radius: 8px;
+        padding: 12px 24px; min-height: 44px;
+      }
+      [hidden] { display: none; }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 64 64" role="img" aria-label="Z-Next">
+      <rect width="64" height="64" rx="14" fill="#526952" />
+      <path d="M19 20H45L19 44H45" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <p id="laden">Z-Next wordt geopend…</p>
+    <div id="offline" hidden>
+      <p>Geen internetverbinding. Z-Next werkt online, met je gewone inlog.</p>
+      <p><button type="button" id="opnieuw">Opnieuw proberen</button></p>
+    </div>
+    <script>
+      // De app opent de Z-App op de ERP-omgeving; inloggen gaat zoals in de browser.
+      const ADRES = "https://erp.voorbeeld.nl/zapp";
+      const laden = document.getElementById("laden");
+      const offline = document.getElementById("offline");
+
+      function openen() {
+        if (!navigator.onLine) {
+          laden.hidden = true;
+          offline.hidden = false;
+          return;
+        }
+        laden.hidden = false;
+        offline.hidden = true;
+        window.location.replace(ADRES);
+      }
+
+      document.getElementById("opnieuw").addEventListener("click", openen);
+      window.addEventListener("online", openen);
+      openen();
+    </script>
+  </body>
+</html>

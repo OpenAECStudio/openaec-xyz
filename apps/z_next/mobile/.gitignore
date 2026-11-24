@@ -1,0 +1,4 @@
+node_modules/
+src-tauri/target/
+# Android- en iOS-projecten worden in CI gegenereerd (tauri android/ios init).
+src-tauri/gen/

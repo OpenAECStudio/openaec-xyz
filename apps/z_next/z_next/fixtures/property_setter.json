@@ -1,0 +1,30 @@
+[
+ {
+  "doc_type": "Quotation",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "custom_acquisitie_status",
+  "is_system_generated": 1,
+  "modified": "2026-04-16 05:25:52.432269",
+  "module": "Z Next",
+  "name": "Quotation-custom_acquisitie_status-in_list_view",
+  "property": "in_list_view",
+  "property_type": "Check",
+  "value": "1"
+ },
+ {
+  "doc_type": "Quotation",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "custom_scoringskans",
+  "is_system_generated": 1,
+  "modified": "2026-04-16 05:25:52.437204",
+  "module": "Z Next",
+  "name": "Quotation-custom_scoringskans-in_list_view",
+  "property": "in_list_view",
+  "property_type": "Check",
+  "value": "1"
+ }
+]
