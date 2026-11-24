@@ -4,6 +4,13 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/openaec-bouw-routekaart.md`.
 
+## 0.2.1 (23 november 2026)
+
+- **Herstel:** het rustige menu liep op de modelomgeving vast als een gebruiker tijdens de uitrol door een andere
+  aanvraag was gewijzigd; daardoor werd het hele profiel van 0.2.0 niet toegepast. De lader leest de gebruiker nu met
+  een slot.
+- Routekaart: Y-Next en Z-Next gaan samen op in XYZ.
+
 ## 0.2.0 (november 2026)
 
 - **Startscherm Bouwbedrijf:** een eigen tegel op het startscherm, met een werkruimte (tegels voor projecten, offertes,

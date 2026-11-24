@@ -213,7 +213,8 @@ def _verberg(module: str, record: dict) -> int:
 	).insert(ignore_permissions=True)
 	_onthoud(module, "Module Profile", naam)
 	for gebruiker in frappe.get_all("User", filters={"enabled": 1, "user_type": "System User", "name": ("not in", frappe.STANDARD_USERS)}, pluck="name"):
-		doc = frappe.get_doc("User", gebruiker)
+		# for_update: een andere aanvraag kan de gebruiker net gewijzigd hebben (dienstaccount tijdens de uitrol)
+		doc = frappe.get_doc("User", gebruiker, for_update=True)
 		if doc.module_profile or doc.block_modules:
 			continue  # eigen keuze van de klant
 		doc.module_profile = naam
@@ -226,7 +227,7 @@ def _toon_weer(module: str) -> None:
 	"""Vóór het weghalen van een moduleprofiel: de gebruikers die het hebben, zien alles weer."""
 	for regel in frappe.get_all(REGEL, filters={"module": module, "soort": "Module Profile"}, pluck="record"):
 		for gebruiker in frappe.get_all("User", filters={"module_profile": regel}, pluck="name"):
-			doc = frappe.get_doc("User", gebruiker)
+			doc = frappe.get_doc("User", gebruiker, for_update=True)
 			doc.module_profile = None
 			doc.set("block_modules", [])
 			doc.flags.ignore_permissions = True
