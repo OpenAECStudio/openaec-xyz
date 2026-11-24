@@ -4,7 +4,7 @@ import frappe
 from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, today
 
-from openaec_bouw import profiel
+from openaec_bouw import boekhouding, profiel
 from openaec_bouw.openaec_bouw.report.btw_aangifte.btw_aangifte import bereken, execute
 
 
@@ -14,11 +14,13 @@ class TestBtwAangifte(IntegrationTestCase):
 			self.skipTest("ERPNext is op deze site niet ingericht (geen bedrijf)")
 		frappe.set_user("Administrator")
 		self.bedrijf = frappe.get_all("Company", fields=["name", "abbr"], order_by="creation asc")[0]
+		boekhouding.zorg_voor_velden()
 		profiel.zet_module("basis", 1)
+		profiel.pas_toe("basis")
 		self.voor = bereken(self.bedrijf.name, today(), today())
 
 	def tearDown(self):
-		frappe.db.rollback()
+		profiel.draai_terug()
 
 	def _rekening(self, root_type: str) -> str:
 		return frappe.get_all("Account", filters={"company": self.bedrijf.name, "root_type": root_type, "is_group": 0, "account_type": ("in", ["", None, "Income Account", "Expense Account"])}, pluck="name", limit=1)[0]
@@ -81,10 +83,30 @@ class TestBtwAangifte(IntegrationTestCase):
 		self.assertEqual(self._erbij("5b", "btw"), 84 + 105)
 		self.assertEqual(self._erbij("5c", "btw"), 144)
 
+	def test_buitenland_en_icp(self):
+		from openaec_bouw.openaec_bouw.report.opgaaf_icp.opgaaf_icp import bereken as icp
+
+		boekhouding.zet_btw_codes()
+		klant = self._partij("Customer")
+		voor = {r["klant"]: r["bedrag"] for r in icp(self.bedrijf.name, today(), today())}.get(klant, 0)
+		self._factuur("Sales Invoice", 700, "BTW binnen de EU")
+		self._factuur("Sales Invoice", 800, "BTW buiten de EU")
+		self._factuur("Purchase Invoice", 100, "BTW binnen de EU")
+		self._factuur("Purchase Invoice", 200, "BTW buiten de EU")
+		self.assertEqual(self._erbij("3b", "omzet"), 700)
+		self.assertEqual(self._erbij("3a", "omzet"), 800)
+		self.assertEqual((self._erbij("4b", "omzet"), self._erbij("4b", "btw")), (100, 21))
+		self.assertEqual((self._erbij("4a", "omzet"), self._erbij("4a", "btw")), (200, 42))
+		# Verwerving: aangeven en aftrekken, per saldo niets te betalen.
+		self.assertEqual((self._erbij("5a", "btw"), self._erbij("5b", "btw"), self._erbij("5c", "btw")), (63, 63, 0))
+		self.assertEqual(self._erbij("1e", "omzet"), 0)
+		rij = next(r for r in icp(self.bedrijf.name, today(), today()) if r["klant"] == klant)
+		self.assertEqual(round(rij["bedrag"] - voor, 2), 700)
+
 	def test_rapport(self):
 		kolommen, rijen, melding = execute({"company": self.bedrijf.name, "van": today(), "tot": today()})
 		self.assertEqual([k["fieldname"] for k in kolommen], ["rubriek", "omschrijving", "omzet", "btw"])
-		self.assertEqual([r["rubriek"] for r in rijen], ["1a", "1b", "1c", "1e", "2a", "5a", "5b", "5c"])
-		self.assertIn("buitenland", melding)
+		self.assertEqual([r["rubriek"] for r in rijen], ["1a", "1b", "1c", "1e", "2a", "3a", "3b", "4a", "4b", "5a", "5b", "5c"])
+		self.assertIn("3c", melding)
 		with self.assertRaises(frappe.ValidationError):
 			execute({"company": self.bedrijf.name, "van": today(), "tot": add_days(today(), -1)})

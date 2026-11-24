@@ -1,13 +1,17 @@
 """Btw-aangifte: de rubrieken van de Nederlandse aangifte omzetbelasting over een tijdvak.
 
-Leest de geboekte verkoop- en inkoopfacturen van het bedrijf. Binnenland: 1a, 1b, 1c, 1e, 2a en 5a tot en met 5c.
-Buitenland (rubriek 3 en 4) zit er nog niet in; de pagina zegt dat erbij. Een hulpmiddel bij de aangifte, geen aangifte:
+Leest de geboekte verkoop- en inkoopfacturen van het bedrijf. De rubriek volgt uit de btw-code van het btw-sjabloon
+op de factuur (`openaec_bouw.boekhouding.BTW_CODES`); een factuur met een sjabloon zonder code valt terug op het tarief
+van de btw-regels en op het woord "verlegd". Rubrieken: 1a, 1b, 1c, 1e, 2a, 3a, 3b, 4a, 4b en 5a tot en met 5c.
+Niet: 1d (privégebruik), 3c (afstandsverkopen) en suppletie. Een hulpmiddel bij de aangifte, geen aangifte:
 controleer de cijfers voor het indienen.
 """
 
 import frappe
 from frappe import _
 from frappe.utils import flt, getdate
+
+from openaec_bouw.boekhouding import BTW_CODES
 
 HOOG, LAAG = 21.0, 9.0
 VERLEGD = "verlegd"
@@ -22,7 +26,7 @@ def execute(filters=None):
 	if getdate(filters.van) > getdate(filters.tot):
 		frappe.throw(_("Het begin van het tijdvak ligt na het einde"))
 	cijfers = bereken(filters.company, filters.van, filters.tot)
-	melding = _("Rubriek 3 en 4 (buitenland) zitten nog niet in dit overzicht. Controleer de cijfers voor het indienen.")
+	melding = _("Rubriek 1d, 3c en suppleties zitten niet in dit overzicht. Controleer de cijfers voor het indienen.")
 	return kolommen(), rijen(cijfers), melding
 
 
@@ -55,8 +59,14 @@ def _facturen(doctype: str, bedrijf: str, van, tot) -> list[frappe._dict]:
 	per_factuur = {}
 	for regel in regels:
 		per_factuur.setdefault(regel.parent, []).append(regel)
+	sjablonen = {f.taxes_and_charges for f in facturen if f.taxes_and_charges}
+	sjabloon = f"{doctype.split()[0]} Taxes and Charges Template"
+	codes = {}
+	if sjablonen and frappe.db.has_column(sjabloon, "btw_code"):
+		codes = dict(frappe.get_all(sjabloon, filters={"name": ("in", list(sjablonen))}, fields=["name", "btw_code"], as_list=True))
 	for factuur in facturen:
 		factuur.regels = per_factuur.get(factuur.name, [])
+		factuur.code = codes.get(factuur.taxes_and_charges) or None
 	return facturen
 
 
@@ -67,10 +77,14 @@ def _is_verlegd(factuur: frappe._dict) -> bool:
 
 def bereken(bedrijf: str, van, tot) -> dict:
 	"""De rubrieken als `{rubriek: {"omzet": ..., "btw": ...}}`, in de valuta van het bedrijf."""
-	uit = {r: {"omzet": 0.0, "btw": 0.0} for r in ("1a", "1b", "1c", "1e", "2a", "5b")}
+	uit = {r: {"omzet": 0.0, "btw": 0.0} for r in ("1a", "1b", "1c", "1e", "2a", "3a", "3b", "4a", "4b", "5b")}
 	btw_rekeningen = set(frappe.get_all("Account", filters={"company": bedrijf, "account_type": "Tax"}, pluck="name"))
 
 	for factuur in _facturen("Sales Invoice", bedrijf, van, tot):
+		if factuur.code in ("V0", "VVERL", "VEXP", "VEU"):
+			# Geen Nederlandse btw op de factuur: de hele omzet in de rubriek van de code.
+			uit[BTW_CODES[factuur.code]]["omzet"] += flt(factuur.base_net_total)
+			continue
 		belast = 0.0
 		grootste = None
 		for regel in factuur.regels:
@@ -96,16 +110,20 @@ def bereken(bedrijf: str, van, tot) -> dict:
 				continue
 			teken = -1 if regel.add_deduct_tax == "Deduct" else 1
 			uit["5b"]["btw"] += teken * flt(regel.bedrag)
-		if _is_verlegd(factuur):
-			# De btw is naar ons verlegd: aangeven (2a) en als voorbelasting aftrekken (5b).
+		rubriek = BTW_CODES.get(factuur.code) if factuur.code in ("IVERL", "IBUI", "IEU") else None
+		if not rubriek and not factuur.code and _is_verlegd(factuur):
+			rubriek = "2a"
+		if rubriek:
+			# De btw is naar ons verlegd (binnenland 2a, buiten de EU 4a, binnen de EU 4b): aangeven en als
+			# voorbelasting aftrekken (5b).
 			btw = flt(factuur.base_net_total) * HOOG / 100
-			uit["2a"]["omzet"] += flt(factuur.base_net_total)
-			uit["2a"]["btw"] += btw
+			uit[rubriek]["omzet"] += flt(factuur.base_net_total)
+			uit[rubriek]["btw"] += btw
 			uit["5b"]["btw"] += btw
 
 	for rubriek in uit.values():
 		rubriek["omzet"], rubriek["btw"] = flt(rubriek["omzet"], 2), flt(rubriek["btw"], 2)
-	uit["5a"] = {"omzet": None, "btw": flt(sum(uit[r]["btw"] for r in ("1a", "1b", "1c", "2a")), 2)}
+	uit["5a"] = {"omzet": None, "btw": flt(sum(uit[r]["btw"] for r in ("1a", "1b", "1c", "2a", "4a", "4b")), 2)}
 	uit["5c"] = {"omzet": None, "btw": flt(uit["5a"]["btw"] - uit["5b"]["btw"], 2)}
 	return uit
 
@@ -117,14 +135,18 @@ def rijen(cijfers: dict) -> list[dict]:
 		("1c", _("Leveringen en diensten belast met overige tarieven")),
 		("1e", _("Leveringen en diensten belast met 0% of niet bij u belast (ook verlegd)")),
 		("2a", _("Leveringen en diensten waarbij de btw naar u is verlegd")),
-		("5a", _("Verschuldigde btw (rubriek 1 en 2)")),
+		("3a", _("Leveringen naar landen buiten de EU (uitvoer)")),
+		("3b", _("Leveringen naar of diensten in landen binnen de EU")),
+		("4a", _("Leveringen en diensten uit landen buiten de EU")),
+		("4b", _("Leveringen en diensten uit landen binnen de EU")),
+		("5a", _("Verschuldigde btw (rubriek 1, 2 en 4)")),
 		("5b", _("Voorbelasting")),
 		("5c", _("Te betalen (of bij een negatief bedrag: terug te vragen)")),
 	]
 	uit = []
 	for rubriek, tekst in teksten:
 		rij = {"rubriek": rubriek, "omschrijving": tekst, **cijfers[rubriek], "vet": rubriek in ("5a", "5c")}
-		if rubriek in ("1e", "5b"):
-			rij["btw" if rubriek == "1e" else "omzet"] = None
+		if rubriek in ("1e", "3a", "3b", "5b"):
+			rij["omzet" if rubriek == "5b" else "btw"] = None
 		uit.append(rij)
 	return uit

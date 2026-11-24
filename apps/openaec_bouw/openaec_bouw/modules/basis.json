@@ -1,9 +1,9 @@
 {
  "id": "basis",
  "titel": "Basis",
- "omschrijving": "Btw (21%, 9%, 0% en verlegd), betaalvoorwaarden, eenheden en groepen voor klanten en leveranciers",
+ "omschrijving": "Btw (21%, 9%, 0%, verlegd, binnen en buiten de EU), betaalvoorwaarden, eenheden en groepen voor klanten en leveranciers",
  "standaard": true,
- "versie": 2,
+ "versie": 3,
  "records": [
   {
    "soort": "btw",
@@ -13,6 +13,10 @@
    "rekeningen": {
     "verkoop": "Btw af te dragen hoog",
     "inkoop": "Btw te vorderen hoog"
+   },
+   "codes": {
+    "verkoop": "V21",
+    "inkoop": "I21"
    }
   },
   {
@@ -23,6 +27,10 @@
    "rekeningen": {
     "verkoop": "Btw af te dragen laag",
     "inkoop": "Btw te vorderen laag"
+   },
+   "codes": {
+    "verkoop": "V9",
+    "inkoop": "I9"
    }
   },
   {
@@ -33,6 +41,10 @@
    "rekeningen": {
     "verkoop": "Btw af te dragen overig",
     "inkoop": "Btw te vorderen overig"
+   },
+   "codes": {
+    "verkoop": "V0",
+    "inkoop": "I0"
    }
   },
   {
@@ -43,6 +55,38 @@
    "rekeningen": {
     "verkoop": "Af te dragen Btw-verlegd",
     "inkoop": "Te vorderen Btw-verlegd"
+   },
+   "codes": {
+    "verkoop": "VVERL",
+    "inkoop": "IVERL"
+   }
+  },
+  {
+   "soort": "btw",
+   "naam": "BTW binnen de EU",
+   "tarief": 0,
+   "omschrijving": "Btw binnen de EU (verlegd)",
+   "rekeningen": {
+    "verkoop": "Af te dragen Btw-verlegd",
+    "inkoop": "Te vorderen Btw-verlegd"
+   },
+   "codes": {
+    "verkoop": "VEU",
+    "inkoop": "IEU"
+   }
+  },
+  {
+   "soort": "btw",
+   "naam": "BTW buiten de EU",
+   "tarief": 0,
+   "omschrijving": "Btw buiten de EU",
+   "rekeningen": {
+    "verkoop": "Btw af te dragen overig",
+    "inkoop": "Btw te vorderen overig"
+   },
+   "codes": {
+    "verkoop": "VEXP",
+    "inkoop": "IBUI"
    }
   },
   {

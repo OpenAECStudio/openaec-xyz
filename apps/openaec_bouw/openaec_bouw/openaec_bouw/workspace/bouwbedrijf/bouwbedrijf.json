@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Administratie",
-   "link_count": 6,
+   "link_count": 7,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -28,6 +28,16 @@
    "label": "Btw-aangifte",
    "link_count": 0,
    "link_to": "Btw-aangifte",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Opgaaf ICP",
+   "link_count": 0,
+   "link_to": "Opgaaf ICP",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -211,7 +221,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-11-21 16:11:52.203779",
+ "modified": "2026-11-24 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "OpenAEC Bouw",
  "name": "Bouwbedrijf",

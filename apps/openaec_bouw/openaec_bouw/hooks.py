@@ -20,8 +20,12 @@ add_to_apps_screen = [
 ]
 
 # Installeren zet de standaardmodules; elke migratie (uitrol) vult aan met wat een nieuwe versie van een module brengt.
-after_install = "openaec_bouw.profiel.na_installatie"
-after_migrate = ["openaec_bouw.profiel.na_migratie"]
+# Eerst de velden van de boekhouding (RGS-code, btw-code), dan het profiel, dan de btw-codes op wat het profiel zette.
+after_install = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.profiel.na_installatie", "openaec_bouw.boekhouding.na_profiel"]
+after_migrate = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.profiel.na_migratie", "openaec_bouw.boekhouding.na_profiel"]
+
+# Op het bedrijf: de auditfile downloaden en het Nederlandse rekeningschema zetten.
+doctype_js = {"Company": "public/js/company.js"}
 
 # Een nieuwe gebruiker krijgt het rustige menu (module `rust`), als dat aan staat.
 doc_events = {"User": {"before_insert": "openaec_bouw.profiel.nieuwe_gebruiker"}}

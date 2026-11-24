@@ -4,6 +4,27 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/openaec-bouw-routekaart.md`.
 
+## 0.3.0 (24 november 2026): Nederlandse administratie, eerste deel
+
+- **Eigen rekeningschema:** `Nederland - OpenAEC Bouw (RGS)`, een compact Nederlands schema voor een bouwbedrijf
+  (onderhanden projecten, G-rekening, onderaanneming, btw-rekeningen), met de standaardrekeningen van het bedrijf erbij.
+  Een nieuwe Nederlandse omgeving krijgt het vanzelf; op een bestaand bedrijf zonder boekingen zet je het met de knop
+  **Nederland → Nederlands rekeningschema zetten** op het bedrijf. Een bedrijf waar al op geboekt is, houdt zijn schema.
+- **RGS-code per rekening** (veld op de grootboekrekening). Rapporten en de auditfile lezen die code, niet de naam.
+  Bestaande rekeningen krijgen een voorstel op rekeningtype; wat al ingevuld is, blijft staan.
+- **Btw-code per btw-sjabloon**, die de rubriek van de aangifte bepaalt. Nieuw: btw binnen en buiten de EU.
+- **Btw-aangifte** nu ook met rubriek 3a, 3b, 4a en 4b, en een rapport **Opgaaf ICP** per btw-nummer.
+- **Auditfile (XAF 3.2)** van een boekjaar: knop **Nederland → Auditfile (XAF)** op het bedrijf.
+- Herstel: na een mislukte poging onthield de cache dat een module aan stond terwijl de database dat niet wist.
+
+Nog niet: de RGS-codes en het schema zijn niet door een boekhouder nagelopen, en de auditfile is niet tegen het
+officiële XSD gevalideerd of in een accountantspakket ingelezen.
+
+## 0.2.3 (24 november 2026)
+
+- **Herstel:** het moduleprofiel van het rustige menu wordt rechtstreeks aangemaakt. Via Frappe bleef na een mislukte
+  poging een slot op het profiel staan, waar elke volgende migratie op vastliep.
+
 ## 0.2.2 (24 november 2026)
 
 - **Herstel:** het rustige menu liep op de modelomgeving nog steeds vast, nu op het DocShare van de gebruiker. De

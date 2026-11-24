@@ -62,6 +62,13 @@ def _bewaar_aan(ids) -> None:
 	frappe.db.set_default(AAN, json.dumps(sorted(set(ids))))
 
 
+def draai_terug() -> None:
+	"""Rollback, en de standaardwaarden uit de cache: `set_default` schrijft die meteen bij, ook als de transactie daarna
+	wordt teruggedraaid. Zonder dit zegt de cache dat een module aan staat terwijl de database dat niet meer weet."""
+	frappe.db.rollback()
+	frappe.defaults._clear_cache("__default")
+
+
 def _zet_nieuwe_standaard_aan() -> None:
 	"""Bij installeren en na elke migratie: de standaardmodules die deze omgeving nog niet kende, gaan aan."""
 	alle, gekozen = modules(), ingeschakeld()
@@ -208,9 +215,19 @@ def _verberg(module: str, record: dict) -> int:
 	if _al_gezet(module, "Module Profile", naam) or frappe.db.exists("Module Profile", naam):
 		return 0
 	bestaand = set(frappe.get_all("Module Def", pluck="name"))
-	frappe.get_doc(
+	doc = frappe.get_doc(
 		{"doctype": "Module Profile", "module_profile_name": naam, "block_modules": [{"module": m} for m in record["modules"] if m in bestaand]}
-	).insert(ignore_permissions=True)
+	)
+	# Rechtstreeks in de database, niet via `insert()`: `Module Profile.on_update` zet een achtergrondtaak in de wachtrij
+	# en vergrendelt het document daarvoor. Mislukt het profiel daarna, dan blijft dat slot staan en loopt elke volgende
+	# poging erop vast (DocumentLockedError). De gebruikers zet deze functie hieronder zelf.
+	doc.set_user_and_timestamp()
+	doc.set_new_name()
+	doc.set_parent_in_children()
+	doc.unlock()  # een slot dat een eerdere, mislukte poging achterliet
+	doc.db_insert()
+	for regel in doc.get_all_children():
+		regel.db_insert()
 	_onthoud(module, "Module Profile", naam)
 	geblokt = [m for m in record["modules"] if m in bestaand]
 	for gebruiker in frappe.get_all(
@@ -352,5 +369,5 @@ def na_migratie() -> None:
 		_zet_nieuwe_standaard_aan()
 		pas_toe()
 	except Exception:
-		frappe.db.rollback()
+		draai_terug()
 		frappe.log_error(title="OpenAEC Bouw: profiel toepassen mislukt")

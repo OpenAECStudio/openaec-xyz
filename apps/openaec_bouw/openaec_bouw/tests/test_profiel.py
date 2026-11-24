@@ -18,7 +18,7 @@ class TestProfiel(IntegrationTestCase):
 			profiel.zet_module(module, 0)
 
 	def tearDown(self):
-		frappe.db.rollback()
+		profiel.draai_terug()
 
 	def test_modules_kloppen(self):
 		alle = profiel.modules()
