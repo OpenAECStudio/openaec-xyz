@@ -4,6 +4,26 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/openaec-bouw-routekaart.md`.
 
+## 0.4.0 (25 november 2026): Nederlandse administratie, tweede deel
+
+- **Bankafschrift inlezen (CAMT.053):** knop op de lijst met banktransacties. Elke regel wordt een banktransactie op
+  de bankrekening met hetzelfde IBAN; een regel die er al staat, komt er niet nog eens bij.
+- **Afletteren waar het zeker is:** staat het factuurnummer in de omschrijving en klopt het bedrag met wat openstaat,
+  dan wordt de betaling geboekt en gekoppeld. De rest blijft open voor het afstemscherm van ERPNext, waar ook de eigen
+  afletterregels gelden. Met **Open regels afletteren** probeer je het later opnieuw.
+- **SEPA-betaalbestand (pain.001.001.09):** vink inkoopfacturen aan en kies **Acties → SEPA-betaalbestand**. Het
+  kenmerk van elke overboeking is het factuurnummer, zodat het afschrift de betaling daarna vanzelf aflettert. Een
+  factuur komt niet ongemerkt twee keer in een bestand.
+- **G-rekening:** bij de leverancier het IBAN van de G-rekening en het afgesproken percentage; de inkoopfactuur krijgt
+  het G-bedrag en het betaalbestand splitst de betaling. Bij het bedrijf de eigen G-rekening; een verkoopfactuur met
+  een G-bedrag wordt in twee delen afgeletterd (bank en G-rekening).
+- **UBL (NLCIUS) uit en in:** knop **Nederland → UBL downloaden** op een geboekte verkoopfactuur (ook creditnota's),
+  en **UBL-factuur inlezen** op de lijst met inkoopfacturen: dat maakt een concept met het bestand als bijlage.
+- Nieuw veld **KvK-nummer** op het bedrijf (staat op de UBL-factuur).
+
+Nog niet: versturen en ontvangen over Peppol; meer dan één btw-tarief op één UBL-factuur; incasso (pain.008). Het
+betaalbestand en de UBL zijn niet bij een bank of tegen de officiële validatie van NLCIUS aangeboden.
+
 ## 0.3.0 (24 november 2026): Nederlandse administratie, eerste deel
 
 - **Eigen rekeningschema:** `Nederland - OpenAEC Bouw (RGS)`, een compact Nederlands schema voor een bouwbedrijf

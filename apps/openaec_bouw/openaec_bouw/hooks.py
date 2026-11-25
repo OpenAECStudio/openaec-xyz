@@ -25,7 +25,17 @@ after_install = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.profiel.n
 after_migrate = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.profiel.na_migratie", "openaec_bouw.boekhouding.na_profiel"]
 
 # Op het bedrijf: de auditfile downloaden en het Nederlandse rekeningschema zetten.
-doctype_js = {"Company": "public/js/company.js"}
+doctype_js = {"Company": "public/js/company.js", "Sales Invoice": "public/js/sales_invoice.js"}
+# Op de lijsten: een bankafschrift (CAMT.053) inlezen, een UBL-factuur inlezen en een SEPA-betaalbestand maken.
+doctype_list_js = {
+	"Bank Transaction": "public/js/bank_transaction_list.js",
+	"Purchase Invoice": "public/js/purchase_invoice_list.js",
+}
 
 # Een nieuwe gebruiker krijgt het rustige menu (module `rust`), als dat aan staat.
-doc_events = {"User": {"before_insert": "openaec_bouw.profiel.nieuwe_gebruiker"}}
+# Het deel van een factuur dat naar de G-rekening gaat, wordt bij het opslaan gevuld en bewaakt.
+doc_events = {
+	"User": {"before_insert": "openaec_bouw.profiel.nieuwe_gebruiker"},
+	"Purchase Invoice": {"validate": "openaec_bouw.sepa.vul_g_bedrag"},
+	"Sales Invoice": {"validate": "openaec_bouw.sepa.controleer_g_verkoop"},
+}

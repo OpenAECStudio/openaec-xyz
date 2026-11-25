@@ -92,6 +92,70 @@ def _velden() -> dict:
 		],
 		"Sales Taxes and Charges Template": [code("V")],
 		"Purchase Taxes and Charges Template": [code("I")],
+		"Company": [
+			{
+				"fieldname": "kvk_nummer",
+				"label": "KvK-nummer",
+				"fieldtype": "Data",
+				"insert_after": "tax_id",
+				"description": "Acht cijfers. Staat op de UBL-factuur.",
+			},
+			{
+				"fieldname": "g_rekening",
+				"label": "G-rekening",
+				"fieldtype": "Link",
+				"options": "Bank Account",
+				"insert_after": "default_bank_account",
+				"description": "De eigen geblokkeerde rekening; staat op verkoopfacturen met een G-bedrag.",
+			},
+		],
+		"Supplier": [
+			{
+				"fieldname": "g_rekening_iban",
+				"label": "IBAN G-rekening",
+				"fieldtype": "Data",
+				"insert_after": "tax_id",
+				"description": "De geblokkeerde rekening van de onderaannemer (Wet ketenaansprakelijkheid).",
+			},
+			{
+				"fieldname": "g_percentage",
+				"label": "Naar de G-rekening (%)",
+				"fieldtype": "Percent",
+				"insert_after": "g_rekening_iban",
+				"description": "Afgesproken deel van het factuurbedrag zonder btw. Vult het G-bedrag op een nieuwe inkoopfactuur.",
+			},
+		],
+		"Purchase Invoice": [
+			{
+				"fieldname": "g_bedrag",
+				"label": "Naar de G-rekening",
+				"fieldtype": "Currency",
+				"options": "currency",
+				"insert_after": "bill_date",
+				"allow_on_submit": 1,
+				"description": "Dit deel gaat in het betaalbestand naar de G-rekening van de leverancier.",
+			},
+			{
+				"fieldname": "sepa_bestand",
+				"label": "In betaalbestand",
+				"fieldtype": "Data",
+				"insert_after": "g_bedrag",
+				"read_only": 1,
+				"no_copy": 1,
+				"allow_on_submit": 1,
+			},
+		],
+		"Sales Invoice": [
+			{
+				"fieldname": "g_bedrag",
+				"label": "Naar de G-rekening",
+				"fieldtype": "Currency",
+				"options": "currency",
+				"insert_after": "due_date",
+				"allow_on_submit": 1,
+				"description": "Dit deel betaalt de opdrachtgever op de G-rekening van het bedrijf.",
+			}
+		],
 	}
 
 
