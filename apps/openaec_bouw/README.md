@@ -4,7 +4,7 @@ De OpenAEC-inrichting van ERPNext voor bedrijven in de bouw: van aannemers en in
 ingenieurs- en architectenbureaus. De inrichting bestaat uit **modules** met stamgegevens (btw, projecttypes, fasen,
 uursoorten, groepen, sjablonen). Elke module kan per omgeving aan of uit.
 
-Ontwerp en keuzes: `docs/standaard-bouwinrichting.md`. Routekaart per sector: `docs/openaec-bouw-routekaart.md`.
+Ontwerp en keuzes: `docs/standaard-bouwinrichting.md`. Routekaart per sector: `docs/routekaart.md`.
 Versies: `CHANGELOG.md`.
 
 ## Wat een gebruiker ziet

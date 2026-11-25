@@ -1,6 +1,6 @@
 # Routekaart OpenAEC Bouw
 
-Stand 21 november 2026, bij versie 0.2.0 van de app `openaec_bouw`. Het ontwerp van de app staat in
+Stand 24 november 2026, bij versie 0.3.0 van de app `openaec_bouw`. Het ontwerp van de app staat in
 `docs/standaard-bouwinrichting.md`; dit stuk gaat over wat erna komt, voor welke bedrijven, en in welke volgorde.
 
 ## Het idee
@@ -16,26 +16,28 @@ OpenAEC Bouw (deze app), **Y-Next** (waar medewerkers werken: projecten, uren, a
 aannemersmaatwerk: termijnen, calculatie, planning). Een klant ziet straks één product met modules, niet drie apps.
 De technische naam `openaec_bouw` blijft tot de samenvoeging; hernoemen is een eigen stap (zie de besluiten onderaan).
 
-## Waar we staan (0.2.0)
+## Waar we staan (0.3.0)
 
 | Onderdeel | Stand |
 |---|---|
 | Startscherm | Tegel **Bouwbedrijf** met werkruimte en Nederlandse zijbalk |
 | Rustig menu | Productie, voorraad, activa, kwaliteit, support en dergelijke uit de navigatie |
 | Stamgegevens | Projecttypes, fasen, uursoorten, functies, groepen, eenheden, termijnstaat, projectsjablonen |
-| Btw | 21%, 9%, 0% en verlegd; rapport Btw-aangifte voor het binnenland |
+| Rekeningschema | Eigen Nederlands schema met RGS-code per rekening; auditfile (XAF) per boekjaar |
+| Btw | 21%, 9%, 0%, verlegd, binnen en buiten de EU; rapporten Btw-aangifte en Opgaaf ICP |
 | Loon | Looncomponenten, verlofsoorten, dienstverbanden en declaratiesoorten (alleen de structuur) |
+
+Sinds 0.3.0 erbij: een eigen Nederlands rekeningschema met RGS-codes en standaardrekeningen (nieuwe omgevingen krijgen
+het vanzelf), btw-codes met buitenland en ICP, en de auditfile (XAF).
 
 Wat er nog **niet** is, en wat een Nederlandse administratie wel nodig heeft:
 
-- **Rekeningschema.** Een nieuwe omgeving krijgt nog het Engelse schema `Standard`. Het Nederlandse schema van
-  ERPNext is geprobeerd (21 november): de rekeningen komen goed, maar het bedrijf krijgt dan geen standaardrekening
-  voor omzet, afronding en afboeking, en dan loopt de eerste factuur vast. Het schema kan dus pas de standaard worden
-  als de app ook die standaardrekeningen zet.
-- **Btw buitenland** (rubriek 3 en 4, opgaaf ICP), en de aangifte zelf indienen.
-- **Loonberekening en loonaangifte.** Zie de keuze bij 0.4.
-- **Bank en betalen:** SEPA-betaalbestanden, bankafschriften inlezen, G-rekening.
-- **E-factureren:** UBL en Peppol, voor overheid en grote opdrachtgevers.
+- **Controle door een boekhouder** van het rekeningschema, de RGS-codes en de btw-rubrieken.
+- **De aangifte zelf indienen.** Dat kan alleen via Digipoort met een eigen certificaat; voorlopig neemt de klant de
+  cijfers over.
+- **Bank en betalen:** SEPA-betaalbestanden, bankafschriften inlezen, G-rekening (0.4).
+- **E-factureren:** UBL en Peppol, voor overheid en grote opdrachtgevers (0.4).
+- **Loonberekening en loonaangifte:** zie de keuze bij de loonkoppeling.
 
 ## De sectoren
 
@@ -55,9 +57,10 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 
 | Module | Inhoud | Voor |
 |---|---|---|
-| Administratie Nederland | Nederlands rekeningschema met standaardrekeningen, btw buitenland en ICP, SEPA, bankafschriften, UBL en Peppol, jaarafsluiting | iedereen |
+| Administratie Nederland | Rekeningschema met RGS, btw buitenland en ICP, auditfile (0.3); SEPA, bankafschriften, UBL en Peppol (0.4); jaarafsluiting | iedereen |
+| Koppelingen | Exact Online, AFAS en Twinfield; loonpakket | wie zijn pakket (nog) houdt |
 | Uren en verlof | Weekstaat per project, goedkeuren, verlof en declaraties (Frappe HR), doorbelasten | iedereen met personeel |
-| Loon | Zie 0.4 | iedereen met personeel |
+| Loon | Zie de loonkoppeling (0.6) | iedereen met personeel |
 | Calculatie | Begroting met hoofdstukken en staartkosten, van calculatie naar projectbudget en inkoop | aannemers, installateurs |
 | Termijnen en meerwerk | Termijnstaat per project, meer- en minderwerk met akkoord van de opdrachtgever, opleverpunten | aannemers, installateurs |
 | Onderaanneming | Wet ketenaansprakelijkheid: G-rekening, verklaring betalingsgedrag, mandagenregister; inkoopcontracten | aannemers |
@@ -75,16 +78,34 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 |---|---|---|
 | 0.1 | Lader en de eerste vier modules | klaar |
 | 0.2 | Startscherm, rustig menu, btw-aangifte, begin van loon | klaar |
-| 0.3 | **Administratie Nederland** en het scherm **Beheer → Inrichting** met profielen | Zonder kloppende boekhouding is de rest niet te verkopen; samen met een boekhouder |
-| 0.4 | **Uren en verlof**, en **Loon** | Zie de keuze hieronder |
-| 0.5 | **XYZ**: Y-Next en Z-Next erin. Y-Next als de werkschermen (projecten, uren, agenda); Z-Next als modules (termijnen en meerwerk, calculatie, planning, terugkerende taken) | Bestaat al; wordt samen de basis van alle sectoren |
-| 0.6 | **Installatietechniek** en **Service en onderhoud** | Eerste sector naast de aannemer |
-| 0.7 | **Onderaanneming** en **Projectbewaking** | Middelgrote en grote aannemers |
-| 0.8 | **Handel en voorraad**, **Materieel** | Handel |
-| 0.9 | **Concern**, **Kwaliteit en veiligheid** | Grote aannemers |
+| 0.3 | **Administratie Nederland, deel 1**: eigen rekeningschema met RGS-codes, btw-codes met buitenland en ICP, auditfile (XAF) | klaar; nog na te lopen door een boekhouder |
+| 0.4 | **Administratie Nederland, deel 2**: bankafschriften (CAMT.053) met afletterregels, SEPA-betaalbestanden, G-rekening, facturen als UBL in en uit | klaar; Peppol en incasso volgen, nog niet bij een bank aangeboden |
+| 0.5 | **Fundament voor een groep**: btw-aangifte als document, dochters onder een holding, en het demonstratiebedrijf (`docs/demonstratiebedrijf.md`) | klaar; voorraad, activa en onderhanden werk volgen |
+| 0.6 | **De assistent boekt voor**: inkoopfactuur lezen en een boeking voorstellen (project, kostensoort, btw-code); één lijst "nog te doen" | Hier zit het verschil met een gewoon boekhoudpakket |
+| 0.7 | **Koppelingen**: Exact Online, AFAS en Twinfield (stamgegevens en journaalposten heen en terug), en de loonkoppeling | Een klant hoeft zijn pakket niet op dag één te vervangen |
+| 0.8 | **Beheer → Inrichting** met profielen per sector, en **Uren en verlof** | |
+| 0.9 | **XYZ**: Y-Next en Z-Next erin. Y-Next als de werkschermen (projecten, uren, agenda); Z-Next als modules (termijnen en meerwerk, calculatie, planning, terugkerende taken) | Bestaat al; wordt samen de basis van alle sectoren |
+| 0.10 | **Installatietechniek** en **Service en onderhoud** | Eerste sector naast de aannemer |
+| 0.11 | **Onderaanneming** en **Projectbewaking** | Middelgrote en grote aannemers |
+| 0.12 | **Handel en voorraad**, **Materieel** | Handel |
+| 0.13 | **Concern**, **Kwaliteit en veiligheid** | Grote aannemers |
 | 1.0 | Alle klanten op de app, profielen per sector vast | |
 
-## Keuze bij 0.4: loon
+## Koppelingen met boekhoudpakketten (0.6)
+
+Niet elke klant wil zijn boekhouding meteen in ERPNext voeren. Daarom één koppellaag met een stekker per pakket:
+
+- **Wat er overgaat:** relaties, grootboekrekeningen, verkoop- en inkoopfacturen als journaalposten, en betalingen
+  terug. Per omgeving kies je de richting: ERPNext is leidend, of het pakket is leidend.
+- **Waarop het rust:** de RGS-code per rekening en de btw-code per sjabloon uit 0.3. Twee administraties met een ander
+  rekeningschema vinden elkaar via die codes; er hoeft geen tabel per klant onderhouden te worden.
+- **Stekkers:** Exact Online (REST, OAuth), AFAS Profit (GetConnectors en UpdateConnectors met een token) en Twinfield
+  (OAuth, XML). Eerst Exact, omdat dat bij aannemers het meest voorkomt.
+- **Wat nodig is en niet te bouwen valt:** per pakket een ontwikkelaarsaccount en een geregistreerde app (bij Exact
+  met een toets door Exact voordat klanten hem mogen gebruiken), en een proefadministratie om tegen te testen.
+- **Zonder koppeling kan al:** de auditfile uit 0.3 is in elk van deze pakketten in te lezen door de accountant.
+
+## Keuze bij de loonkoppeling (0.6)
 
 Twee wegen, met een groot verschil in werk en risico.
 
@@ -94,7 +115,7 @@ Twee wegen, met een groot verschil in werk en risico.
 - **B. Zelf verlonen in het ERP.** Loonheffingstabellen, de cao Bouw en Infra, pensioen bij bpfBOUW, de loonaangifte
   naar de Belastingdienst, en elk jaar de nieuwe cijfers. Fouten raken het loon van mensen.
 
-Voorstel: A eerst. De module van 0.2 legt de structuur klaar die voor beide nodig is.
+Voorstel: A eerst, samen met de koppelingen in 0.6. De module van 0.2 legt de structuur klaar die voor beide nodig is.
 
 ## Y-Next en Z-Next gaan op in XYZ
 
@@ -110,7 +131,7 @@ De samenvoeging gaat in stappen, zodat geen klant iets kwijtraakt:
   nu al dezelfde records: een projecttype of uursoort uit de app is in Y-Next direct te kiezen. De code staat in een
   eigen repo en draait bij elke klant; dat is de grootste verhuizing en vraagt een eigen ontwerp.
 - **Z-Next** is nu het maatwerk van één klant in een eigen app: projectadministratie, planning, offertes,
-  termijnstaten, terugkerende taken en de koppeling met Bouw7. In 0.5 gaan de algemene delen als modules naar OpenAEC
+  termijnstaten, terugkerende taken en de koppeling met Bouw7. In 0.8 gaan de algemene delen als modules naar OpenAEC
   Bouw; wat alleen voor die klant geldt, blijft in Z-Next of wordt een klantmodule. Let op: Z-Next zet 370 eigen
   velden; op een omgeving met Z-Next past Frappe HR nu niet meer in de tabel van het bedrijf (lokaal gezien op
   21 november). Dat moet opgelost zijn voordat loon en Z-Next samen op één omgeving staan.

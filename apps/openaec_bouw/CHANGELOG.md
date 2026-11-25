@@ -2,7 +2,7 @@
 
 Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op de modelomgeving
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
-`docs/openaec-bouw-routekaart.md`.
+`docs/routekaart.md`.
 
 ## 0.5.0 (25 november 2026): fundament voor een groep, en het demonstratiebedrijf
 
