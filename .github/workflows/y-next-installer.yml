@@ -1,0 +1,74 @@
+# Bouwt de bundel van installer/y-next, installeert hem als proef op een schone Linux-runner
+# en maakt bij een tag y-next-installer-v* de release met de bundel als bijlage.
+name: y-next-installer
+
+on:
+  push:
+    tags: ["y-next-installer-v*"]
+  pull_request:
+    paths: ["installer/y-next/**", "apps/y_next/**", ".github/workflows/y-next-installer.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# shell: bash geeft pipefail, zodat een fout vóór een | sed niet wegvalt.
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  bundel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tag en VERSIE moeten gelijk zijn
+        if: startsWith(github.ref, 'refs/tags/')
+        run: test "$GITHUB_REF_NAME" = "y-next-installer-v$(cat installer/y-next/VERSIE)"
+
+      - name: Bundel maken
+        run: installer/y-next/maak-bundel.sh
+
+      - name: Proefinstallatie uit de bundel
+        run: |
+          mkdir /tmp/proef && tar -xzf installer/y-next/dist/*.tar.gz -C /tmp/proef
+          cd /tmp/proef/y-next-installer-v*
+          ./installeer.sh --bedrijf "Proef BV" --email proef@example.com --naam "Petra Proef" | sed -E 's/(Wachtwoord: +).*/\1***/'
+          # Vanaf de host, via de gepubliceerde poort: de site antwoordt en Y-Next wordt geserveerd.
+          curl -fsS http://localhost:8080/api/method/ping
+          curl -fsS -o /dev/null http://localhost:8080/y-next
+          curl -fsS -o /dev/null http://localhost:8080/assets/y_next/app/manifest.json
+          # Inloggen als de eigen beheerder en de eigen functie van Y-Next aanroepen.
+          WACHTWOORD=$(sed -n 's/^ADMIN_PASSWORD=//p' .env)
+          curl -fsS -c /tmp/koek -o /dev/null http://localhost:8080/api/method/login \
+            --data-urlencode usr=proef@example.com --data-urlencode "pwd=$WACHTWOORD"
+          curl -fsS -b /tmp/koek http://localhost:8080/api/method/y_next_mogelijkheden
+          # Een tweede keer draaien mag en verandert niets.
+          ./installeer.sh --ja | sed -E 's/(Wachtwoord: +).*/\1***/'
+
+      - name: Meldingen bij een fout
+        if: failure()
+        run: cd /tmp/proef/y-next-installer-v* && docker compose ps -a && docker compose logs --tail 200
+
+      - name: Bundel bewaren
+        uses: actions/upload-artifact@v4
+        with:
+          name: y-next-installer
+          path: |
+            installer/y-next/dist/*.zip
+            installer/y-next/dist/*.tar.gz
+            installer/y-next/dist/SHA256SUMS.txt
+
+      - name: Release maken
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VLAG=""
+          case "$GITHUB_REF_NAME" in *-v0.*) VLAG="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" $VLAG --latest=false \
+            --title "Y-Next lokaal $(cat installer/y-next/VERSIE)" \
+            --notes-file installer/y-next/RELEASE.md \
+            installer/y-next/dist/*.zip installer/y-next/dist/*.tar.gz installer/y-next/dist/SHA256SUMS.txt
