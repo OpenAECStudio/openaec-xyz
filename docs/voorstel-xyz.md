@@ -84,6 +84,22 @@ in dat project staat.
   Elk project heeft zijn eigen kamer; een uitnodiging voor iemand van buiten is een link die een dag geldt. De
   techniek is er al (Jitsi Meet per server, een kamer opent alleen met een token van de omgeving).
 
+## Intranet per bedrijf
+
+Eén omgeving kan een hele groep bevatten: een holding met werkmaatschappijen. Elk bedrijf heeft dan zijn eigen
+intranet, en de holding heeft er een voor de hele groep.
+
+- Een medewerker hoort bij één bedrijf en ziet het intranet van dat bedrijf, plus wat de holding voor de hele groep
+  plaatst. Het intranet van een zusterbedrijf ziet hij niet.
+- Wie voor meer bedrijven werkt (directie, financiën, personeelszaken) krijgt die bedrijven erbij, of de hele groep.
+- Dezelfde toewijzing regelt ook wat iemand in de administratie ziet: wie bij één bedrijf hoort, ziet alleen de
+  projecten en facturen van dat bedrijf. Dat is de bestaande afscherming per bedrijf van ERPNext; het intranet volgt
+  die, er komt geen tweede rechtenstelsel naast.
+- Een bericht heeft een soort (nieuws, persbericht, mededeling, personeel), een bedrijf of "hele groep", een datum en
+  een afbeelding; het kan vastgezet worden en reacties krijgen.
+- Het intranet is het scherm **Vandaag** van de app: bovenaan het nieuws van je bedrijf en van de groep, daaronder je
+  eigen werk.
+
 ## Voorbereiding voor installatietechniek
 
 Het installatiebedrijf is de eerste sector na de aannemer (0.6 in de routekaart). Het verschil met een aannemer: naast
