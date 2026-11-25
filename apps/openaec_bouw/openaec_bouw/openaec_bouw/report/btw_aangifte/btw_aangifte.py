@@ -39,11 +39,11 @@ def kolommen() -> list[dict]:
 	]
 
 
-def _facturen(doctype: str, bedrijf: str, van, tot) -> list[frappe._dict]:
-	"""De geboekte facturen in het tijdvak, elk met zijn btw-regels (`regels`)."""
+def _facturen(doctype: str, bedrijf: str, van, tot, concepten: bool = False) -> list[frappe._dict]:
+	"""De geboekte facturen in het tijdvak (met `concepten` ook de concepten), elk met zijn btw-regels (`regels`)."""
 	facturen = frappe.get_all(
 		doctype,
-		filters={"docstatus": 1, "company": bedrijf, "posting_date": ("between", [van, tot])},
+		filters={"docstatus": ("in", [0, 1]) if concepten else 1, "company": bedrijf, "posting_date": ("between", [van, tot])},
 		fields=["name", "base_net_total", "taxes_and_charges"],
 	)
 	if not facturen:
@@ -75,12 +75,13 @@ def _is_verlegd(factuur: frappe._dict) -> bool:
 	return any(VERLEGD in (t or "").lower() for t in teksten)
 
 
-def bereken(bedrijf: str, van, tot) -> dict:
-	"""De rubrieken als `{rubriek: {"omzet": ..., "btw": ...}}`, in de valuta van het bedrijf."""
+def bereken(bedrijf: str, van, tot, concepten: bool = False) -> dict:
+	"""De rubrieken als `{rubriek: {"omzet": ..., "btw": ...}}`, in de valuta van het bedrijf. Met `concepten` tellen ook
+	conceptfacturen mee (voor een voorlopige stand)."""
 	uit = {r: {"omzet": 0.0, "btw": 0.0} for r in ("1a", "1b", "1c", "1e", "2a", "3a", "3b", "4a", "4b", "5b")}
 	btw_rekeningen = set(frappe.get_all("Account", filters={"company": bedrijf, "account_type": "Tax"}, pluck="name"))
 
-	for factuur in _facturen("Sales Invoice", bedrijf, van, tot):
+	for factuur in _facturen("Sales Invoice", bedrijf, van, tot, concepten):
 		if factuur.code in ("V0", "VVERL", "VEXP", "VEU"):
 			# Geen Nederlandse btw op de factuur: de hele omzet in de rubriek van de code.
 			uit[BTW_CODES[factuur.code]]["omzet"] += flt(factuur.base_net_total)
@@ -104,7 +105,7 @@ def bereken(bedrijf: str, van, tot) -> dict:
 		else:
 			uit["1e"]["omzet"] += rest
 
-	for factuur in _facturen("Purchase Invoice", bedrijf, van, tot):
+	for factuur in _facturen("Purchase Invoice", bedrijf, van, tot, concepten):
 		for regel in factuur.regels:
 			if regel.account_head not in btw_rekeningen or regel.category == "Valuation":
 				continue

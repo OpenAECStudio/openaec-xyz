@@ -4,6 +4,29 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/openaec-bouw-routekaart.md`.
 
+## 0.5.0 (25 november 2026): fundament voor een groep, en het demonstratiebedrijf
+
+- **Btw-aangifte als document:** nieuw doctype, één per bedrijf per tijdvak. Als concept ververst het de rubrieken
+  (desgewenst met conceptfacturen erbij); indienen zet de cijfers vast en kan pas als er in het tijdvak geen concepten
+  meer staan. **Journaalpost maken** boekt de btw-rekeningen leeg naar Btw-afdracht.
+- **Groep met dochters:** een bedrijf dat onder een moeder met het Nederlandse schema wordt aangemaakt, krijgt van
+  ERPNext het schema van de moeder; `neem_schema_over` zet de RGS-codes, de standaardrekeningen en de btw-sjablonen
+  erbij.
+- **Herstel:** op een omgeving met Frappe HR liep de eerstvolgende opslag vast na "Nederlands rekeningschema zetten",
+  omdat een declaratiesoort nog naar een rekening van het oude schema wees.
+- **Onderhanden werk als document:** nieuw doctype, één stand per bedrijf per peildatum met een regel per lopend
+  project: kosten, gefactureerde termijnen, voortgang, verwacht en genomen resultaat. Het resultaat naar voortgang of
+  bij oplevering; een verwacht verlies altijd meteen. **Journaalpost maken** boekt de mutatie naar de balans. Nieuw
+  veld **Aanneemsom** op het project en de rekening 8090 Mutatie onderhanden projecten.
+- **Hout:** keurmerk op het artikel, en land en gebied van herkomst op de partij.
+- **Demonstratiebedrijf** (`openaec_bouw.demo.maak`): een verzonnen bouwgroep met zeven bedrijven en drie jaar
+  administratie, alles als concept: voorraad met partijen en grijpvoorraad bij de houthandel, een register van vaste
+  activa, onderhanden werk per kwartaal, en vaste gezichten met een lijn van afdelingshoofd tot directeur. Zie
+  `docs/demonstratiebedrijf.md`, `docs/openaec-bouw-fundament.md` en `docs/houtherkomst-en-werkstromen.md`.
+- De status van een nog niet ingediend document heet in het Nederlands weer Concept (Frappe maakte er Droogte van).
+
+Nog niet: het boeken van het demonstratiebedrijf, de zorgvuldigheidsverklaring voor hout, en de werkstromen.
+
 ## 0.4.0 (25 november 2026): Nederlandse administratie, tweede deel
 
 - **Bankafschrift inlezen (CAMT.053):** knop op de lijst met banktransacties. Elke regel wordt een banktransactie op

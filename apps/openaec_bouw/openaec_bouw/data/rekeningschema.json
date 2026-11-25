@@ -87,6 +87,7 @@
   ["8030", "Omzet regie", "8000", "Income Account", "WOmz"],
   ["8040", "Omzet onderhoud en service", "8000", "Income Account", "WOmz"],
   ["8050", "Omzet handel", "8000", "Income Account", "WOmz"],
+  ["8090", "Mutatie onderhanden projecten", "8000", "Income Account", "WWiv"],
   ["8100", "Omzet btw verlegd", "8000", "Income Account", "WOmz"],
   ["8200", "Omzet binnen de EU", "8000", "Income Account", "WOmz"],
   ["8210", "Omzet buiten de EU", "8000", "Income Account", "WOmz"],

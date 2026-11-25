@@ -1,0 +1,228 @@
+{
+ "actions": [],
+ "creation": "2026-11-25 09:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-25 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "name": "Btw-aangifte",
+ "autoname": "format:BTW-{#####}",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "title_field": "titel",
+ "permissions": [
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Auditor",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  }
+ ],
+ "fields": [
+  {
+   "fieldname": "bedrijf",
+   "fieldtype": "Link",
+   "label": "Bedrijf",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "tijdvak",
+   "fieldtype": "Select",
+   "label": "Tijdvak",
+   "options": "Kwartaal\nMaand\nJaar\nAnders",
+   "default": "Kwartaal"
+  },
+  {
+   "fieldname": "titel",
+   "fieldtype": "Data",
+   "label": "Titel",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "kolom_tijdvak",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "van",
+   "fieldtype": "Date",
+   "label": "Van",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tot",
+   "fieldtype": "Date",
+   "label": "Tot en met",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "concepten_meetellen",
+   "fieldtype": "Check",
+   "label": "Ook concepten meetellen",
+   "description": "Voor een voorlopige stand. Indienen kan pas als er in het tijdvak geen conceptfacturen meer staan."
+  },
+  {
+   "fieldname": "sectie_rubrieken",
+   "fieldtype": "Section Break",
+   "label": "Rubrieken"
+  },
+  {
+   "fieldname": "regels",
+   "fieldtype": "Table",
+   "label": "Rubrieken",
+   "options": "Btw-aangifte Regel",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sectie_totaal",
+   "fieldtype": "Section Break",
+   "label": "Totaal"
+  },
+  {
+   "fieldname": "verschuldigd",
+   "fieldtype": "Currency",
+   "label": "5a Verschuldigde btw",
+   "read_only": 1
+  },
+  {
+   "fieldname": "voorbelasting",
+   "fieldtype": "Currency",
+   "label": "5b Voorbelasting",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kolom_totaal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "te_betalen",
+   "fieldtype": "Currency",
+   "label": "5c Te betalen of terug te vragen",
+   "read_only": 1,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "sectie_afhandeling",
+   "fieldtype": "Section Break",
+   "label": "Afhandeling"
+  },
+  {
+   "fieldname": "ingediend_op",
+   "fieldtype": "Date",
+   "label": "Ingediend op",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "betalingskenmerk",
+   "fieldtype": "Data",
+   "label": "Betalingskenmerk",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "kolom_afhandeling",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "journaalpost",
+   "fieldtype": "Link",
+   "label": "Journaalpost",
+   "options": "Journal Entry",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "opmerking",
+   "fieldtype": "Small Text",
+   "label": "Opmerking",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Gewijzigd van",
+   "options": "Btw-aangifte",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1
+  }
+ ],
+ "field_order": [
+  "bedrijf",
+  "tijdvak",
+  "titel",
+  "kolom_tijdvak",
+  "van",
+  "tot",
+  "concepten_meetellen",
+  "sectie_rubrieken",
+  "regels",
+  "sectie_totaal",
+  "verschuldigd",
+  "voorbelasting",
+  "kolom_totaal",
+  "te_betalen",
+  "sectie_afhandeling",
+  "ingediend_op",
+  "betalingskenmerk",
+  "kolom_afhandeling",
+  "journaalpost",
+  "opmerking",
+  "amended_from"
+ ]
+}

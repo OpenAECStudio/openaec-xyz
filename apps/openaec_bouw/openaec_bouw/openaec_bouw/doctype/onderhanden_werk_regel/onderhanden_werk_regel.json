@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "creation": "2026-11-25 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-25 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "name": "Onderhanden Werk Regel",
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "in_list_view": 1,
+   "read_only": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "projectnaam",
+   "fieldtype": "Data",
+   "label": "Naam",
+   "read_only": 1
+  },
+  {
+   "fieldname": "aanneemsom",
+   "fieldtype": "Currency",
+   "label": "Aanneemsom",
+   "read_only": 1
+  },
+  {
+   "fieldname": "begrote_kosten",
+   "fieldtype": "Currency",
+   "label": "Begrote kosten",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kosten",
+   "fieldtype": "Currency",
+   "label": "Kosten tot peildatum",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "gefactureerd",
+   "fieldtype": "Currency",
+   "label": "Gefactureerd tot peildatum",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "voortgang",
+   "fieldtype": "Percent",
+   "label": "Voortgang",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "verwacht_resultaat",
+   "fieldtype": "Currency",
+   "label": "Verwacht resultaat",
+   "read_only": 1
+  },
+  {
+   "fieldname": "genomen_resultaat",
+   "fieldtype": "Currency",
+   "label": "Genomen resultaat",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "saldo",
+   "fieldtype": "Currency",
+   "label": "Onderhanden saldo",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2,
+   "bold": 1
+  }
+ ],
+ "field_order": [
+  "project",
+  "projectnaam",
+  "aanneemsom",
+  "begrote_kosten",
+  "kosten",
+  "gefactureerd",
+  "voortgang",
+  "verwacht_resultaat",
+  "genomen_resultaat",
+  "saldo"
+ ]
+}

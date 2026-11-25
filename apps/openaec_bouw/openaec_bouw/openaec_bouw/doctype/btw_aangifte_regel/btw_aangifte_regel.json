@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "creation": "2026-11-25 09:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-25 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "name": "Btw-aangifte Regel",
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "rubriek",
+   "fieldtype": "Data",
+   "label": "Rubriek",
+   "in_list_view": 1,
+   "read_only": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "omschrijving",
+   "fieldtype": "Data",
+   "label": "Omschrijving",
+   "in_list_view": 1,
+   "read_only": 1,
+   "columns": 5
+  },
+  {
+   "fieldname": "omzet",
+   "fieldtype": "Currency",
+   "label": "Omzet",
+   "in_list_view": 1,
+   "read_only": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "btw",
+   "fieldtype": "Currency",
+   "label": "Btw",
+   "in_list_view": 1,
+   "read_only": 1,
+   "columns": 2
+  }
+ ],
+ "field_order": [
+  "rubriek",
+  "omschrijving",
+  "omzet",
+  "btw"
+ ]
+}

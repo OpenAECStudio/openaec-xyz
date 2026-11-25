@@ -1,0 +1,235 @@
+{
+ "actions": [],
+ "creation": "2026-11-25 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-25 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "name": "Onderhanden Werk",
+ "autoname": "format:OHW-{#####}",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "title_field": "titel",
+ "permissions": [
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Auditor",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  }
+ ],
+ "fields": [
+  {
+   "fieldname": "bedrijf",
+   "fieldtype": "Link",
+   "label": "Bedrijf",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "peildatum",
+   "fieldtype": "Date",
+   "label": "Peildatum",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "titel",
+   "fieldtype": "Data",
+   "label": "Titel",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "kolom_kop",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "methode",
+   "fieldtype": "Select",
+   "label": "Resultaat nemen",
+   "options": "Naar voortgang\nBij oplevering",
+   "default": "Naar voortgang",
+   "reqd": 1,
+   "description": "Een verwacht verlies wordt bij beide methodes meteen en volledig genomen."
+  },
+  {
+   "fieldname": "concepten_meetellen",
+   "fieldtype": "Check",
+   "label": "Ook concepten meetellen",
+   "description": "Voor een voorlopige stand. Vastleggen kan pas als er tot de peildatum geen conceptfacturen op deze projecten staan."
+  },
+  {
+   "fieldname": "sectie_regels",
+   "fieldtype": "Section Break",
+   "label": "Projecten"
+  },
+  {
+   "fieldname": "regels",
+   "fieldtype": "Table",
+   "label": "Projecten",
+   "options": "Onderhanden Werk Regel",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sectie_totaal",
+   "fieldtype": "Section Break",
+   "label": "Totaal"
+  },
+  {
+   "fieldname": "kosten",
+   "fieldtype": "Currency",
+   "label": "Kosten",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gefactureerd",
+   "fieldtype": "Currency",
+   "label": "Gefactureerde termijnen",
+   "read_only": 1
+  },
+  {
+   "fieldname": "genomen_resultaat",
+   "fieldtype": "Currency",
+   "label": "Genomen resultaat",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kolom_totaal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "te_factureren",
+   "fieldtype": "Currency",
+   "label": "Onderhanden projecten (actief)",
+   "read_only": 1,
+   "in_list_view": 1,
+   "bold": 1,
+   "description": "Projecten waar meer is gemaakt dan gefactureerd."
+  },
+  {
+   "fieldname": "vooruitgefactureerd",
+   "fieldtype": "Currency",
+   "label": "Vooruitgefactureerd (passief)",
+   "read_only": 1,
+   "in_list_view": 1,
+   "bold": 1,
+   "description": "Projecten waar meer is gefactureerd dan gemaakt."
+  },
+  {
+   "fieldname": "sectie_afhandeling",
+   "fieldtype": "Section Break",
+   "label": "Afhandeling"
+  },
+  {
+   "fieldname": "journaalpost",
+   "fieldtype": "Link",
+   "label": "Journaalpost",
+   "options": "Journal Entry",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "kolom_afhandeling",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opmerking",
+   "fieldtype": "Small Text",
+   "label": "Opmerking",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Gewijzigd van",
+   "options": "Onderhanden Werk",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1
+  }
+ ],
+ "field_order": [
+  "bedrijf",
+  "peildatum",
+  "titel",
+  "kolom_kop",
+  "methode",
+  "concepten_meetellen",
+  "sectie_regels",
+  "regels",
+  "sectie_totaal",
+  "kosten",
+  "gefactureerd",
+  "genomen_resultaat",
+  "kolom_totaal",
+  "te_factureren",
+  "vooruitgefactureerd",
+  "sectie_afhandeling",
+  "journaalpost",
+  "kolom_afhandeling",
+  "opmerking",
+  "amended_from"
+ ]
+}
