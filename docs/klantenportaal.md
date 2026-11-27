@@ -53,9 +53,16 @@ Bij het project in ERPNext en in de Y-app een tabblad **Klant**:
 
 Het rust op wat Frappe en ERPNext al hebben, en vult aan:
 
-- **Inloggen**: de klant is een websitegebruiker (geen bureaubladgebruiker, dus geen licentie- of rechtenvragen in
-  het ERP), gekoppeld aan een contactpersoon van de klant. Uitnodigen gaat vanaf het project; inloggen met een link
-  per mail of met wachtwoord, en straks met de inlog van de SuperCloud.
+- **Bekijken met een verborgen link** (de basis): het bedrijf deelt per project of bouwnummer een link met een
+  lange willekeurige sleutel (`/portaal/l/<sleutel>`). Wie de link heeft, ziet alleen wat gedeeld is en kan niets
+  doen: geen berichten, geen keuzes, geen akkoord. De link heeft een einddatum, kan per stuk ingetrokken worden, en
+  elk bezoek komt in het logboek. Geen account nodig.
+- **Inloggen met een account** (voor reageren, berichten, keuzes en akkoord): de klant is een websitegebruiker (geen
+  bureaubladgebruiker, dus geen licentie- of rechtenvragen in het ERP), gekoppeld aan een contactpersoon van de
+  klant. Hij logt in met zijn **Apple-, Microsoft- of Google-account** via de inlog van de SuperCloud (openaec_sso;
+  Google en Apple werken daar al voor het forum, Microsoft komt erbij). Geen eigen wachtwoord bij het bedrijf. Wie
+  een verborgen link heeft, ziet in het portaal de knop "Inloggen om te reageren"; na het inloggen wordt de link aan
+  zijn account gekoppeld (Portaaltoegang), zodat hij daarna zonder link binnenkomt.
 - **Wat er al is**: ERPNext heeft een eenvoudig portaal met projecten (`/project`), offertes, facturen en meldingen,
   en per project een lijst gebruikers met "bijlagen zien". Dat is te kaal om te tonen, maar de rechten en de koppeling
   aan de klant nemen we over.
@@ -85,7 +92,8 @@ Het rust op wat Frappe en ERPNext al hebben, en vult aan:
 
 ## Volgorde van bouwen
 
-1. Inloggen, Portaaltoegang, mijn projecten, voortgang, foto's en berichten. Het tabblad Klant met "zien als de
+1. Verborgen link, inloggen met Apple, Microsoft of Google, Portaaltoegang, mijn projecten, voortgang, foto's en
+   berichten. Het tabblad Klant met "zien als de
    klant".
 2. Tekeningen en documenten met versies en meldingen; 3D-model via de datadrop.
 3. Facturen, termijnen en afspraken.
@@ -97,8 +105,14 @@ Het rust op wat Frappe en ERPNext al hebben, en vult aan:
 In het demonstratiebedrijf: de aannemer krijgt een project met twaalf woningen en kopers, het adviesbureau een
 opdrachtgever die tekeningen volgt.
 
+## Besluiten (27 november 2026)
+
+- In de basis bekijkt de klant alles met een verborgen link, zonder account.
+- Voor reageren en communiceren logt hij in met zijn Apple- of Microsoft-account (en Google), niet met een
+  wachtwoord bij het bedrijf.
+- De klant communiceert via het portaal, niet via losse mail. Een mail meldt alleen dat er iets nieuws is, met een
+  link naar het portaal.
+
 ## Open vragen
 
-1. Inloggen met een link per mail als standaard (makkelijkst voor kopers), of altijd met wachtwoord?
-2. Het portaal op het adres van de omgeving, of per bedrijf een eigen adres (bijvoorbeeld `mijn.<bedrijf>.nl`)?
-3. Berichten alleen in het portaal, of ook antwoorden per mail toestaan (de mail komt dan in hetzelfde gesprek)?
+1. Het portaal op het adres van de omgeving, of per bedrijf een eigen adres (bijvoorbeeld `mijn.<bedrijf>.nl`)?
