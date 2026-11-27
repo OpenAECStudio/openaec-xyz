@@ -149,9 +149,11 @@ class TestProfiel(IntegrationTestCase):
 	def test_module_wacht_op_vereiste_app(self):
 		loon = profiel.modules()["loon"]
 		self.assertEqual(loon["vereist"], ["hrms"])
+		# Wat er al staat, telt niet mee: verlofsoorten waar een cao naar wijst, blijven staan als de module uitgaat.
+		al_er = sum(1 for r in loon["records"] if frappe.db.exists("DocType", r["doctype"]) and frappe.db.exists(r["doctype"], r["naam"]))
 		uit = profiel.zet_module("loon", 1)
 		if "hrms" in frappe.get_installed_apps():
-			self.assertEqual(uit["gezet"], len(loon["records"]))
+			self.assertEqual(uit["gezet"], len(loon["records"]) - al_er)
 			self.assertEqual(frappe.db.get_value("Salary Component", "Loonheffing", "type"), "Deduction")
 			self.assertTrue(frappe.db.exists("Leave Type", "Vakantie (wettelijk)"))
 		else:
