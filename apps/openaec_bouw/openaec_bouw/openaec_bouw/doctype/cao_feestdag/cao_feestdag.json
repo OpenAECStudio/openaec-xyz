@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao Feestdag",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "feestdag",
+  "vrij",
+  "eens_per_vijf_jaar"
+ ],
+ "fields": [
+  {
+   "fieldname": "feestdag",
+   "fieldtype": "Select",
+   "label": "Feestdag",
+   "options": "Nieuwjaarsdag\nGoede Vrijdag\nEerste Paasdag\nTweede Paasdag\nKoningsdag\nBevrijdingsdag\nHemelvaartsdag\nEerste Pinksterdag\nTweede Pinksterdag\nEerste Kerstdag\nTweede Kerstdag",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "vrij",
+   "fieldtype": "Check",
+   "label": "Vrij",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "eens_per_vijf_jaar",
+   "fieldtype": "Check",
+   "label": "Alleen in een lustrumjaar",
+   "in_list_view": 1,
+   "depends_on": "eval:doc.feestdag=='Bevrijdingsdag'",
+   "description": "Bevrijdingsdag: alleen in 2025, 2030, ..."
+  }
+ ],
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": []
+}

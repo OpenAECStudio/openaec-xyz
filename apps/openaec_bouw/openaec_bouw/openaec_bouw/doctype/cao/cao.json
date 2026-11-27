@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "cao_naam",
+  "sector",
+  "soort",
+  "kolom_cao",
+  "partijen",
+  "bron",
+  "sectie_groepen",
+  "werknemersgroepen",
+  "opmerking"
+ ],
+ "fields": [
+  {
+   "fieldname": "cao_naam",
+   "fieldtype": "Data",
+   "label": "Naam",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sector",
+   "fieldtype": "Data",
+   "label": "Sector",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "soort",
+   "fieldtype": "Select",
+   "label": "Soort",
+   "options": "Sector-cao\nBedrijfs-cao\nBedrijfsregeling",
+   "default": "Sector-cao",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "kolom_cao",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "partijen",
+   "fieldtype": "Small Text",
+   "label": "Partijen"
+  },
+  {
+   "fieldname": "bron",
+   "fieldtype": "Data",
+   "label": "Bron",
+   "options": "URL"
+  },
+  {
+   "fieldname": "sectie_groepen",
+   "fieldtype": "Section Break",
+   "label": "Werknemersgroepen"
+  },
+  {
+   "fieldname": "werknemersgroepen",
+   "fieldtype": "Table",
+   "label": "Werknemersgroepen",
+   "options": "Cao Werknemersgroep",
+   "description": "Bijvoorbeeld bouwplaats en uta. Eén groep is genoeg als de cao er geen onderscheid in maakt."
+  },
+  {
+   "fieldname": "opmerking",
+   "fieldtype": "Small Text",
+   "label": "Opmerking"
+  }
+ ],
+ "autoname": "field:cao_naam",
+ "naming_rule": "By fieldname",
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1
+  }
+ ],
+ "title_field": "cao_naam"
+}

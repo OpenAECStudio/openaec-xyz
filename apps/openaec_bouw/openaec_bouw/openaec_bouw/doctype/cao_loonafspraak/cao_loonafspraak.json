@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao Loonafspraak",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "datum",
+  "percentage",
+  "bedrag",
+  "omschrijving"
+ ],
+ "fields": [
+  {
+   "fieldname": "datum",
+   "fieldtype": "Date",
+   "label": "Ingangsdatum",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "label": "Verhoging",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "bedrag",
+   "fieldtype": "Currency",
+   "label": "Of een bedrag",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "omschrijving",
+   "fieldtype": "Data",
+   "label": "Omschrijving",
+   "in_list_view": 1
+  }
+ ],
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": []
+}
