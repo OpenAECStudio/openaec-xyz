@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao Verlofrecht",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "verlofsoort",
+  "uren_per_jaar",
+  "per_gewerkt_uur",
+  "verval"
+ ],
+ "fields": [
+  {
+   "fieldname": "verlofsoort",
+   "fieldtype": "Link",
+   "label": "Verlofsoort",
+   "options": "Leave Type",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "uren_per_jaar",
+   "fieldtype": "Float",
+   "label": "Uren per jaar bij volledig contract",
+   "in_list_view": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "per_gewerkt_uur",
+   "fieldtype": "Percent",
+   "label": "Opbouw per gewerkt uur (nul-uren en oproep)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "verval",
+   "fieldtype": "Select",
+   "label": "Vervalt",
+   "options": "Zes maanden na het jaar\nVijf jaar na het jaar\nEinde van het jaar\nNooit",
+   "default": "Vijf jaar na het jaar",
+   "in_list_view": 1
+  }
+ ],
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": []
+}

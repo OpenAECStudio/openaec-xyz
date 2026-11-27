@@ -4,6 +4,40 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/routekaart.md`.
 
+## 0.6.0 (27 november 2026): personeel in uren, cao's, en het bedrijf leeg
+
+Frappe HR hoort er nu altijd bij (vereiste app). Ontwerp: `docs/personeel-cao-verlof.md`.
+
+- **Bedrijfsinstellingen:** nieuw doctype, één per bedrijf, met tabbladen voor facturen, inkoop en offertes,
+  projecten, tarieven en toeslagen, werktijden en planning, en documenten. Elk bedrijf krijgt het meteen, met een
+  werkweek van vijf dagen van acht uur.
+- **Het bedrijf leeg:** de 93 velden van Z op het bedrijf gaan bij de eerstvolgende migratie naar
+  Bedrijfsinstellingen; de KvK naar het KvK-nummer van het bedrijf, het IBAN naar een bankrekening, het adres naar een
+  adresrecord, de vervaltijd naar de standaardbetaalvoorwaarde. Lukt een van die vier niet, dan staat de waarde als
+  opmerking op het bedrijf. Daarna gaan de velden en kolommen weg: van 114 naar 79 tekstkolommen. Er paste nog maar
+  één tekstveld bij, dus de volgende versie van ERPNext of Frappe HR had de installatie laten vastlopen
+  ("Row size too large").
+- **Cao's met looptijd:** doctypes Cao en Cao-periode (per werknemersgroep: geldig van en tot, normuren, verlofrechten
+  in uren met vervalregel, welke feestdagen vrij zijn, collectieve dagen, loonafspraken). Wat op een datum geldt,
+  volgt uit de datum. Twee maanden voor het einde zonder opvolger komt er een melding; stilzwijgend verlengen maakt
+  zelf de volgende periode. Als concept geladen: Bouw & Infra (bouwplaats en uta), Technisch Installatiebedrijf,
+  Afbouw, Houthandel en Architectenbureaus, nog na te lopen tegen de cao-teksten.
+- **Arbeidscontract:** soort (onbepaalde en bepaalde tijd, nul-uren, min-max, oproep, stage, BBL, inhuur), van en tot,
+  uren, werkpatroon per weekdag met week A en B, cao en werknemersgroep. Controleert overlap, waarschuwt bij de
+  ketenregeling en de aanzegplicht, en zet het huidige contract en de cao op de medewerker.
+- **Verlof in uren:** verlofboekingen (startsaldo, opbouw, opname, verval, uitbetaling, correctie). Opbouw achteraf
+  op de laatste dag van de maand, naar rato van contract en dagen, in stukken als contract of cao midden in de maand
+  wisselt; bij nul-uren en oproep per gewerkt uur. Verval per opbouwjaar, oudste eerst. De verlofaanvraag stelt de
+  uren voor uit het werkpatroon zonder vrije dagen en toetst het saldo in uren; voor soorten in uren slaat hij de
+  controles in dagen van Frappe over. Rapport **Verlofsaldo**.
+- **Bedrijfskalender:** de vrije dagen van een bedrijf per jaar en cao-groep, uitgerekend uit de cao (ook Goede
+  Vrijdag en Bevrijdingsdag eens per vijf jaar); vaststellen maakt de feestdagenlijst van Frappe HR en wijst die toe.
+  Op 1 oktober komt de kalender van het volgende jaar als concept klaar.
+- **BSN** op de medewerker, alleen zichtbaar voor HR.
+
+Nog niet: de schermen van Y op het saldo in uren, en de rest van de velden van Z op de medewerker
+(`docs/velden-harmonisatie.md`, hoofdstuk Personeel).
+
 ## 0.5.0 (25 november 2026): fundament voor een groep, en het demonstratiebedrijf
 
 - **Btw-aangifte als document:** nieuw doctype, één per bedrijf per tijdvak. Als concept ververst het de rubrieken

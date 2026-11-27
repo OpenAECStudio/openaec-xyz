@@ -4,7 +4,8 @@ app_publisher = "OpenAEC Foundation"
 app_description = "Z-Next: projectadministratie, planning, offertes en bronkoppeling voor ERPNext"
 app_email = ""
 
-required_apps = ["erpnext"]
+# De instellingen per bedrijf staan in OpenAEC Bouw (doctype Bedrijfsinstellingen), niet meer op het bedrijf.
+required_apps = ["erpnext", "openaec_bouw"]
 
 # Neemt bestaande custom doctypes met dezelfde naam over (custom=1, module Custom)
 # zodat de model-sync ze bijwerkt in plaats van opnieuw aan te maken.

@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao Collectieve Dag",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "datum",
+  "omschrijving",
+  "verlofsoort"
+ ],
+ "fields": [
+  {
+   "fieldname": "datum",
+   "fieldtype": "Date",
+   "label": "Datum",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "omschrijving",
+   "fieldtype": "Data",
+   "label": "Omschrijving",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "verlofsoort",
+   "fieldtype": "Link",
+   "label": "Gaat af van",
+   "options": "Leave Type",
+   "in_list_view": 1,
+   "description": "Leeg = gewoon vrij, kost geen verlof"
+  }
+ ],
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": []
+}

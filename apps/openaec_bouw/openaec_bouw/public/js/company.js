@@ -1,8 +1,9 @@
-// Op het bedrijf: de auditfile (XAF) van een boekjaar downloaden, en bij een bedrijf zonder boekingen het
+// Op het bedrijf: naar de bedrijfsinstellingen, de auditfile (XAF) van een boekjaar downloaden, en bij een bedrijf zonder boekingen het
 // Nederlandse rekeningschema van OpenAEC Bouw zetten.
 frappe.ui.form.on("Company", {
 	refresh(frm) {
 		if (frm.is_new()) return;
+		frm.add_custom_button(__("Bedrijfsinstellingen"), () => frappe.set_route("Form", "Bedrijfsinstellingen", frm.doc.name));
 		frm.add_custom_button(
 			__("Auditfile (XAF)"),
 			() => {

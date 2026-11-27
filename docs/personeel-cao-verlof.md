@@ -1,8 +1,8 @@
 # Personeel: contract, rooster, verlof in uren, cao's en feestdagen
 
-Stand 27 november 2026. Ontwerp, nog niet gebouwd. Dit is het deel **Uren en verlof** uit de routekaart (0.8), maar
-het hangt nergens van af behalve van Frappe HR en kan dus eerder. De cijfers uit cao's komen uit openbare
-samenvattingen; **elke waarde gaat pas het systeem in als ze tegen de cao-tekst is nagelopen** (zie onderaan).
+Stand 27 november 2026. Gebouwd in OpenAEC Bouw 0.6.0 (zie `apps/openaec_bouw/CHANGELOG.md`), naar voren gehaald
+uit **Uren en verlof** in de routekaart. De cijfers uit cao's komen uit openbare samenvattingen en staan als concept in
+het systeem; **een cao-periode gaat pas op Vastgesteld als ze tegen de cao-tekst is nagelopen** (zie onderaan).
 
 ## Wat we willen
 

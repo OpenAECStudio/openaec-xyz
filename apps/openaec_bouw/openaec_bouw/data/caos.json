@@ -1,0 +1,99 @@
+{
+ "_uitleg": "Cao's van de bouwsector als concept. Elk getal komt uit een openbare samenvatting en moet tegen de cao-tekst worden nagelopen voordat een periode op Vastgesteld gaat. Verlofsoorten zijn die van de module loon.",
+ "caos": [
+  {
+   "cao_naam": "Bouw & Infra",
+   "sector": "Bouw en infra",
+   "partijen": "Bouwend Nederland, FNV Bouwen & Wonen, CNV Vakmensen",
+   "bron": "https://www.bouwendnederland.nl/kennis/vakantie-en-verlof/verlof-rondom-vrije-tijd",
+   "werknemersgroepen": ["Bouwplaats", "UTA"],
+   "periodes": [
+    {
+     "werknemersgroep": "Bouwplaats",
+     "geldig_van": "2025-01-01", "geldig_tot": "2027-03-31", "stilzwijgend_verlengen": 1, "normuren_per_week": 40,
+     "verlofrechten": [
+      ["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"],
+      ["Vakantie (bovenwettelijk)", 40, "Vijf jaar na het jaar"],
+      ["Roostervrij (ATV)", 160, "Einde van het jaar"]
+     ],
+     "collectief_door_bedrijf": 10,
+     "feestdagen": "bouw"
+    },
+    {
+     "werknemersgroep": "UTA",
+     "geldig_van": "2025-01-01", "geldig_tot": "2027-03-31", "stilzwijgend_verlengen": 1, "normuren_per_week": 40,
+     "verlofrechten": [
+      ["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"],
+      ["Vakantie (bovenwettelijk)", 40, "Vijf jaar na het jaar"],
+      ["Roostervrij (ATV)", 120, "Einde van het jaar"]
+     ],
+     "feestdagen": "bouw"
+    }
+   ]
+  },
+  {
+   "cao_naam": "Technisch Installatiebedrijf",
+   "sector": "Installatietechniek (Metaal & Techniek)",
+   "partijen": "Techniek Nederland, FNV Metaal, CNV Vakmensen, De Unie",
+   "bron": "https://www.technieknederland.nl/nieuws/cao-technisch-installatiebedrijf-2026-2028-definitief-na-instemming-leden",
+   "werknemersgroepen": ["Werknemers"],
+   "periodes": [
+    {
+     "werknemersgroep": "Werknemers",
+     "geldig_van": "2026-02-01", "geldig_tot": "2028-01-31", "normuren_per_week": 40,
+     "verlofrechten": [["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"]],
+     "feestdagen": "algemeen",
+     "loonafspraken": [["2026-03-01", 3, 0, "Loonsverhoging"], ["2027-03-01", 0, 115, "Structureel bedrag per maand"]]
+    }
+   ]
+  },
+  {
+   "cao_naam": "Afbouw",
+   "sector": "Afbouw",
+   "bron": "https://www.fnv.nl/nieuwsbericht/sectornieuws/bouwen-en-wonen/2026/01/het-is-nu-officieel-er-is-een-nieuwe-cao-afbouw",
+   "werknemersgroepen": ["Werknemers"],
+   "periodes": [
+    {
+     "werknemersgroep": "Werknemers",
+     "geldig_van": "2026-01-01", "geldig_tot": "2027-12-31", "normuren_per_week": 40,
+     "verlofrechten": [["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"]],
+     "feestdagen": "bouw",
+     "loonafspraken": [["2026-01-01", 3.5, 30, "Loonsverhoging en een bedrag per maand (datum na te lopen)"]]
+    }
+   ]
+  },
+  {
+   "cao_naam": "Houthandel",
+   "sector": "Houthandel",
+   "bron": "https://www.salaris-informatie.nl/cao-sector/houthandel",
+   "werknemersgroepen": ["Werknemers"],
+   "periodes": [
+    {
+     "werknemersgroep": "Werknemers",
+     "geldig_van": "2025-07-01", "geldig_tot": "2027-06-30", "normuren_per_week": 40,
+     "verlofrechten": [["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"]],
+     "feestdagen": "algemeen",
+     "loonafspraken": [["2026-01-01", 2.5, 0, "Loonsverhoging"], ["2027-01-01", 1.5, 0, "Loonsverhoging"]]
+    }
+   ]
+  },
+  {
+   "cao_naam": "Architectenbureaus",
+   "sector": "Architectuur",
+   "bron": "https://www.fnv.nl/nieuwsbericht/sectornieuws/bouwen-en-wonen/2026/08/cao-architectenbureaus-2026-2028",
+   "werknemersgroepen": ["Werknemers"],
+   "periodes": [
+    {
+     "werknemersgroep": "Werknemers",
+     "geldig_van": "2026-07-01", "geldig_tot": "2028-06-30", "normuren_per_week": 40,
+     "verlofrechten": [["Vakantie (wettelijk)", 160, "Zes maanden na het jaar"]],
+     "feestdagen": "algemeen"
+    }
+   ]
+  }
+ ],
+ "feestdagen": {
+  "bouw": {"vrij": ["Nieuwjaarsdag", "Eerste Paasdag", "Tweede Paasdag", "Koningsdag", "Bevrijdingsdag", "Hemelvaartsdag", "Eerste Pinksterdag", "Tweede Pinksterdag", "Eerste Kerstdag", "Tweede Kerstdag"], "lustrum": ["Bevrijdingsdag"]},
+  "algemeen": {"vrij": ["Nieuwjaarsdag", "Eerste Paasdag", "Tweede Paasdag", "Koningsdag", "Bevrijdingsdag", "Hemelvaartsdag", "Eerste Pinksterdag", "Tweede Pinksterdag", "Eerste Kerstdag", "Tweede Kerstdag"], "lustrum": ["Bevrijdingsdag"]}
+ }
+}

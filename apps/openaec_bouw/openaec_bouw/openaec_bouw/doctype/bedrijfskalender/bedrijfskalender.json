@@ -1,0 +1,130 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Bedrijfskalender",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "bedrijf",
+  "jaar",
+  "cao",
+  "werknemersgroep",
+  "kolom_kalender",
+  "status",
+  "feestdagenlijst",
+  "sectie_dagen",
+  "dagen"
+ ],
+ "fields": [
+  {
+   "fieldname": "bedrijf",
+   "fieldtype": "Link",
+   "label": "Bedrijf",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "jaar",
+   "fieldtype": "Int",
+   "label": "Jaar",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cao",
+   "fieldtype": "Link",
+   "label": "Cao",
+   "options": "Cao",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "werknemersgroep",
+   "fieldtype": "Data",
+   "label": "Werknemersgroep",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "kolom_kalender",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Concept\nVastgesteld",
+   "default": "Concept",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "feestdagenlijst",
+   "fieldtype": "Link",
+   "label": "Feestdagenlijst",
+   "options": "Holiday List",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sectie_dagen",
+   "fieldtype": "Section Break",
+   "label": "Vrije dagen"
+  },
+  {
+   "fieldname": "dagen",
+   "fieldtype": "Table",
+   "label": "Dagen",
+   "options": "Bedrijfskalender Dag",
+   "description": "Komt uit de cao-periode; eigen vrije dagen van het bedrijf (soort Bedrijf) mag je toevoegen."
+  }
+ ],
+ "autoname": "format:{bedrijf} {jaar} {cao} {werknemersgroep}",
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1
+  }
+ ],
+ "title_field": "bedrijf"
+}
