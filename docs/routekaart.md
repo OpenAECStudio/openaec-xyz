@@ -83,7 +83,7 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 | 0.5 | **Fundament voor een groep**: btw-aangifte als document, dochters onder een holding, en het demonstratiebedrijf (`docs/demonstratiebedrijf.md`) | klaar; voorraad, activa en onderhanden werk volgen |
 | 0.6 | **De assistent boekt voor**: inkoopfactuur lezen en een boeking voorstellen (project, kostensoort, btw-code); één lijst "nog te doen" | Hier zit het verschil met een gewoon boekhoudpakket |
 | 0.7 | **Koppelingen**: Exact Online, AFAS en Twinfield (stamgegevens en journaalposten heen en terug), en de loonkoppeling | Een klant hoeft zijn pakket niet op dag één te vervangen |
-| 0.8 | **Beheer → Inrichting** met profielen per sector, en **Uren en verlof** | |
+| 0.8 | **Beheer → Inrichting** met profielen per sector, en **Uren en verlof** (ontwerp: `docs/personeel-cao-verlof.md`: contract, rooster, verlof in uren, cao's, feestdagen) | Kan eerder; vraagt eerst dat Frappe HR naast Z-Next past |
 | 0.9 | **XYZ**: Y-Next en Z-Next erin. Y-Next als de werkschermen (projecten, uren, agenda); Z-Next als modules (termijnen en meerwerk, calculatie, planning, terugkerende taken) | Bestaat al; wordt samen de basis van alle sectoren |
 | 0.10 | **Installatietechniek** en **Service en onderhoud** | Eerste sector naast de aannemer |
 | 0.11 | **Onderaanneming** en **Projectbewaking** | Middelgrote en grote aannemers |
