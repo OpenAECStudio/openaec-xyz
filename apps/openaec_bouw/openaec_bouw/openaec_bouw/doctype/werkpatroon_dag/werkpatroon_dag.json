@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Werkpatroon Dag",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "week",
+  "weekdag",
+  "uren"
+ ],
+ "fields": [
+  {
+   "fieldname": "week",
+   "fieldtype": "Select",
+   "label": "Week",
+   "options": "\nA\nB",
+   "in_list_view": 1,
+   "columns": 1,
+   "description": "Leeg = elke week; A en B wisselen elkaar af"
+  },
+  {
+   "fieldname": "weekdag",
+   "fieldtype": "Select",
+   "label": "Weekdag",
+   "options": "Maandag\nDinsdag\nWoensdag\nDonderdag\nVrijdag\nZaterdag\nZondag",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "uren",
+   "fieldtype": "Float",
+   "label": "Uren",
+   "in_list_view": 1,
+   "non_negative": 1
+  }
+ ],
+ "istable": 1,
+ "editable_grid": 1,
+ "permissions": []
+}

@@ -1,0 +1,299 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Arbeidscontract",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "medewerker",
+  "medewerker_naam",
+  "bedrijf",
+  "status",
+  "kolom_contract",
+  "soort",
+  "van",
+  "tot",
+  "vorig_contract",
+  "sectie_uren",
+  "uren_per_week",
+  "min_uren",
+  "max_uren",
+  "contractfactor",
+  "dienst",
+  "kolom_uren",
+  "werkpatroon",
+  "sectie_cao",
+  "cao",
+  "werknemersgroep",
+  "kolom_cao",
+  "cao_periode_nu",
+  "cao_periode_volgende",
+  "sectie_functie",
+  "functie",
+  "schaal",
+  "trede",
+  "kolom_functie",
+  "loon_per_maand",
+  "uurloon",
+  "proeftijd_tot",
+  "opzegtermijn_dagen",
+  "sectie_opmerking",
+  "opmerking"
+ ],
+ "fields": [
+  {
+   "fieldname": "medewerker",
+   "fieldtype": "Link",
+   "label": "Medewerker",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "medewerker_naam",
+   "fieldtype": "Data",
+   "label": "Naam",
+   "fetch_from": "medewerker.employee_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "bedrijf",
+   "fieldtype": "Link",
+   "label": "Bedrijf",
+   "options": "Company",
+   "fetch_from": "medewerker.company",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Toekomstig\nLopend\nAfgelopen",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "kolom_contract",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "soort",
+   "fieldtype": "Select",
+   "label": "Soort",
+   "options": "Onbepaalde tijd\nBepaalde tijd\nNulurencontract\nMin-maxcontract\nOproepcontract\nStage\nBBL\nInhuur",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "van",
+   "fieldtype": "Date",
+   "label": "Van",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tot",
+   "fieldtype": "Date",
+   "label": "Tot",
+   "in_list_view": 1,
+   "mandatory_depends_on": "eval:['Bepaalde tijd','Min-maxcontract','Stage','BBL'].includes(doc.soort)"
+  },
+  {
+   "fieldname": "vorig_contract",
+   "fieldtype": "Link",
+   "label": "Vorig contract",
+   "options": "Arbeidscontract"
+  },
+  {
+   "fieldname": "sectie_uren",
+   "fieldtype": "Section Break",
+   "label": "Uren"
+  },
+  {
+   "fieldname": "uren_per_week",
+   "fieldtype": "Float",
+   "label": "Uren per week",
+   "non_negative": 1,
+   "depends_on": "eval:!['Nulurencontract','Oproepcontract'].includes(doc.soort)"
+  },
+  {
+   "fieldname": "min_uren",
+   "fieldtype": "Float",
+   "label": "Minimum uren per week",
+   "depends_on": "eval:doc.soort=='Min-maxcontract'",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "max_uren",
+   "fieldtype": "Float",
+   "label": "Maximum uren per week",
+   "depends_on": "eval:doc.soort=='Min-maxcontract'",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "contractfactor",
+   "fieldtype": "Float",
+   "label": "Contractfactor",
+   "read_only": 1,
+   "precision": "4",
+   "description": "Uren per week gedeeld door de normuren van de cao"
+  },
+  {
+   "fieldname": "dienst",
+   "fieldtype": "Link",
+   "label": "Dienst",
+   "options": "Shift Type",
+   "description": "Voor begin- en eindtijd, als het bedrijf met diensten werkt"
+  },
+  {
+   "fieldname": "kolom_uren",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "werkpatroon",
+   "fieldtype": "Table",
+   "label": "Werkpatroon",
+   "options": "Werkpatroon Dag",
+   "description": "Uren per weekdag. Met week A en B wisselen twee weken elkaar af, gerekend vanaf de week van de ingangsdatum."
+  },
+  {
+   "fieldname": "sectie_cao",
+   "fieldtype": "Section Break",
+   "label": "Cao"
+  },
+  {
+   "fieldname": "cao",
+   "fieldtype": "Link",
+   "label": "Cao",
+   "options": "Cao",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "werknemersgroep",
+   "fieldtype": "Data",
+   "label": "Werknemersgroep"
+  },
+  {
+   "fieldname": "kolom_cao",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cao_periode_nu",
+   "fieldtype": "Link",
+   "label": "Geldt nu",
+   "options": "Cao Periode",
+   "read_only": 1,
+   "is_virtual": 1
+  },
+  {
+   "fieldname": "cao_periode_volgende",
+   "fieldtype": "Link",
+   "label": "Daarna",
+   "options": "Cao Periode",
+   "read_only": 1,
+   "is_virtual": 1
+  },
+  {
+   "fieldname": "sectie_functie",
+   "fieldtype": "Section Break",
+   "label": "Functie en loon"
+  },
+  {
+   "fieldname": "functie",
+   "fieldtype": "Link",
+   "label": "Functie",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "schaal",
+   "fieldtype": "Data",
+   "label": "Schaal"
+  },
+  {
+   "fieldname": "trede",
+   "fieldtype": "Data",
+   "label": "Trede"
+  },
+  {
+   "fieldname": "kolom_functie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loon_per_maand",
+   "fieldtype": "Currency",
+   "label": "Loon per maand"
+  },
+  {
+   "fieldname": "uurloon",
+   "fieldtype": "Currency",
+   "label": "Uurloon"
+  },
+  {
+   "fieldname": "proeftijd_tot",
+   "fieldtype": "Date",
+   "label": "Proeftijd tot"
+  },
+  {
+   "fieldname": "opzegtermijn_dagen",
+   "fieldtype": "Int",
+   "label": "Opzegtermijn (dagen)"
+  },
+  {
+   "fieldname": "sectie_opmerking",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opmerking",
+   "fieldtype": "Small Text",
+   "label": "Opmerking"
+  }
+ ],
+ "autoname": "format:AC-{medewerker}-{##}",
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "title_field": "medewerker_naam"
+}

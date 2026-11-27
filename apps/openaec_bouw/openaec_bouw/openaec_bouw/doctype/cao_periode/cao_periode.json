@@ -1,0 +1,221 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Cao Periode",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "cao",
+  "werknemersgroep",
+  "status",
+  "kolom_periode",
+  "geldig_van",
+  "geldig_tot",
+  "stilzwijgend_verlengen",
+  "vorige_periode",
+  "sectie_werktijd",
+  "normuren_per_week",
+  "sectie_verlof",
+  "verlofrechten",
+  "sectie_feestdagen",
+  "feestdagen",
+  "collectieve_dagen",
+  "collectief_door_bedrijf",
+  "sectie_loon",
+  "loonafspraken",
+  "sectie_bron",
+  "bron",
+  "kolom_bron",
+  "nagelopen_door",
+  "nagelopen_op"
+ ],
+ "fields": [
+  {
+   "fieldname": "cao",
+   "fieldtype": "Link",
+   "label": "Cao",
+   "options": "Cao",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "werknemersgroep",
+   "fieldtype": "Data",
+   "label": "Werknemersgroep",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Concept\nVastgesteld\nStilzwijgend verlengd\nVerlopen",
+   "default": "Concept",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "kolom_periode",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "geldig_van",
+   "fieldtype": "Date",
+   "label": "Geldig van",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "geldig_tot",
+   "fieldtype": "Date",
+   "label": "Geldig tot",
+   "in_list_view": 1,
+   "description": "Leeg = tot er een nieuwe periode is"
+  },
+  {
+   "fieldname": "stilzwijgend_verlengen",
+   "fieldtype": "Check",
+   "label": "Na afloop stilzwijgend met een jaar verlengen"
+  },
+  {
+   "fieldname": "vorige_periode",
+   "fieldtype": "Link",
+   "label": "Vorige periode",
+   "options": "Cao Periode",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sectie_werktijd",
+   "fieldtype": "Section Break",
+   "label": "Werktijd"
+  },
+  {
+   "fieldname": "normuren_per_week",
+   "fieldtype": "Float",
+   "label": "Normuren per week",
+   "default": "40",
+   "reqd": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "sectie_verlof",
+   "fieldtype": "Section Break",
+   "label": "Verlof"
+  },
+  {
+   "fieldname": "verlofrechten",
+   "fieldtype": "Table",
+   "label": "Verlofrechten",
+   "options": "Cao Verlofrecht"
+  },
+  {
+   "fieldname": "sectie_feestdagen",
+   "fieldtype": "Section Break",
+   "label": "Feestdagen"
+  },
+  {
+   "fieldname": "feestdagen",
+   "fieldtype": "Table",
+   "label": "Feestdagen",
+   "options": "Cao Feestdag",
+   "description": "Welke feestdagen vrij zijn. Een feestdag die er niet in staat, is een gewone werkdag."
+  },
+  {
+   "fieldname": "collectieve_dagen",
+   "fieldtype": "Table",
+   "label": "Collectieve vrije dagen",
+   "options": "Cao Collectieve Dag"
+  },
+  {
+   "fieldname": "collectief_door_bedrijf",
+   "fieldtype": "Int",
+   "label": "Collectieve dagen die het bedrijf zelf kiest",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "sectie_loon",
+   "fieldtype": "Section Break",
+   "label": "Loon"
+  },
+  {
+   "fieldname": "loonafspraken",
+   "fieldtype": "Table",
+   "label": "Loonafspraken",
+   "options": "Cao Loonafspraak"
+  },
+  {
+   "fieldname": "sectie_bron",
+   "fieldtype": "Section Break",
+   "label": "Bron"
+  },
+  {
+   "fieldname": "bron",
+   "fieldtype": "Data",
+   "label": "Bron",
+   "options": "URL"
+  },
+  {
+   "fieldname": "kolom_bron",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "nagelopen_door",
+   "fieldtype": "Link",
+   "label": "Nagelopen door",
+   "options": "User"
+  },
+  {
+   "fieldname": "nagelopen_op",
+   "fieldtype": "Date",
+   "label": "Nagelopen op"
+  }
+ ],
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1
+  }
+ ],
+ "title_field": "cao"
+}

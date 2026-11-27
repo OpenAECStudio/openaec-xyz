@@ -1,0 +1,656 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Bedrijfsinstellingen",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "tab_algemeen",
+  "bedrijf",
+  "filiaalnaam",
+  "code",
+  "gln",
+  "facturatie_email",
+  "kolom_algemeen",
+  "organisatiegegevens_tonen",
+  "alternatieve_adrespositie",
+  "dashboard_notitie",
+  "tab_facturen",
+  "factuur_voettekst",
+  "verzamelfactuur_titel",
+  "g_rekening_tekst",
+  "n_rekening_tekst",
+  "g_percentage",
+  "kolom_facturen",
+  "factuur_projectnummer",
+  "factuur_projectnaam",
+  "factuur_opleverdatum",
+  "factuur_werkadres",
+  "btw_grondslag_tonen",
+  "bsn_kvk_op_manurenstaat",
+  "projectomschrijving_overnemen",
+  "sectie_herinneren",
+  "automatisch_herinneren",
+  "herinnering_1",
+  "herinnering_2",
+  "tab_inkoop",
+  "inkooporder_naam",
+  "contract_oa_naam",
+  "betalingsafspraak",
+  "kolom_inkoop",
+  "bevestiging_io_bijvoegen",
+  "bevestiging_oa_bijvoegen",
+  "projectinfo_io",
+  "projectinfo_oa",
+  "projectnummer_uitvoerdersbon",
+  "sectie_offertes",
+  "handtekening_positie",
+  "ondertekening_positie",
+  "tab_projecten",
+  "projectnummer_soort",
+  "projectnummer_voorvoegsel",
+  "projectstatus_bij_aanmaken",
+  "opleveringstekst",
+  "kolom_projecten",
+  "projectadres_automatisch",
+  "categorie_verplicht",
+  "leverbon_factuurdatum",
+  "start_eindtijd_bij_uren",
+  "andere_naam_bewakingscode",
+  "sectie_bewaking",
+  "standopname",
+  "urenprognose_uit_planning",
+  "prognose_direct_bijwerken",
+  "tab_tarieven",
+  "uurtarief",
+  "verkoop_uurtarief",
+  "prognose_uurtarief",
+  "kolom_tarieven",
+  "loonkosten_percentage",
+  "sectie_toeslagen",
+  "toeslagen",
+  "tab_werktijden",
+  "werkweek",
+  "kolom_werktijden",
+  "planning_starttijd",
+  "planning_eindtijd",
+  "planning_volledige_dagen",
+  "planning_weken_vooruit",
+  "tab_documenten",
+  "bestandstype_financieel",
+  "bestandstype_inkoop",
+  "bestandstype_kvgm",
+  "bestandstype_meerwerk",
+  "bestandstype_offerte",
+  "bestandstype_oplever",
+  "kolom_documenten",
+  "titel_afvalstaat",
+  "titel_manurenstaat",
+  "titel_materiaalstaat",
+  "titel_materieelstaat",
+  "land_op_pdf",
+  "projectnummer_afrekenstaat",
+  "projectnummer_manurenstaat",
+  "projectnummer_oplever",
+  "projectnummer_uitbesteed",
+  "tab_overgang",
+  "administratie",
+  "dagboek_inkoop",
+  "dagboek_verkoop"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_algemeen",
+   "fieldtype": "Tab Break",
+   "label": "Algemeen"
+  },
+  {
+   "fieldname": "bedrijf",
+   "fieldtype": "Link",
+   "label": "Bedrijf",
+   "options": "Company",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "filiaalnaam",
+   "fieldtype": "Data",
+   "label": "Filiaalnaam"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code"
+  },
+  {
+   "fieldname": "gln",
+   "fieldtype": "Data",
+   "label": "GLN"
+  },
+  {
+   "fieldname": "facturatie_email",
+   "fieldtype": "Data",
+   "label": "Facturatie e-mail"
+  },
+  {
+   "fieldname": "kolom_algemeen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "organisatiegegevens_tonen",
+   "fieldtype": "Check",
+   "label": "Standaard organisatiegegevens tonen"
+  },
+  {
+   "fieldname": "alternatieve_adrespositie",
+   "fieldtype": "Check",
+   "label": "Alternatieve adrespositie",
+   "default": "0"
+  },
+  {
+   "fieldname": "dashboard_notitie",
+   "fieldtype": "Text Editor",
+   "label": "Dashboard notitie"
+  },
+  {
+   "fieldname": "tab_facturen",
+   "fieldtype": "Tab Break",
+   "label": "Facturen"
+  },
+  {
+   "fieldname": "factuur_voettekst",
+   "fieldtype": "Small Text",
+   "label": "Factuur voettekst"
+  },
+  {
+   "fieldname": "verzamelfactuur_titel",
+   "fieldtype": "Data",
+   "label": "Verzamelfactuur titel"
+  },
+  {
+   "fieldname": "g_rekening_tekst",
+   "fieldtype": "Small Text",
+   "label": "G-rekening tekst"
+  },
+  {
+   "fieldname": "n_rekening_tekst",
+   "fieldtype": "Small Text",
+   "label": "N-rekening tekst"
+  },
+  {
+   "fieldname": "g_percentage",
+   "fieldtype": "Percent",
+   "label": "Deel naar de G-rekening"
+  },
+  {
+   "fieldname": "kolom_facturen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "factuur_projectnummer",
+   "fieldtype": "Check",
+   "label": "Projectnummer op de factuur",
+   "default": "1"
+  },
+  {
+   "fieldname": "factuur_projectnaam",
+   "fieldtype": "Check",
+   "label": "Projectnaam op de factuur",
+   "default": "1"
+  },
+  {
+   "fieldname": "factuur_opleverdatum",
+   "fieldtype": "Check",
+   "label": "Opleverdatum op de factuur",
+   "default": "0"
+  },
+  {
+   "fieldname": "factuur_werkadres",
+   "fieldtype": "Check",
+   "label": "Werkadres op de factuur",
+   "default": "0"
+  },
+  {
+   "fieldname": "btw_grondslag_tonen",
+   "fieldtype": "Check",
+   "label": "Btw-grondslag op de factuur",
+   "default": "1"
+  },
+  {
+   "fieldname": "bsn_kvk_op_manurenstaat",
+   "fieldtype": "Check",
+   "label": "BSN of KvK op de manurenstaat",
+   "default": "0"
+  },
+  {
+   "fieldname": "projectomschrijving_overnemen",
+   "fieldtype": "Check",
+   "label": "Projectomschrijving als factuuromschrijving overnemen",
+   "default": "1"
+  },
+  {
+   "fieldname": "sectie_herinneren",
+   "fieldtype": "Section Break",
+   "label": "Herinneren"
+  },
+  {
+   "fieldname": "automatisch_herinneren",
+   "fieldtype": "Check",
+   "label": "Automatisch herinneringen versturen"
+  },
+  {
+   "fieldname": "herinnering_1",
+   "fieldtype": "Int",
+   "label": "1e herinnering (dagen na factuurdatum)"
+  },
+  {
+   "fieldname": "herinnering_2",
+   "fieldtype": "Int",
+   "label": "2e herinnering (dagen na factuurdatum)"
+  },
+  {
+   "fieldname": "tab_inkoop",
+   "fieldtype": "Tab Break",
+   "label": "Inkoop en offertes"
+  },
+  {
+   "fieldname": "inkooporder_naam",
+   "fieldtype": "Data",
+   "label": "Inkooporder naam"
+  },
+  {
+   "fieldname": "contract_oa_naam",
+   "fieldtype": "Data",
+   "label": "Contract onderaannemer naam"
+  },
+  {
+   "fieldname": "betalingsafspraak",
+   "fieldtype": "Text",
+   "label": "Standaard betalingsafspraak (IO/OA mobiel)"
+  },
+  {
+   "fieldname": "kolom_inkoop",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bevestiging_io_bijvoegen",
+   "fieldtype": "Check",
+   "label": "Opdrachtbevestiging inkooporder bijvoegen",
+   "default": "1"
+  },
+  {
+   "fieldname": "bevestiging_oa_bijvoegen",
+   "fieldtype": "Check",
+   "label": "Opdrachtbevestiging contract onderaannemer bijvoegen",
+   "default": "1"
+  },
+  {
+   "fieldname": "projectinfo_io",
+   "fieldtype": "Check",
+   "label": "Projectinformatie tonen in opdrachtbevestiging inkooporder",
+   "default": "1"
+  },
+  {
+   "fieldname": "projectinfo_oa",
+   "fieldtype": "Check",
+   "label": "Projectinformatie tonen in opdrachtbevestiging contract onderaannemer",
+   "default": "1"
+  },
+  {
+   "fieldname": "projectnummer_uitvoerdersbon",
+   "fieldtype": "Check",
+   "label": "Toon projectnummer op de uitvoerdersbon PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "sectie_offertes",
+   "fieldtype": "Section Break",
+   "label": "Offertes"
+  },
+  {
+   "fieldname": "handtekening_positie",
+   "fieldtype": "Select",
+   "label": "Standaard handtekening positie",
+   "options": "Handtekening op eerste blad\nHandtekening op laatste blad\nGeen handtekening",
+   "default": "Handtekening op eerste blad"
+  },
+  {
+   "fieldname": "ondertekening_positie",
+   "fieldtype": "Select",
+   "label": "Standaard ondertekening positie",
+   "options": "Ondertekening op eerste blad\nOndertekening op laatste blad\nGeen ondertekening",
+   "default": "Ondertekening op eerste blad"
+  },
+  {
+   "fieldname": "tab_projecten",
+   "fieldtype": "Tab Break",
+   "label": "Projecten"
+  },
+  {
+   "fieldname": "projectnummer_soort",
+   "fieldtype": "Select",
+   "label": "Projectnummer",
+   "options": "Eenvoudig\nSamengesteld",
+   "default": "Eenvoudig"
+  },
+  {
+   "fieldname": "projectnummer_voorvoegsel",
+   "fieldtype": "Data",
+   "label": "Projectnummer voorvoegsel"
+  },
+  {
+   "fieldname": "projectstatus_bij_aanmaken",
+   "fieldtype": "Select",
+   "label": "Projectstatus bij aanmaken",
+   "options": "01 Inplannen\n02 Onderhanden\n03 Opgeleverd\n04 Gefactureerd\n98 Uitbesteed\n99 Intern",
+   "default": "02 Onderhanden"
+  },
+  {
+   "fieldname": "opleveringstekst",
+   "fieldtype": "Text",
+   "label": "Standaard opleveringstekst"
+  },
+  {
+   "fieldname": "kolom_projecten",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "projectadres_automatisch",
+   "fieldtype": "Check",
+   "label": "Automatisch projectadres invullen",
+   "default": "1"
+  },
+  {
+   "fieldname": "categorie_verplicht",
+   "fieldtype": "Check",
+   "label": "Categorie verplicht",
+   "default": "1"
+  },
+  {
+   "fieldname": "leverbon_factuurdatum",
+   "fieldtype": "Check",
+   "label": "Datum leverbon vervangen door factuurdatum",
+   "default": "1"
+  },
+  {
+   "fieldname": "start_eindtijd_bij_uren",
+   "fieldtype": "Check",
+   "label": "Start- en eindtijd bij uren boeken",
+   "default": "0"
+  },
+  {
+   "fieldname": "andere_naam_bewakingscode",
+   "fieldtype": "Check",
+   "label": "Alternatieve project bewakingscode naam",
+   "default": "0"
+  },
+  {
+   "fieldname": "sectie_bewaking",
+   "fieldtype": "Section Break",
+   "label": "Projectbewaking"
+  },
+  {
+   "fieldname": "standopname",
+   "fieldtype": "Select",
+   "label": "Standopname",
+   "options": "Alleen arbeid\nAlle kostentypes",
+   "default": "Alleen arbeid"
+  },
+  {
+   "fieldname": "urenprognose_uit_planning",
+   "fieldtype": "Check",
+   "label": "Urenprognose aan planning koppelen",
+   "default": "1"
+  },
+  {
+   "fieldname": "prognose_direct_bijwerken",
+   "fieldtype": "Check",
+   "label": "Prognose bedragen realtime bijwerken a.d.h.v. urenprognose",
+   "default": "1"
+  },
+  {
+   "fieldname": "tab_tarieven",
+   "fieldtype": "Tab Break",
+   "label": "Tarieven en toeslagen"
+  },
+  {
+   "fieldname": "uurtarief",
+   "fieldtype": "Currency",
+   "label": "Uurtarief"
+  },
+  {
+   "fieldname": "verkoop_uurtarief",
+   "fieldtype": "Currency",
+   "label": "Verkoop uurtarief"
+  },
+  {
+   "fieldname": "prognose_uurtarief",
+   "fieldtype": "Currency",
+   "label": "Prognose uurtarief"
+  },
+  {
+   "fieldname": "kolom_tarieven",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loonkosten_percentage",
+   "fieldtype": "Percent",
+   "label": "Opslag op loonkosten"
+  },
+  {
+   "fieldname": "sectie_toeslagen",
+   "fieldtype": "Section Break",
+   "label": "Toeslagen"
+  },
+  {
+   "fieldname": "toeslagen",
+   "fieldtype": "Table",
+   "label": "Toeslagen per kostensoort",
+   "options": "Bedrijfstoeslag"
+  },
+  {
+   "fieldname": "tab_werktijden",
+   "fieldtype": "Tab Break",
+   "label": "Werktijden en planning"
+  },
+  {
+   "fieldname": "werkweek",
+   "fieldtype": "Table",
+   "label": "Werkweek (voorstel voor een nieuw contract)",
+   "options": "Werkpatroon Dag"
+  },
+  {
+   "fieldname": "kolom_werktijden",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "planning_starttijd",
+   "fieldtype": "Time",
+   "label": "Planning starttijd"
+  },
+  {
+   "fieldname": "planning_eindtijd",
+   "fieldtype": "Time",
+   "label": "Planning eindtijd"
+  },
+  {
+   "fieldname": "planning_volledige_dagen",
+   "fieldtype": "Check",
+   "label": "Volledige dagen volgens start- en eindtijd planning",
+   "default": "0"
+  },
+  {
+   "fieldname": "planning_weken_vooruit",
+   "fieldtype": "Data",
+   "label": "Aantal weken vooruit kijken",
+   "default": "Alle"
+  },
+  {
+   "fieldname": "tab_documenten",
+   "fieldtype": "Tab Break",
+   "label": "Documenten"
+  },
+  {
+   "fieldname": "bestandstype_financieel",
+   "fieldtype": "Data",
+   "label": "Bestandstype financiële documenten",
+   "default": "Financiële documenten"
+  },
+  {
+   "fieldname": "bestandstype_inkoop",
+   "fieldtype": "Data",
+   "label": "Bestandstype inkoopdocumenten"
+  },
+  {
+   "fieldname": "bestandstype_kvgm",
+   "fieldtype": "Data",
+   "label": "Bestandstype KVGM documenten",
+   "default": "KVGM documenten"
+  },
+  {
+   "fieldname": "bestandstype_meerwerk",
+   "fieldtype": "Data",
+   "label": "Bestandstype meerwerk documenten",
+   "default": "Meerwerk documenten"
+  },
+  {
+   "fieldname": "bestandstype_offerte",
+   "fieldtype": "Data",
+   "label": "Bestandstype offertedocumenten"
+  },
+  {
+   "fieldname": "bestandstype_oplever",
+   "fieldtype": "Data",
+   "label": "Bestandstype opleverdocumenten",
+   "default": "Opleverdocumenten"
+  },
+  {
+   "fieldname": "kolom_documenten",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "titel_afvalstaat",
+   "fieldtype": "Data",
+   "label": "Afvalstaat titel",
+   "default": "Afval specificatie"
+  },
+  {
+   "fieldname": "titel_manurenstaat",
+   "fieldtype": "Data",
+   "label": "Manurenstaat titel",
+   "default": "Manurenregister"
+  },
+  {
+   "fieldname": "titel_materiaalstaat",
+   "fieldtype": "Data",
+   "label": "Materiaalstaat titel",
+   "default": "Materiaal specificatie"
+  },
+  {
+   "fieldname": "titel_materieelstaat",
+   "fieldtype": "Data",
+   "label": "Materieelstaat titel",
+   "default": "Materieel specificatie"
+  },
+  {
+   "fieldname": "land_op_pdf",
+   "fieldtype": "Check",
+   "label": "Land weergeven op PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "projectnummer_afrekenstaat",
+   "fieldtype": "Check",
+   "label": "Toon projectnummer op de afrekenstaat PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "projectnummer_manurenstaat",
+   "fieldtype": "Check",
+   "label": "Toon projectnummer op de manurenstaat PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "projectnummer_oplever",
+   "fieldtype": "Check",
+   "label": "Toon projectnummer op de oplever PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "projectnummer_uitbesteed",
+   "fieldtype": "Check",
+   "label": "Toon projectnummer op werk uitbesteed PDF",
+   "default": "0"
+  },
+  {
+   "fieldname": "tab_overgang",
+   "fieldtype": "Tab Break",
+   "label": "Overgang"
+  },
+  {
+   "fieldname": "administratie",
+   "fieldtype": "Data",
+   "label": "Administratie in het oude pakket"
+  },
+  {
+   "fieldname": "dagboek_inkoop",
+   "fieldtype": "Data",
+   "label": "Dagboek inkoop in het oude pakket"
+  },
+  {
+   "fieldname": "dagboek_verkoop",
+   "fieldtype": "Data",
+   "label": "Dagboek verkoop in het oude pakket"
+  }
+ ],
+ "autoname": "field:bedrijf",
+ "naming_rule": "By fieldname",
+ "track_changes": 1,
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1
+  },
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "write": 1,
+   "report": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "report": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1
+  }
+ ],
+ "title_field": "bedrijf"
+}

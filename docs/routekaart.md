@@ -60,7 +60,7 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 | Administratie Nederland | Rekeningschema met RGS, btw buitenland en ICP, auditfile (0.3); SEPA, bankafschriften, UBL en Peppol (0.4); jaarafsluiting | iedereen |
 | Koppelingen | Exact Online, AFAS en Twinfield; loonpakket | wie zijn pakket (nog) houdt |
 | Uren en verlof | Weekstaat per project, goedkeuren, verlof en declaraties (Frappe HR), doorbelasten | iedereen met personeel |
-| Loon | Zie de loonkoppeling (0.6) | iedereen met personeel |
+| Loon | Zie de loonkoppeling (0.8) | iedereen met personeel |
 | Calculatie | Begroting met hoofdstukken en staartkosten, van calculatie naar projectbudget en inkoop | aannemers, installateurs |
 | Termijnen en meerwerk | Termijnstaat per project, meer- en minderwerk met akkoord van de opdrachtgever, opleverpunten | aannemers, installateurs |
 | Onderaanneming | Wet ketenaansprakelijkheid: G-rekening, verklaring betalingsgedrag, mandagenregister; inkoopcontracten | aannemers |
@@ -81,17 +81,18 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 | 0.3 | **Administratie Nederland, deel 1**: eigen rekeningschema met RGS-codes, btw-codes met buitenland en ICP, auditfile (XAF) | klaar; nog na te lopen door een boekhouder |
 | 0.4 | **Administratie Nederland, deel 2**: bankafschriften (CAMT.053) met afletterregels, SEPA-betaalbestanden, G-rekening, facturen als UBL in en uit | klaar; Peppol en incasso volgen, nog niet bij een bank aangeboden |
 | 0.5 | **Fundament voor een groep**: btw-aangifte als document, dochters onder een holding, en het demonstratiebedrijf (`docs/demonstratiebedrijf.md`) | klaar; voorraad, activa en onderhanden werk volgen |
-| 0.6 | **De assistent boekt voor**: inkoopfactuur lezen en een boeking voorstellen (project, kostensoort, btw-code); één lijst "nog te doen" | Hier zit het verschil met een gewoon boekhoudpakket |
-| 0.7 | **Koppelingen**: Exact Online, AFAS en Twinfield (stamgegevens en journaalposten heen en terug), en de loonkoppeling | Een klant hoeft zijn pakket niet op dag één te vervangen |
-| 0.8 | **Beheer → Inrichting** met profielen per sector, en **Uren en verlof** | |
-| 0.9 | **XYZ**: Y-Next en Z-Next erin. Y-Next als de werkschermen (projecten, uren, agenda); Z-Next als modules (termijnen en meerwerk, calculatie, planning, terugkerende taken) | Bestaat al; wordt samen de basis van alle sectoren |
-| 0.10 | **Installatietechniek** en **Service en onderhoud** | Eerste sector naast de aannemer |
-| 0.11 | **Onderaanneming** en **Projectbewaking** | Middelgrote en grote aannemers |
-| 0.12 | **Handel en voorraad**, **Materieel** | Handel |
-| 0.13 | **Concern**, **Kwaliteit en veiligheid** | Grote aannemers |
+| 0.6 | **Personeel en het bedrijf leeg**: Frappe HR standaard, cao's met looptijd, arbeidscontract, verlof in uren, bedrijfskalender; Bedrijfsinstellingen in plaats van de velden van Z op het bedrijf (`docs/personeel-cao-verlof.md`) | klaar, nog niet uitgerold |
+| 0.7 | **De assistent boekt voor**: inkoopfactuur lezen en een boeking voorstellen (project, kostensoort, btw-code); één lijst "nog te doen" | Hier zit het verschil met een gewoon boekhoudpakket |
+| 0.8 | **Koppelingen**: Exact Online, AFAS en Twinfield (stamgegevens en journaalposten heen en terug), en de loonkoppeling | Een klant hoeft zijn pakket niet op dag één te vervangen |
+| 0.9 | **Beheer → Inrichting** met profielen per sector, en **Uren en verlof** (weekstaat, goedkeuren, doorbelasten; het verlof zelf zit in 0.6) | |
+| 0.10 | **XYZ**: Y-Next en Z-Next erin. Y-Next als de werkschermen (projecten, uren, agenda); Z-Next als modules (termijnen en meerwerk, calculatie, planning, terugkerende taken) | Bestaat al; wordt samen de basis van alle sectoren |
+| 0.11 | **Installatietechniek** en **Service en onderhoud** | Eerste sector naast de aannemer |
+| 0.12 | **Onderaanneming** en **Projectbewaking** | Middelgrote en grote aannemers |
+| 0.13 | **Handel en voorraad**, **Materieel** | Handel |
+| 0.14 | **Concern**, **Kwaliteit en veiligheid** | Grote aannemers |
 | 1.0 | Alle klanten op de app, profielen per sector vast | |
 
-## Koppelingen met boekhoudpakketten (0.6)
+## Koppelingen met boekhoudpakketten (0.8)
 
 Niet elke klant wil zijn boekhouding meteen in ERPNext voeren. Daarom één koppellaag met een stekker per pakket:
 
@@ -105,7 +106,7 @@ Niet elke klant wil zijn boekhouding meteen in ERPNext voeren. Daarom één kopp
   met een toets door Exact voordat klanten hem mogen gebruiken), en een proefadministratie om tegen te testen.
 - **Zonder koppeling kan al:** de auditfile uit 0.3 is in elk van deze pakketten in te lezen door de accountant.
 
-## Keuze bij de loonkoppeling (0.6)
+## Keuze bij de loonkoppeling (0.8)
 
 Twee wegen, met een groot verschil in werk en risico.
 
@@ -115,7 +116,7 @@ Twee wegen, met een groot verschil in werk en risico.
 - **B. Zelf verlonen in het ERP.** Loonheffingstabellen, de cao Bouw en Infra, pensioen bij bpfBOUW, de loonaangifte
   naar de Belastingdienst, en elk jaar de nieuwe cijfers. Fouten raken het loon van mensen.
 
-Voorstel: A eerst, samen met de koppelingen in 0.6. De module van 0.2 legt de structuur klaar die voor beide nodig is.
+Voorstel: A eerst, samen met de koppelingen in 0.8. De module van 0.2 legt de structuur klaar die voor beide nodig is.
 
 ## Y-Next en Z-Next gaan op in XYZ
 
