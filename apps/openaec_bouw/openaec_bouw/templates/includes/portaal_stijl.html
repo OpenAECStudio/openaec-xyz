@@ -1,0 +1,31 @@
+<style>
+.portaal { max-width: 760px; margin: 0 auto; padding: 16px; }
+.portaal h1 { font-size: 1.6rem; margin: 0; }
+.portaal h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+.portaal section { border-top: 1px solid var(--border-color, #e5e7eb); }
+.portaal-kop { display: flex; gap: 14px; align-items: center; margin: 8px 0 4px; }
+.portaal-kop img { max-height: 48px; max-width: 120px; object-fit: contain; }
+.portaal-melding { background: #fff7e6; border: 1px solid #f5c26b; border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; }
+.portaal-leeg { color: var(--text-muted, #6b7280); }
+.portaal-lijst { list-style: none; padding: 0; }
+.portaal-lijst li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--border-color, #e5e7eb); color: inherit; text-decoration: none; }
+.portaal-lijst small { color: var(--text-muted, #6b7280); }
+.portaal-balk { display: block; height: 6px; margin: 6px 0; background: #eceef1; border-radius: 3px; overflow: hidden; }
+.portaal-balk.groot { height: 12px; border-radius: 6px; }
+.portaal-balk span { display: block; height: 100%; background: var(--primary, #2f6fde); }
+.portaal-mijlpalen { list-style: none; padding: 0; margin: 12px 0 0; }
+.portaal-mijlpalen li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0 8px 22px; position: relative; }
+.portaal-mijlpalen li::before { content: ""; position: absolute; left: 0; top: 13px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #b8bec7; }
+.portaal-mijlpalen li.bezig::before { border-color: var(--primary, #2f6fde); }
+.portaal-mijlpalen li.klaar::before { background: #2e9b5f; border-color: #2e9b5f; }
+.portaal-fotos { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.portaal-fotos figure { margin: 0; }
+.portaal-fotos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+.portaal-fotos figcaption { font-size: .8rem; color: var(--text-muted, #6b7280); margin-top: 4px; }
+.portaal-berichten .bericht { padding: 10px 12px; border-radius: 10px; margin: 8px 0; max-width: 85%; background: #f1f3f5; }
+.portaal-berichten .bericht.klant { margin-left: auto; background: #e8f0fe; }
+.portaal-berichten .bericht p { margin: 4px 0 0; white-space: pre-wrap; }
+.portaal-berichten small { color: var(--text-muted, #6b7280); }
+.portaal-schrijf textarea { width: 100%; border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #d1d5db); margin-top: 8px; }
+.portaal-knop { display: inline-block; margin-top: 8px; padding: 10px 16px; border-radius: 8px; border: 0; background: var(--primary, #2f6fde); color: #fff; text-decoration: none; }
+</style>

@@ -1,0 +1,29 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+{% include "openaec_bouw/templates/includes/portaal_stijl.html" %}
+<div class="portaal">
+	<h1>{{ _("Mijn projecten") }}</h1>
+	{% if projecten %}
+	<ul class="portaal-lijst">
+		{% for p in projecten %}
+		<li>
+			<a href="/portaal/p/{{ p.name | urlencode }}">
+				<strong>{{ (p.project_name or p.name) | e }}</strong>
+				<span class="portaal-balk"><span style="width: {{ (p.percent_complete or 0) | int }}%"></span></span>
+				<small>{{ (p.percent_complete or 0) | int }}% {{ _("klaar") }}{% if p.expected_end_date %} · {{ _("verwacht klaar") }} {{ frappe.format(p.expected_end_date, {"fieldtype": "Date"}) }}{% endif %}</small>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p class="portaal-leeg">
+		{% if is_bedrijf %}
+		{{ _("Je bent medewerker: open een project en kies Klantenportaal → Zien als de klant.") }}
+		{% else %}
+		{{ _("Er zijn nog geen projecten met u gedeeld. Hebt u een link gekregen? Open die dan opnieuw.") }}
+		{% endif %}
+	</p>
+	{% endif %}
+</div>
+{% endblock %}

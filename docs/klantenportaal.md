@@ -107,6 +107,8 @@ opdrachtgever die tekeningen volgt.
 
 ## Besluiten (27 november 2026)
 
+- Het portaal zit standaard in elke omgeving met XYZ (OpenAEC Bouw), niet als module die aan of uit moet.
+
 - In de basis bekijkt de klant alles met een verborgen link, zonder account.
 - Voor reageren en communiceren logt hij in met zijn Apple- of Microsoft-account (en Google), niet met een
   wachtwoord bij het bedrijf.

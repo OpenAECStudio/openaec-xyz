@@ -22,11 +22,16 @@ add_to_apps_screen = [
 
 # Installeren zet de standaardmodules; elke migratie (uitrol) vult aan met wat een nieuwe versie van een module brengt.
 # Eerst de velden van de boekhouding (RGS-code, btw-code) en de bedrijfsinstellingen, dan het profiel, dan de btw-codes op wat het profiel zette.
-after_install = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.bedrijfsinstellingen.na_migratie", "openaec_bouw.profiel.na_installatie", "openaec_bouw.boekhouding.na_profiel", "openaec_bouw.personeel.na_migratie"]
-after_migrate = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.bedrijfsinstellingen.na_migratie", "openaec_bouw.profiel.na_migratie", "openaec_bouw.boekhouding.na_profiel", "openaec_bouw.personeel.na_migratie"]
+after_install = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.bedrijfsinstellingen.na_migratie", "openaec_bouw.profiel.na_installatie", "openaec_bouw.boekhouding.na_profiel", "openaec_bouw.personeel.na_migratie", "openaec_bouw.portaal.na_migratie"]
+after_migrate = ["openaec_bouw.boekhouding.na_migratie", "openaec_bouw.bedrijfsinstellingen.na_migratie", "openaec_bouw.profiel.na_migratie", "openaec_bouw.boekhouding.na_profiel", "openaec_bouw.personeel.na_migratie", "openaec_bouw.portaal.na_migratie"]
 
 # Op het bedrijf: de auditfile downloaden en het Nederlandse rekeningschema zetten.
-doctype_js = {"Company": "public/js/company.js", "Sales Invoice": "public/js/sales_invoice.js"}
+doctype_js = {
+	"Company": "public/js/company.js",
+	"Sales Invoice": "public/js/sales_invoice.js",
+	"Project": "public/js/project.js",
+	"Portaaltoegang": "public/js/portaaltoegang.js",
+}
 # Op de lijsten: een bankafschrift (CAMT.053) inlezen, een UBL-factuur inlezen en een SEPA-betaalbestand maken.
 doctype_list_js = {
 	"Bank Transaction": "public/js/bank_transaction_list.js",
@@ -52,3 +57,9 @@ override_doctype_class = {"Leave Application": "openaec_bouw.verlofaanvraag.Verl
 
 # Opbouw aan het eind van de maand, verval, contracten en cao-periodes bijwerken, kalenders een jaar vooruit.
 scheduler_events = {"daily": ["openaec_bouw.personeel.dagelijks"]}
+
+# Klantenportaal: /portaal (mijn projecten), /portaal/p/<project> na inloggen, /portaal/l/<sleutel> met een verborgen link.
+website_route_rules = [
+	{"from_route": "/portaal/p/<project>", "to_route": "portaal/project"},
+	{"from_route": "/portaal/l/<sleutel>", "to_route": "portaal/project"},
+]

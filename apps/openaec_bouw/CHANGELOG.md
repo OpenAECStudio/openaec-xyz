@@ -4,6 +4,21 @@ Elke stap van de inrichting is een versie van deze app. Een versie komt eerst op
 (`model.cloud.open-aec.eu`), daarna met de gewone uitrol bij elke omgeving die de app heeft. De routekaart staat in
 `docs/routekaart.md`.
 
+## 0.7.0 (27 november 2026): klantenportaal, stap 1
+
+Standaard in elke omgeving met OpenAEC Bouw. Ontwerp: `docs/klantenportaal.md`.
+
+- **Verborgen link** `/portaal/l/<sleutel>`: de klant bekijkt zijn project zonder account. Alleen de hash van de
+  sleutel wordt bewaard; de link heeft een einddatum en kan ingetrokken worden (Portaallink).
+- **Inloggen** met Apple, Microsoft of Google via de inlog van de SuperCloud: `/portaal` (mijn projecten) en
+  `/portaal/p/<project>`. Toegang per project en e-mailadres (Portaaltoegang, rol koper, opdrachtgever of
+  hoofdgebruiker); "Uitnodigen" maakt de klant gast van de omgeving (telt niet in het abonnement).
+- **Wat de klant ziet:** voortgang, mijlpalen (taken met "zichtbaar voor de klant"), gedeelde bouwfoto's (Bouwfoto,
+  ook als het bestand privé is) en, na inloggen, het gesprek met het bedrijf (Portaalbericht). Het bedrijf krijgt
+  een melding; de klant een mail met alleen een link naar het portaal.
+- **Op het project:** knoppen Zien als de klant, Verborgen link maken, Klant toegang geven en Foto toevoegen.
+- **Portaallogboek:** elke inzage, link en elk bericht.
+
 ## 0.6.0 (27 november 2026): personeel in uren, cao's, en het bedrijf leeg
 
 Frappe HR hoort er nu altijd bij (vereiste app). Ontwerp: `docs/personeel-cao-verlof.md`.
