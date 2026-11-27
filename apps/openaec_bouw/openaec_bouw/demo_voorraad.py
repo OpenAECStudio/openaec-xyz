@@ -110,8 +110,12 @@ def maak(rng: random.Random, bedrijf, klanten, leveranciers, jaren, vandaag) -> 
 	tel = {"projecten": 0, "verkoop": 0, "inkoop": 0, "bank": 0, "afgeboekt": 0, "partijen": 0, "tellingen": 0, "zaagwerk": 0}
 	frappe.db.set_value("Company", bedrijf.name, {"valuation_method": "Moving Average", "enable_perpetual_inventory": 1})
 	# Partijen per artikel aan (voor de herkomst van tropisch hout), met de partij gewoon op de factuurregel.
+	# De waarderingsmethode staat ook op elk artikel; de algemene instelling alleen zetten zolang er nog geen voorraad
+	# geboekt is (een omgeving met andere bedrijven, zoals klant0, weigert die wissel anders).
 	instellingen = frappe.get_doc("Stock Settings")
-	instellingen.update({"enable_serial_and_batch_no_for_item": 1, "use_serial_batch_fields": 1, "valuation_method": "Moving Average"})
+	instellingen.update({"enable_serial_and_batch_no_for_item": 1, "use_serial_batch_fields": 1})
+	if not frappe.db.exists("Stock Ledger Entry", {"is_cancelled": 0}):
+		instellingen.valuation_method = "Moving Average"
 	instellingen.save()
 	_artikelen()
 	magazijn = _magazijnen(bedrijf)
