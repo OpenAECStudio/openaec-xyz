@@ -188,9 +188,9 @@ Installatiebedrijf, de houthandel Houthandel, de rest een eigen regeling.
 ## Wat eerst moet
 
 - **Frappe HR naast Z-Next.** Op een site met Z-Next loopt de bedrijfstabel vol ("Row size too large") zodra Frappe HR
-  erbij komt. Het demonstratiebedrijf heeft Z bij de aannemer. Dus eerst de velden van Z van het bedrijf af (zie
-  `velden-harmonisatie.md`), of het demonstratiebedrijf tijdelijk zonder Z.
-- Frappe HR op de demosite installeren.
+  erbij komt: ERPNext, Frappe HR en de 93 velden van Z samen gaan over de grens van MariaDB voor één regel. Dus eerst
+  de velden van Z van het bedrijf af naar **Bedrijfsinstellingen** (zie `velden-harmonisatie.md`).
+- Frappe HR op elke omgeving installeren, ook op de demosite.
 
 ## Volgorde van bouwen
 
@@ -205,12 +205,13 @@ Tests, op een schone site: parttimer met vrije vrijdag, indienst halverwege de m
 de maand, wissel van cao-periode op 1 januari, opname over een feestdag die wel en niet meetelt, verval op 1 juli,
 stilzwijgende verlenging.
 
-## Open vragen
+## Besluiten (27 november 2026)
 
-1. Uren als enige waarheid en Frappe alleen voor aanvragen en goedkeuren (voorstel), of Frappe laten rekenen in
-   delen van dagen?
-2. Opbouw achteraf op de laatste dag van de maand (voorstel), of vooraf op de eerste?
-3. Demonstratiebedrijf: eerst Z van de bedrijfstabel af, of HR eerst zonder Z?
+1. **Uren zijn de enige waarheid.** Frappe HR doet het aanvragen en goedkeuren; het saldo staat in de
+   verlofboekingen.
+2. **Opbouw achteraf**, op de laatste dag van de maand.
+3. **Frappe HR zit altijd standaard in onze ERPNext.** Alles bouwt daarop voort. Wat Z (en Y) zelf doen en Frappe HR
+   of ERPNext al doet, wordt herontworpen tot één geheel; zie het hoofdstuk Personeel in `velden-harmonisatie.md`.
 
 ## Na te lopen in de cao-teksten
 

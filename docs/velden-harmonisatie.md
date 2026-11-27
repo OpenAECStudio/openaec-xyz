@@ -91,6 +91,32 @@ en risico blijven tot de module Projectbewaking bestaat; daarna horen ze daar.
 | Kilometers: `Y Km Registratie` | `Zapp Kilometerstand` | Samenvoegen |
 | Werkweek en kantooruren | zeven velden op Employee en zeven op Company | Blijft, maar als tabel in de instellingen per bedrijf |
 
+### Personeel (Frappe HR is leidend)
+
+Besluit 27 november 2026: Frappe HR zit altijd standaard in de ERPNext van XYZ. Wat Z of Y zelf doen en Frappe HR,
+ERPNext of de module personeel (`docs/personeel-cao-verlof.md`) al doet, vervalt.
+
+| Blijft | Vervangt | Opmerking |
+|---|---|---|
+| Werkpatroon op het **Arbeidscontract** (uren per weekdag, week A en B) | `zapp_ww_ma` … `zapp_ww_zo` op Employee | Het patroon hoort bij een contract met een datum, niet los op de medewerker |
+| Standaardwerkpatroon in **Bedrijfsinstellingen** | `zapp_kantooruren_*` op Company | Voorstel bij een nieuw contract |
+| Dienst (standaard `Shift Type`) met begin- en eindtijd | `zapp_planning_starttijd`, `zapp_planning_eindtijd` op Company | Eén standaarddienst per bedrijf |
+| Werkpatroon van het contract, via de API van de module personeel | `Shift Plan` en `Shift Plan Assignment` in Y | Bestaan niet in Frappe HR 16 (dat heet daar Shift Schedule); Y valt nu terug op 5 × de dienst. Y vraagt het patroon voortaan op |
+| Verlofsaldo in uren, via de API van de module personeel | Y leest `Leave Allocation` in dagen | Y toont uren en "vervalt op" |
+| Vestiging (standaard `Branch`) | `zapp_filiaal` op Employee en Department | Al genoemd bij Project |
+| Contractsoort; extern = soort Inhuur, met de leverancier | `zapp_extern`, `zapp_bedrijfsnaam` | Een ingehuurde kracht is een medewerker met soort Inhuur en een link naar de leverancier |
+| Adres van de medewerker (standaard `current_address` en het adresrecord) | `zapp_adres`, `zapp_postcode`, `zapp_plaats` | |
+| `bsn` in de module personeel, alleen zichtbaar voor HR (rechtenniveau) | `zapp_bsn` | Privacy: niet in lijsten, niet in de export naar Bouw7 |
+| Kostprijs per uur uit het contract (loon × opslag), tarief in `Activity Cost` | `zapp_kostprijs_uurtarief`, `custom_gross_hourly_rate`, `zapp_loonkosten_percentage`, de tariefvelden | De opslag voor loonkosten staat in Bedrijfsinstellingen |
+| Rollen (standaard) | `zapp_type_gebruiker` | |
+| Afwezigheid door **onwerkbaar weer**: verlofsoort "Onwerkbaar weer" (niet van het saldo) en de dag in het bouwdagboek | `Zapp Onwerkbare Dag` als los register | De uitvoerder legt de dag vast in het dagboek; het systeem maakt de afwezigheid voor de ploeg op dat project |
+| Planitem blijft, maar **leest beschikbaarheid** uit werkpatroon, verlof en feestdagen | | Wie verlof heeft of op een feestdag vrij is, kleurt rood in de planning |
+| Urenstaat (standaard `Timesheet`) | `Zapp Contacturenlog` | Een extern persoon wordt een medewerker met soort Inhuur |
+| Mandagenregister uit de urenstaten, per week en project | `Zapp Dagboekweek` met aantallen per dag | Telt nu losse getallen; wordt een overzicht van wie er echt was |
+
+Gevolg: het formulier Medewerker houdt alleen de standaardvelden van ERPNext en Frappe HR, plus het huidige contract,
+de cao en `bsn`.
+
 ### Offerte, inkoop en onderaanneming
 
 | Blijft | Vervangt | Opmerking |
@@ -118,7 +144,8 @@ als los veld:
 
 ## De instellingen per bedrijf
 
-De 93 velden van Z op het bedrijf gaan naar één nieuw doctype, **XYZ Bedrijfsinstellingen** (één per bedrijf), met
+De 93 velden van Z op het bedrijf gaan naar één nieuw doctype, **Bedrijfsinstellingen** (één per bedrijf, in
+`openaec_bouw`), met
 tabbladen voor facturen, inkoop, offertes, projecten, planning en pdf's, en kindtabellen voor de werkweek en de
 toeslagen. Het bedrijf zelf houdt alleen wat een bedrijf ís: `kvk_nummer`, `g_rekening` en de standaardvelden.
 
