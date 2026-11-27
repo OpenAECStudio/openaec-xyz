@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 18:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Portaaltoegang",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "project",
+  "project_naam",
+  "klant",
+  "rol",
+  "kolom_wie",
+  "email",
+  "gebruiker",
+  "actief",
+  "sinds"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "project_naam",
+   "fieldtype": "Data",
+   "label": "Projectnaam",
+   "fetch_from": "project.project_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "klant",
+   "fieldtype": "Link",
+   "label": "Klant",
+   "options": "Customer",
+   "fetch_from": "project.customer",
+   "fetch_if_empty": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "rol",
+   "fieldtype": "Select",
+   "label": "Rol",
+   "options": "Koper\nOpdrachtgever\nHoofdgebruiker",
+   "default": "Opdrachtgever",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "kolom_wie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "E-mailadres",
+   "options": "Email",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "De klant logt in met zijn Apple-, Microsoft- of Google-account onder dit adres."
+  },
+  {
+   "fieldname": "gebruiker",
+   "fieldtype": "Link",
+   "label": "Gebruiker",
+   "options": "User",
+   "read_only": 1,
+   "description": "Wordt gevuld zodra de klant voor het eerst inlogt."
+  },
+  {
+   "fieldname": "actief",
+   "fieldtype": "Check",
+   "label": "Actief",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sinds",
+   "fieldtype": "Date",
+   "label": "Sinds",
+   "default": "Today"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Projects User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "title_field": "email",
+ "autoname": "hash",
+ "show_title_field_in_link": 0
+}

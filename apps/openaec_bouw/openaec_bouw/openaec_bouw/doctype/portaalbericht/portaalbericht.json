@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "creation": "2026-11-27 18:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "modified": "2026-11-27 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "OpenAEC Bouw",
+ "owner": "Administrator",
+ "name": "Portaalbericht",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "field_order": [
+  "project",
+  "van",
+  "van_naam",
+  "van_klant",
+  "kolom_bericht",
+  "gelezen",
+  "sectie_tekst",
+  "tekst",
+  "bijlage"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "van",
+   "fieldtype": "Link",
+   "label": "Van",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "van_naam",
+   "fieldtype": "Data",
+   "label": "Naam",
+   "fetch_from": "van.full_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "van_klant",
+   "fieldtype": "Check",
+   "label": "Van de klant",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "kolom_bericht",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gelezen",
+   "fieldtype": "Check",
+   "label": "Gelezen door het bedrijf",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sectie_tekst",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tekst",
+   "fieldtype": "Small Text",
+   "label": "Bericht",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bijlage",
+   "fieldtype": "Attach",
+   "label": "Bijlage"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Projects Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Projects User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "title_field": "van_naam",
+ "autoname": "hash"
+}

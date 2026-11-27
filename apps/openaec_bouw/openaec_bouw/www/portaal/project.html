@@ -1,0 +1,90 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+{% include "openaec_bouw/templates/includes/portaal_stijl.html" %}
+<div class="portaal">
+{% if geen_toegang %}
+	<h1>{{ _("Niet gevonden") }}</h1>
+	<p class="portaal-leeg">{{ _("Deze pagina bestaat niet of de link is verlopen. Vraag het bedrijf om een nieuwe link.") }}</p>
+{% else %}
+	{% if toegang.soort == "bedrijf" %}
+	<div class="portaal-melding">{{ _("Je ziet wat de klant ziet. Alleen gedeelde foto's en mijlpalen staan hier.") }}</div>
+	{% endif %}
+	<header class="portaal-kop">
+		{% if bedrijf and bedrijf.company_logo %}<img src="{{ bedrijf.company_logo }}" alt="{{ bedrijf.company_name }}">{% endif %}
+		<div>
+			<h1>{{ (project.project_name or project.name) | e }}</h1>
+			{% if bedrijf %}<small>{{ bedrijf.company_name }}</small>{% endif %}
+		</div>
+	</header>
+
+	<section>
+		<h2>{{ _("Voortgang") }}</h2>
+		<span class="portaal-balk groot"><span style="width: {{ (project.percent_complete or 0) | int }}%"></span></span>
+		<p>{{ (project.percent_complete or 0) | int }}% {{ _("klaar") }}{% if project.expected_end_date %} · {{ _("verwacht klaar") }} {{ frappe.format(project.expected_end_date, {"fieldtype": "Date"}) }}{% endif %}</p>
+		{% if mijlpalen %}
+		<ol class="portaal-mijlpalen">
+			{% for m in mijlpalen %}
+			<li class="{{ 'klaar' if m.status == 'Completed' else ('bezig' if m.status == 'Working' else '') }}">
+				<strong>{{ m.subject | e }}</strong>
+				{% if m.exp_end_date %}<small>{{ frappe.format(m.exp_end_date, {"fieldtype": "Date"}) }}</small>{% endif %}
+			</li>
+			{% endfor %}
+		</ol>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>{{ _("Foto's") }}</h2>
+		{% if fotos %}
+		<div class="portaal-fotos">
+			{% for f in fotos %}
+			<figure>
+				<a href="{{ f.url }}" target="_blank" rel="noopener"><img src="{{ f.url }}" loading="lazy" alt="{{ (f.bijschrift or '') | e }}"></a>
+				<figcaption>{{ frappe.format(f.datum, {"fieldtype": "Date"}) }}{% if f.bijschrift %} · {{ f.bijschrift | e }}{% endif %}</figcaption>
+			</figure>
+			{% endfor %}
+		</div>
+		{% else %}
+		<p class="portaal-leeg">{{ _("Nog geen foto's.") }}</p>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>{{ _("Berichten") }}</h2>
+		{% if toegang.soort == "link" %}
+		<p class="portaal-leeg">{{ _("Wilt u reageren of een vraag stellen? Log in met uw Apple-, Microsoft- of Google-account.") }}</p>
+		<a class="portaal-knop" href="{{ inloggen_url }}">{{ _("Inloggen om te reageren") }}</a>
+		{% else %}
+		<div class="portaal-berichten">
+			{% for b in berichten %}
+			<div class="bericht {{ 'klant' if b.van_klant else 'bedrijf' }}">
+				<small>{{ b.van_naam | e }} · {{ frappe.format(b.creation, {"fieldtype": "Datetime"}) }}</small>
+				<p>{{ b.tekst | e }}</p>
+			</div>
+			{% else %}
+			<p class="portaal-leeg">{{ _("Nog geen berichten.") }}</p>
+			{% endfor %}
+		</div>
+		<form class="portaal-schrijf" id="portaal-schrijf">
+			<textarea name="tekst" rows="3" maxlength="5000" required placeholder="{{ _('Uw bericht') }}"></textarea>
+			<button class="portaal-knop" type="submit">{{ _("Versturen") }}</button>
+		</form>
+		<script>
+		document.getElementById("portaal-schrijf").addEventListener("submit", (e) => {
+			e.preventDefault();
+			const knop = e.target.querySelector("button");
+			knop.disabled = true;
+			frappe.call({
+				method: "openaec_bouw.portaal.bericht",
+				args: { project: {{ project.name | tojson }}, tekst: e.target.tekst.value },
+				callback: () => window.location.reload(),
+				always: () => { knop.disabled = false; },
+			});
+		});
+		</script>
+		{% endif %}
+	</section>
+{% endif %}
+</div>
+{% endblock %}
