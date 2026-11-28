@@ -67,6 +67,7 @@ de eigenaar modules aan en uit in Beheer → Inrichting.
 | Projectbewaking | Budget tegen werkelijk, prognose einde werk, onderhanden werk per periode | middelgroot en groot |
 | Installatietechniek | Installaties en objecten per adres, keuringen met vervaldatum, artikeldata van de groothandel | installateurs |
 | Service en onderhoud | Onderhoudscontracten, storingen, werkbonnen op de telefoon, terugkerende taken | installateurs, onderhoud |
+| Vastgoed en beheer | Locaties, percelen, gebouwen, ruimten en installaties in ERPNext, gekoppeld aan IFC op `GlobalId`; kaart van Nederland tot de lamp in een ruimte, met live meetwaarden (`docs/vastgoed-en-beheer.md`, ontwerp) | wie panden heeft of beheert, installateurs |
 | Handel en voorraad | Zet voorraad weer aan, magazijnen, prijslijsten, afhalen en bezorgen | handel, installateurs |
 | Materieel | Eigen materieel en verhuur, keuringen, doorbelasten aan projecten | aannemers |
 | Concern | Meerdere bedrijven, onderlinge facturen, consolidatie | groot |
